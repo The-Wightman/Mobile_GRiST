@@ -9,7 +9,6 @@ export const small = {
   };
   
   export const smallRounded = {
-    ...base,
-    ...small,
-    ...rounded
+    small,
+    rounded
   };
