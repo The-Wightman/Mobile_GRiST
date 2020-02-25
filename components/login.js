@@ -12,21 +12,22 @@ import {
     TouchableOpacity,
     KeyboardAvoidingView,
 } from 'react-native'
-import { Typography, Colors, Spacing } from '../Styles'
-
+import { Typography, Colors, Spacing, Images} from '../Styles'
 
 export default class Login extends Component {
     render() {
         return (
             <SafeAreaView style={styles.container, { padding: 30 }}>
+               
                 <StatusBar barStyle="light-content" />
                 <KeyboardAvoidingView behaviour='padding' >
+               
                     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                         <View>
                             <View>
-                            <Image
-                                source={require('../Assets/Images/Grist icon.png')} >
-                            </Image>
+                           <Image source = {Images.GristLogo} style={{height: 128, width: 128 }} resizeMode={'cover'}>
+                            </Image>  
+                            
                         </View>
                         <Text>Welcome to Mobile GRiST</Text>
                         <Text>Please enter your login credentials or tap sign up</Text>
@@ -42,8 +43,9 @@ export default class Login extends Component {
                         </View>
                         </View>
                     </TouchableWithoutFeedback>
+                    
                 </KeyboardAvoidingView>
-            </SafeAreaView>
+                          </SafeAreaView>
         )
     }
 }

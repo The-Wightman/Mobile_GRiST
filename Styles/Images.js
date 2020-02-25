@@ -1,0 +1,1 @@
+export const GristLogo = require('.\Assets\gristicon.png');
