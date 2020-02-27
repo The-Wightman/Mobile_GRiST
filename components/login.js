@@ -43,7 +43,7 @@ export default class Login extends Component {
                             <TouchableOpacity style = {StyleSheet.container}>
                                 <Text style = {StyleSheet.TextStyle} >Sign In</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity>
+                            <TouchableOpacity >
                                 <Text style = {StyleSheet.TextStyle}>Or sign Up</Text>
                             </TouchableOpacity>
                         </View>

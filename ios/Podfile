@@ -36,6 +36,8 @@ target 'Mobile_GRiST' do
 
   pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
 
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
   target 'Mobile_GRiSTTests' do
     inherit! :search_paths
     # Pods for testing
