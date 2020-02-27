@@ -11,7 +11,7 @@ export const DarkGrey = {
     color: '#737373'
 };
 export const White = {
-    color: '#FFFFFF'
+    color: '#FFffFF'
 };
 export const LightBlue = {
     color: '#2BA5F4'

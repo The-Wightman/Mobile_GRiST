@@ -19,56 +19,76 @@ export default class Login extends Component {
     render() {
         return (
             <View style = {StyleSheet.container} >
-                <KeyboardAvoidingView behaviour='padding' >
+                <KeyboardAvoidingView behaviour='padding'>
              <ImageBackground source={Images.Background} style={{width: '100%', height: '100%'}}>                      
-               <SafeAreaView style={{ padding: 30 }}>              
-                <StatusBar barStyle="light-content"  />
+                <TouchableWithoutFeedback onPress={Keyboard.dismiss} style={styles.container}>
+                <SafeAreaView style={styles.container}>              
+                
+                     <StatusBar barStyle="light-content" />
                              
-                    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                        <View style = {StyleSheet.container} >
-                            <View >
+                   
+                        <View  >
+                            <View style={styles.container} >
                            <Image source = {Images.GristLogo} style={StyleSheet.Logo} >
                             </Image>  
                             
+                        </View >
+                        <View style={styles.container}>
+                            <Text style = {StyleSheet.TextStyle}>Welcome to Mobile GRiST</Text>
+                            <Text style = {StyleSheet.TextStyle}>Please enter your login credentials or tap sign up</Text>
                         </View>
-                            <Text>Welcome to Mobile GRiST</Text>
-                            <Text>Please enter your login credentials or tap sign up</Text>
-                        <View>
-                            <TextInput placeholder="Email" style={{ borderColor: 'black', borderWidth: 1, padding: 10 }} />
-                            <TextInput placeholder="Password" style={{ borderColor: 'black', borderWidth: 1, padding: 10 }} />
+                            <View style={styles.container}>
+                            <TextInput placeholder="Email" style={StyleSheet.TextInputStyle} />
+                            <TextInput placeholder="Password" style={StyleSheet.TextInputStyle} />
                             <TouchableOpacity style = {StyleSheet.container}>
-                                <Text>Sign In</Text>
+                                <Text style = {StyleSheet.TextStyle} >Sign In</Text>
                             </TouchableOpacity>
                             <TouchableOpacity>
-                                <Text>Or sign Up</Text>
+                                <Text style = {StyleSheet.TextStyle}>Or sign Up</Text>
                             </TouchableOpacity>
                         </View>
                         </View>
-                    </TouchableWithoutFeedback>                   
-               
-            </SafeAreaView>
-         </ImageBackground>
-          </KeyboardAvoidingView>
+                          
+                </SafeAreaView> 
+                </TouchableWithoutFeedback> 
+             </ImageBackground>
+            </KeyboardAvoidingView>
          </View>
         )
     }
 }
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
-        padding: 30
-    }
-})
-const Logo = StyleSheet.create({
-        container: {
-            flex: 1,
+        paddingVertical: 30,
+        
+    },
+       Logo: {
+            marginLeft: 'auto',
             justifyContent: 'center',
             alignItems: 'center',
-            flexDirection: 'column',
+            flexDirection: 'row',
             width: '100%',
             height: '100%'
-        }
-})
+        
+
+    },
+       TextInputStyle: {
+       borderColor: 'black',
+       borderWidth: 1,
+       padding: 50,
+       color: Colors.White.color
+       
+    },
+
+        TextStyle: {
+       color: Colors.White.color,
+       textAlign: 'center',
+       borderWidth: 1,
+       padding: 10,
+       fontSize: Spacing.TextSizes.SubText
+    }
+}
+)
