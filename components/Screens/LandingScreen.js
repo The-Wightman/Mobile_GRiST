@@ -11,28 +11,29 @@ import {
   Button,
   TouchableOpacity,  
 } from 'react-native';
+import { color } from 'react-native-reanimated';
+import DefaultTemplate from '../Sub-Comps/DefaultScreen'
 export default class LandingScreen extends Component{
     render() {
         return(
-                <View style={style.container}>
-                    <Text style={styles.title}> LANDING SCREEN</Text>
-                    <TouchableOpacity><Text>
-                      Go Back
-                      </Text>
-                      </TouchableOpacity>
-                </View>
+          <View>
+          <DefaultTemplate/>
+          <Text style={{position: "absolute"}}>Landing screen text???</Text>
+          </View>
+
         )
     }
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: 'black',
     flex: 1,
     alignItems: 'center',
     justifyContent:'center',
   },
   title: {
-      fontSize: 24
+      fontSize: 24,
+      color: 'black'
   }
 })
