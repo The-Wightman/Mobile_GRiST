@@ -34,6 +34,7 @@ export default function App() {
         <NavigationContainer>          
           <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName="SignIn" screenProps={{navigation: this.navigation}}>
           <Stack.Screen name="Sign In" component={Screens.Login}  />
+          <Stack.Screen name="signup" component={Screens.signup}  />
           <Stack.Screen name="Landing" component={_ClinicianNav} />
           </Stack.Navigator>
         </NavigationContainer>

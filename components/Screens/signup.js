@@ -3,16 +3,16 @@ import {
     StyleSheet,
     Text,
     View,
-    Image,
-    TextInput,
-    TouchableOpacity,    
+    Image,  
+    TextInput,    
+    TouchableOpacity,   
 } from 'react-native'
 import { Typography, Colors, Spacing, Images} from '../../Styles'
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
 
 
 
-export default function _Login ({navigation}){
+export default function _signup ({navigation}){
         return ( 
             <View >        
             <DefaultTemplate/>
@@ -23,17 +23,18 @@ export default function _Login ({navigation}){
 
                     </View >
                     <View style={styles.container}>
-                        <Text style={StyleSheet.TextStyle}>Welcome to Mobile GRiST</Text>
-                        <Text style={StyleSheet.TextStyle}>Please enter your login credentials or tap sign up</Text>
+                        <Text style={StyleSheet.TextStyle}>Sign up to GRIST</Text>
+                        <Text style={StyleSheet.TextStyle}>Please enter your email and Information</Text>
                     </View>
                     <View style={styles.container}>
+                        <TextInput placeholder="First Name" style={StyleSheet.TextInputStyle} />
+                        <TextInput placeholder="Last Name" style={StyleSheet.TextInputStyle} />
                         <TextInput placeholder="Email" style={StyleSheet.TextInputStyle} />
-                        <TextInput placeholder="Password" style={StyleSheet.TextInputStyle} />
-                        <TouchableOpacity style={StyleSheet.container} onPress={() => navigation.navigate('Landing') }>
-                            <Text style={StyleSheet.TextStyle} >Sign In</Text>
+                        <TouchableOpacity style={StyleSheet.container}>
+                            <Text style={StyleSheet.TextStyle} >Sign Up</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => navigation.navigate('signup') }>
-                            <Text style={StyleSheet.TextStyle}>Or sign Up</Text>
+                        <TouchableOpacity onPress={() => navigation.navigate('Sign In') }>
+                            <Text style={StyleSheet.TextStyle}>Or Go Back</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
