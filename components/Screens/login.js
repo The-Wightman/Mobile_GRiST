@@ -15,23 +15,12 @@ import {
 } from 'react-native'
 import { Typography, Colors, Spacing, Images} from '../../Styles'
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
-import { StackActions } from '@react-navigation/native';
 
 
-export default class Login extends Component {
-    constructor(props){
-        super(props);
-        
-        
-        this.state={
-            username:'',
-            password:'',
-        }
-    }
-    render() {
-        
+
+export default function _Login ({navigation}){
         return ( 
-            <View>        
+            <View >        
             <DefaultTemplate/>
                 <View behaviour='padding' style={styles.screenPos} >
                     <View style={styles.container} >
@@ -49,7 +38,7 @@ export default class Login extends Component {
                         <TouchableOpacity style={StyleSheet.container}>
                             <Text style={StyleSheet.TextStyle} >Sign In</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => navigation.dispatch(StackActions.push('Landing')) }>
+                        <TouchableOpacity onPress={() => navigation.navigate('Landing') }>
                             <Text style={StyleSheet.TextStyle}>Or sign Up</Text>
                         </TouchableOpacity>
                     </View>
@@ -58,7 +47,7 @@ export default class Login extends Component {
               </View>
         )
     }
-}
+
 const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',

@@ -1,5 +1,5 @@
-import {CNav, ClinDrawer} from "./ClinicianNav";
-import {INav, IndDrawer} from "./IndividualNav";
-import {DefaultScreen} from "./DefaultScreen";
+import * as ClinNav from "./ClinicianNav";
+import * as IndNav from "./IndividualNav";
+import  DefaultScreen from "./DefaultScreen";
 
-export {CNav,INav,DefaultScreen,ClinDrawer,IndDrawer};
+export {ClinNav,DefaultScreen,IndNav};

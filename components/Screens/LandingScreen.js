@@ -13,8 +13,7 @@ import {
 } from 'react-native';
 import { color } from 'react-native-reanimated';
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
-export default class LandingScreen extends Component{
-    render() {
+export default function _LandingScreen ({navigation}){    
         return(
           <View>
           <DefaultTemplate/>
@@ -23,7 +22,6 @@ export default class LandingScreen extends Component{
 
         )
     }
-}
 
 const styles = StyleSheet.create({
   container: {

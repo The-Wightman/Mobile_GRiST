@@ -24,23 +24,17 @@ import { NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as Navigators from './components/Sub-Comps'
 import * as Screens from './components/Screens'
+import _ClinicianNav, { CDrawer } from './components/Sub-Comps/ClinicianNav';
 
-const Stack = createStackNavigator ();  
+export const Stack = createStackNavigator ();  
 AppRegistry.registerComponent('Mobile_GRiST', () => Stack);
-function SignIn() {
-  return (
-    <View>
-      <Screens.Login />
-    </View>
-  );
-}
 
 export default function App() {
       return (        
-        <NavigationContainer>
-          <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName="Sign In" >
-          <Stack.Screen name="Sign In" component={SignIn}  />
-          <Stack.Screen name="Landing" component={Navigators.ClinDrawer.Navigator} />
+        <NavigationContainer>          
+          <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName="SignIn" screenProps={{navigation: this.navigation}}>
+          <Stack.Screen name="Sign In" component={Screens.Login}  />
+          <Stack.Screen name="Landing" component={_ClinicianNav} />
           </Stack.Navigator>
         </NavigationContainer>
     );
