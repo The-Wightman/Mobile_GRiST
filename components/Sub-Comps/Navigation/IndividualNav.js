@@ -2,7 +2,7 @@ import * as React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { View,AppRegistry } from 'react-native';
-import * as Screens from '../Screens'
+import * as Screens from '../../Screens'
 export const IndDrawer = createDrawerNavigator();
 
 function LogoutScreen() {

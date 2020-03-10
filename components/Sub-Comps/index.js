@@ -1,5 +1,5 @@
-import * as ClinNav from "./ClinicianNav";
-import * as IndNav from "./IndividualNav";
+import * as ClinNav from "./Navigation/ClinicianNav";
+import * as IndNav from "./Navigation/IndividualNav";
 import  DefaultScreen from "./DefaultScreen";
-
-export {ClinNav,DefaultScreen,IndNav};
+import * as Regex from "./Regex"
+export {ClinNav,DefaultScreen,IndNav,Regex};
