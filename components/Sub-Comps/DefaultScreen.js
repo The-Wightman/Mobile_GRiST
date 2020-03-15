@@ -13,9 +13,8 @@ import {
     KeyboardAvoidingView,
     ImageBackground,
 } from 'react-native'
-import { Typography, Colors, Spacing, Images} from '../../Styles'
-export default class DefaultTemplate extends React.Component {
-    
+import { Typography, Colors, Spacing, Images} from '../../Styles/index'
+export default class DefaultTemplate extends React.Component {    
     render() {
         return(
             <React.Fragment>

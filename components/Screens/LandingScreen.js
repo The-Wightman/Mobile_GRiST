@@ -13,11 +13,13 @@ import {
 } from 'react-native';
 import { color } from 'react-native-reanimated';
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
+import MainHeadTemplate from '../Sub-Comps/Header'
 export default function _LandingScreen ({navigation}){    
         return(
           <View>
+          <MainHeadTemplate/>
           <DefaultTemplate/>
-          <Text style={{position: "absolute"}}>Landing screen text???</Text>
+          <Text >Landing screen text???</Text>
           </View>
 
         )

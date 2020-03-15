@@ -9,11 +9,25 @@ import {
 } from 'react-native'
 import { Typography, Colors, Spacing, Images} from '../../Styles'
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
+import Validate from '../Sub-Comps/Validator'
 
 
-
-export default function _signup ({navigation}){
-        return ( 
+export default class signup extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+        Email: "",
+        username: "",
+        password: "",
+        } 
+    } 
+    handleSubmission(UID,Email,Pass,Action){
+        if  (Validate(UID,Email,Pass,Action)){
+            //HANDLE json REQUEST
+        }
+       }
+    render() {
+        return (
             <View >        
             <DefaultTemplate/>
                 <View behaviour='padding' style={styles.screenPos} >
@@ -27,13 +41,13 @@ export default function _signup ({navigation}){
                         <Text style={StyleSheet.TextStyle}>Please enter your email and Information</Text>
                     </View>
                     <View style={styles.container}>
-                        <TextInput placeholder="First Name" style={StyleSheet.TextInputStyle} />
-                        <TextInput placeholder="Last Name" style={StyleSheet.TextInputStyle} />
-                        <TextInput placeholder="Email" style={StyleSheet.TextInputStyle} />
-                        <TouchableOpacity style={StyleSheet.container}>
+                        <TextInput placeholder="Username" style={StyleSheet.TextInputStyle}   onChangeText={(text) => { this.setState({ username: text})}}/>
+                        <TextInput placeholder="Email" style={StyleSheet.TextInputStyle}   onChangeText={(text) => { this.setState({ Email: text})}}/>
+                        <TextInput placeholder="Password" style={StyleSheet.TextInputStyle}  onChangeText={(text) => { this.setState({password: text})}} />
+                        <TouchableOpacity style={StyleSheet.container} onPress={() => this.handleSubmission(this.state.username,this.state.Email,this.state.password,"signup")}>
                             <Text style={StyleSheet.TextStyle} >Sign Up</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => navigation.navigate('Sign In') }>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Sign In') }>
                             <Text style={StyleSheet.TextStyle}>Or Go Back</Text>
                         </TouchableOpacity>
                     </View>
@@ -42,6 +56,7 @@ export default function _signup ({navigation}){
               </View>
         )
     }
+}
 
 const styles = StyleSheet.create({
     container: {
