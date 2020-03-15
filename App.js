@@ -29,7 +29,7 @@ import _IndividualNav from './components/Sub-Comps/Navigation/IndividualNav';
 export const Stack = createStackNavigator ();  
 AppRegistry.registerComponent('Mobile_GRiST', () => Stack);
 
-export default function App() {
+export default function _LoginStack() {
       return (        
         <NavigationContainer>          
           <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName="SignIn" screenProps={{navigation: this.navigation}}>
