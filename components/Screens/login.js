@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import { Typography, Colors, Spacing, Images } from '../../Styles'
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
-import { EmailReg, PassReg, IDReg } from '../Sub-Comps/Regex'
+import Validate from '../Sub-Comps/Validator'
 
 export default class _Login extends React.Component{
     constructor(props) {
@@ -21,32 +21,11 @@ export default class _Login extends React.Component{
         }   
         
     }
-    Validate(UserID, Password) {    
-    var isValid = true;
-    var message = "";    
-    if (EmailReg.test(UserID) || IDReg.test(UserID)) {
-        if (PassReg.test(Password)) {
-           this.props.navigation.navigate('CLanding')
-        } else {
-            message = "The password entered was not secure enough"
-            isValid = false
-        }
+    handleSubmission(UID,Pass,Action){
+     if  (Validate(UID,null,Pass,Action)){
+         //HANDLE json REQUEST
+     }
     }
-    else {
-        message = "There was a problem with username or email"
-        isValid = false
-    }
-
-    if (!isValid) {
-        Alert.alert("Validation error",
-            message,
-            [
-                { text: 'Go Back' },
-            ],
-            { cancelable: false },
-        );
-    }    
-}
     render() {
         return (
             <View>
@@ -64,10 +43,10 @@ export default class _Login extends React.Component{
                     <View style={styles.container}>
                         <TextInput name="username"placeholder="Email" style={StyleSheet.TextInputStyle} value={this.state.username} onChangeText={(text) => { this.setState({ username: text})}} />
                         <TextInput name="password" placeholder="Password" style={StyleSheet.TextInputStyle} secureTextEntry={true} value={this.state.password} onChangeText={(text) => { this.setState({ password: text})}} />
-                        <TouchableOpacity style={StyleSheet.container}onPress={() => this.Validate(this.state.username,this.state.password)}>
+                        <TouchableOpacity style={StyleSheet.container}onPress={() => this.handleSubmission(this.state.username,this.state.password,"signin")}>
                             <Text style={StyleSheet.TextStyle} >Sign In</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => navigation.navigate('signup')}>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('signup')}>
                             <Text style={StyleSheet.TextStyle}>Or sign Up</Text>
                         </TouchableOpacity>
                     </View>

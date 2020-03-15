@@ -1,37 +1,41 @@
 import * as React from 'react';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createDrawerNavigator,DrawerContentScrollView,DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
-import { View,AppRegistry } from 'react-native';
+import { View,AppRegistry,Text } from 'react-native';
 import * as Screens from '../../Screens'
-export const IndDrawer = createDrawerNavigator();
+import { Typography, Colors } from '../../../Styles/index'
+export const IDrawer = createDrawerNavigator();
 
-function LogoutScreen() {
-  return (
-    <View>
-      <Screens.Login navigation={props.navigation}/>
-    </View>
-  );
-}
-
-function HomeScreen() {
-  return (
-    <View>
-      <Screens.LandingScreen/>
-    </View>
-  );
-}
 AppRegistry.registerComponent('Mobile_GRiST', () => IndDrawer);
-export default function IndividualNav(){
+
+function CustomDrawerContent(props) {
+  return (
+    <DrawerContentScrollView {...props} style={{backgroundColor:Colors.LightGrey.color}}>
+      <Text>E Grist Mobile</Text>
+      <DrawerItemList {...props} />
+      <DrawerItem label="Help" onPress={() => alert('This modal will contain the break down information')} />
+    </DrawerContentScrollView>
+  );
+}
+
+export default function _IndividualNav(){
     return (
-      <NavigationContainer>
-        <Drawer.Navigator initialRouteName={Screens.LandingScreen}>
-          <Drawer.Screen name="My Profile" component={HomeScreen} />
-          <Drawer.Screen name="Asessment" component={HomeScreen} />
-          <Drawer.Screen name="My Plan" component={HomeScreen} />
-          <Drawer.Screen name="Review" component={HomeScreen} />
-          <Drawer.Screen name="Search" component={HomeScreen} />
-          <Drawer.Screen name="Logout" component={LogoutScreen} />
-        </Drawer.Navigator>
-      </NavigationContainer>
-    );
+        <IDrawer.Navigator initialRouteName={"Landing"} drawerContent={props => CustomDrawerContent(props)} drawerType="slide" drawerContentOptions={styles}>
+          <IDrawer.Screen name="Landing" component={Screens.LandingScreen.default} />
+          <IDrawer.Screen name="My Profile" component={Screens.LandingScreen.default} />
+          <IDrawer.Screen name="My Asessments" component={Screens.LandingScreen.default} />
+          <IDrawer.Screen name="My Plan" component={Screens.LandingScreen.default} />
+          <IDrawer.Screen name="Review" component={Screens.LandingScreen.default} />
+          <IDrawer.Screen name="Search" component={Screens.LandingScreen.default} />
+          <IDrawer.Screen name="Logout" component={Screens.LandingScreen.default} />
+          </IDrawer.Navigator>
+      );
   }
+  const styles = ({
+    activeTintColor : Colors.White.color,
+    activeBackgroundColor: Colors.LightGreen.color,
+    inactiveTintColor: Colors.White.color,
+    inactiveBackgroundColor: Colors.DarkGreen.color,
+    itemStyle: { marginVertical: 5 },
+    contentContainerStyle: {backgroundColor:Colors.LightGrey.color }
+  })
