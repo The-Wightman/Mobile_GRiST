@@ -6,7 +6,7 @@ import * as Screens from '../../Screens'
 import { Typography, Colors } from '../../../Styles/index'
 export const CDrawer = createDrawerNavigator();
 
-AppRegistry.registerComponent('Mobile_GRiST', () => ClinDrawer);
+AppRegistry.registerComponent('eGRiST', () => ClinDrawer);
 
 function CustomDrawerContent(props) {
   return (
@@ -19,7 +19,7 @@ function CustomDrawerContent(props) {
 }
 export default function _ClinicianNav(){
     return (        
-        <CDrawer.Navigator initialRouteName={"Landing"} drawerContent={props => CustomDrawerContent(props)} drawerType="slide" drawerContentOptions={styles}>
+        <CDrawer.Navigator initialRouteName={"Landing"} drawerContent={props => CustomDrawerContent(props)} drawerType="slide" drawerContentOptions={styles} screenProps={{navigation: this.navigation}}>
           <CDrawer.Screen name="Landing" component={Screens.LandingScreen.default} />
           <CDrawer.Screen name="My Profile" component={Screens.LandingScreen.default} />
           <CDrawer.Screen name="My patients" component={Screens.LandingScreen.default} />

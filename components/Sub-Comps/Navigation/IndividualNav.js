@@ -6,7 +6,7 @@ import * as Screens from '../../Screens'
 import { Typography, Colors } from '../../../Styles/index'
 export const IDrawer = createDrawerNavigator();
 
-AppRegistry.registerComponent('Mobile_GRiST', () => IndDrawer);
+AppRegistry.registerComponent('eGRiST', () => IndDrawer);
 
 function CustomDrawerContent(props) {
   return (
@@ -20,7 +20,7 @@ function CustomDrawerContent(props) {
 
 export default function _IndividualNav(){
     return (
-        <IDrawer.Navigator initialRouteName={"Landing"} drawerContent={props => CustomDrawerContent(props)} drawerType="slide" drawerContentOptions={styles}>
+        <IDrawer.Navigator initialRouteName={"Landing"} drawerContent={props => CustomDrawerContent(props)} drawerType="slide" drawerContentOptions={styles} screenProps={{navigation: this.navigation}}>
           <IDrawer.Screen name="Landing" component={Screens.LandingScreen.default} />
           <IDrawer.Screen name="My Profile" component={Screens.LandingScreen.default} />
           <IDrawer.Screen name="My Asessments" component={Screens.LandingScreen.default} />

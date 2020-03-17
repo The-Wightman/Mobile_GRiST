@@ -16,6 +16,9 @@ export const White = {
 export const LightBlue = {
     color: '#2BA5F4'
 };
+export const Black = {
+    color: '#000000'
+};
 export const FullTransparent = {
     opacity: 0
 };

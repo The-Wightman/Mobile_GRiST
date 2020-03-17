@@ -11,7 +11,7 @@ export default function Validate(UserID,Email,Password,action) {
     }
     if (EmailReg.test(UserID) || IDReg.test(UserID)) {
         if (PassReg.test(Password)) {
-           this.props.navigation.navigate('ILanding')
+           isValid = true
         } else {
             message += "The password entered was not secure enough \n\n"
             isValid = false
