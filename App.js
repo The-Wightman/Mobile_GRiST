@@ -27,7 +27,7 @@ import _ClinicianNav from './components/Sub-Comps/Navigation/ClinicianNav';
 import _IndividualNav from './components/Sub-Comps/Navigation/IndividualNav';
 
 export const Stack = createStackNavigator ();  
-AppRegistry.registerComponent('Mobile_GRiST', () => Stack);
+AppRegistry.registerComponent('eGRiST', () => Stack);
 
 export default function _LoginStack() {
       return (        
