@@ -20,11 +20,12 @@ export default class MainHeader extends React.Component {
         return(
             
            <View style={styles.container} navigation={navigation}>
-               <TouchableOpacity style={styles.Internal} onPress={() => DrawerActions.toggleDrawer()}>
+               <TouchableOpacity style={styles.Icon} onPress={() => this.props.navigation.dispatch(DrawerActions.toggleDrawer())}>
                 <Image source={Images.GristLogo} ></Image>
                </TouchableOpacity>
                <View style={styles.Internal}>
-                   <Text style={Typography.Header}> E-Grist Mobile</Text>
+                    <Text style={styles.Heade}> e</Text>
+                   <Text style={styles.HeadText}> GRiST</Text>
                 </View>
                               
            </View>
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.LightGrey.color
         
     },
-       Internal: {
+       Icon: {
             flex:1,
             justifyContent:"flex-start",
             alignSelf:'center',           
@@ -53,6 +54,20 @@ const styles = StyleSheet.create({
         
 
     },
+    Internal: {
+        flex:1,
+        justifyContent:"flex-end",
+        alignSelf:'center',           
+        flexDirection: 'row',
+},
+Heade: {
+    color: Colors.DarkGreen.color,
+    fontSize: Typography.Header.fontSize
+},
+HeadText: {
+    color: Colors.White.color,
+    fontSize: Typography.Header.fontSize
+},
     Title: {
         flex:1,
         justifyContent: 'flex-start',

@@ -14,17 +14,21 @@ import {
 import { color } from 'react-native-reanimated';
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
 import MainHeadTemplate from '../Sub-Comps/Header'
-export default function _LandingScreen ({navigation}){    
+export default class signup extends Component{ 
+  constructor(props) {
+    super(props);
+  }
+  render() {   
         return(
           <View>
-          <MainHeadTemplate/>
+          <MainHeadTemplate navigation={this.props.navigation}/>
           <DefaultTemplate/>
           <Text >Landing screen text???</Text>
           </View>
 
         )
     }
-
+  }
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'black',
