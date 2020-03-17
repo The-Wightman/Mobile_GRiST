@@ -30,25 +30,25 @@ export default class signup extends Component {
         return (
             <View >        
             <DefaultTemplate/>
-                <View behaviour='padding' style={styles.screenPos} >
-                    <View style={styles.container} >
-                        <Image source={Images.GristLogo} style={StyleSheet.Logo} >
+                <View  style={styles.screenPos} >
+                    <View style={styles.Logo} >
+                        <Image source={Images.GristLogo} >
                         </Image>
 
                     </View >
                     <View style={styles.container}>
-                        <Text style={StyleSheet.TextStyle}>Sign up to GRIST</Text>
-                        <Text style={StyleSheet.TextStyle}>Please enter your email and Information</Text>
+                        <Text style={styles.TextStyle}>Sign up to GRIST</Text>
+                        <Text style={styles.TextStyle}>Please enter your email and Information</Text>
                     </View>
                     <View style={styles.container}>
-                        <TextInput placeholder="Username" style={StyleSheet.TextInputStyle}   onChangeText={(text) => { this.setState({ username: text})}}/>
-                        <TextInput placeholder="Email" style={StyleSheet.TextInputStyle}   onChangeText={(text) => { this.setState({ Email: text})}}/>
-                        <TextInput placeholder="Password" style={StyleSheet.TextInputStyle}  onChangeText={(text) => { this.setState({password: text})}} />
-                        <TouchableOpacity style={StyleSheet.container} onPress={() => this.handleSubmission(this.state.username,this.state.Email,this.state.password,"signup")}>
-                            <Text style={StyleSheet.TextStyle} >Sign Up</Text>
+                        <TextInput placeholder="Username" style={styles.TextInputStyle}   onChangeText={(text) => { this.setState({ username: text})}}/>
+                        <TextInput placeholder="Email" style={styles.TextInputStyle}   onChangeText={(text) => { this.setState({ Email: text})}}/>
+                        <TextInput placeholder="Password" style={styles.TextInputStyle}  onChangeText={(text) => { this.setState({password: text})}} />
+                        <TouchableOpacity style={styles.container} onPress={() => this.handleSubmission(this.state.username,this.state.Email,this.state.password,"signup")}>
+                            <Text style={styles.TextStyle} >Sign Up</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => this.props.navigation.navigate('Sign In') }>
-                            <Text style={StyleSheet.TextStyle}>Or Go Back</Text>
+                            <Text style={styles.TextStyle}>Or Go Back</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -63,44 +63,42 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
-        paddingVertical: 30,
-        
+        padding: 15,
+
     },
-    screenPos:{
-        paddingTop:100,
-        width:'100%',
-        height: '50%',
-        alignContent:'center',
-        justifyContent:'center',
+    screenPos: {
+        paddingTop: 100,
+        width: '100%',
+        height: '70%',
+        alignContent: 'center',
+        justifyContent: 'center',
         position: 'absolute',
-        
-    },
-       Logo: {
-            marginLeft: 'auto',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'row',
-            width: '100%',
-            height: '100%'
-        
 
     },
-       TextInputStyle: {
-       borderColor: 'black',
-       borderWidth: 10,
-       padding: 20,
-       color: Colors.White.color,
-       maxHeight: 50,
-       maxWidth: 200
-       
+    Logo: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'row',
+        width: '100%',
+        height: '30%'
+        
+    },
+    TextInputStyle: {
+        borderColor: Colors.LightGrey.color,
+        borderWidth: 3,
+        padding: 10,
+        color: Colors.White.color,
+        maxHeight: 50,
+        width: '75%',
+        backgroundColor: Colors.White.color,
+        
     },
 
-        TextStyle: {
-       color: Colors.White.color,
-       textAlign: 'center',
-       borderWidth: 1,
-       padding: 10,
-       fontSize: Spacing.TextSizes.SubText
+    TextStyle: {
+        color: Colors.DarkGreen.color,
+        textAlign: 'center',
+        padding: 10,
+        fontSize: Spacing.TextSizes.FieldText
     }
 }
 )
