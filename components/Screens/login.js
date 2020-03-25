@@ -11,7 +11,7 @@ import {
 import { Typography, Colors, Spacing, Images } from '../../Styles'
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
 import Validate from '../Sub-Comps/Validator'
-import { Background } from '../../Styles/Images'
+
 
 export default class _Login extends React.Component{
     constructor(props) {
@@ -19,13 +19,32 @@ export default class _Login extends React.Component{
         this.state = {
         username: "",
         password: "",
+        responseJSON: ""
         }   
         
     }
     handleSubmission(UID,Pass,Action){
      if  (Validate(UID,null,Pass,Action)){
-        this.props.navigation.navigate('ILanding')
+       response = this.JsonHandler(UID,Pass);     
+        console.log(response)
+        this.props.navigation.navigate('Clanding')
      }
+    }
+    async JsonHandler(UID,Pass){
+        response = fetch('https://www.egrist.org/user/login? format=hal_json', {
+        method: 'POST',
+        header: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'},
+        body: {data: '{"name":UID,"pass": Pass}'},
+        })//.then ((response) => response.json())
+        .then(async (response) => response.text())
+        .then((res) => { return res})
+        .catch(function(error) {
+            console.log('There has been a problem with your fetch operation: ' + error.message);
+           
+        });
+               
     }
     render() {
         return (
