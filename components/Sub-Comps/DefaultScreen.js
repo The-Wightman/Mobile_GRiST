@@ -18,7 +18,7 @@ export default class DefaultTemplate extends React.Component {
     render() {
         return(
             <React.Fragment>
-            <View style = {StyleSheet.container} >
+            <View style = {styles.Background} >
             <KeyboardAvoidingView behaviour='padding'>
             <ImageBackground source={require('../../Assets/Background.png')} style={{width: '100%', height: '100%'}}>                      
             <TouchableWithoutFeedback onPress={Keyboard.dismiss} style={styles.container}>
@@ -68,6 +68,10 @@ const styles = StyleSheet.create({
        borderWidth: 1,
        padding: 10,
        fontSize: Spacing.TextSizes.SubText
+    },
+    Background: {
+        width: '100%',
+        height: '100%'
     }
 }
 )

@@ -3,20 +3,12 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { View,AppRegistry} from 'react-native';
 import * as Screens from '../../Screens'
-import { Typography, Colors } from '../../../Styles/index'
+import {Colors} from '../../../Styles/index'
 export const CDrawer = createDrawerNavigator();
 
 AppRegistry.registerComponent('eGRiST', () => ClinDrawer);
 
-function CustomDrawerContent(props) {
-  return (
-    <DrawerContentScrollView {...props}>
-      <Text>Header for the drawer</Text>
-      <DrawerItemList {...props} />
-      <DrawerItem label="Help" onPress={() => alert('Link to help')} />
-    </DrawerContentScrollView>
-  );
-}
+
 export default function _ClinicianNav(){
     return (        
         <CDrawer.Navigator initialRouteName={"Landing"} drawerContent={props => CustomDrawerContent(props)} drawerType="slide" drawerContentOptions={styles} screenProps={{navigation: this.navigation}}>
@@ -32,6 +24,10 @@ export default function _ClinicianNav(){
     );
   }
   const styles = ({
-    activeTintColor : Colors.LightGreen.color,
-
+    activeTintColor : Colors.White.color,
+    activeBackgroundColor: Colors.LightGreen.color,
+    inactiveTintColor: Colors.White.color,
+    inactiveBackgroundColor: Colors.DarkGreen.color,
+    itemStyle: { marginVertical: 5 },
+    contentContainerStyle: {backgroundColor:Colors.LightGrey.color }
   })
