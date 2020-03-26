@@ -27,19 +27,20 @@ export default class _Login extends React.Component{
      if  (Validate(UID,null,Pass,Action)){
        response = this.JsonHandler(UID,Pass);     
         console.log(response)
-        this.props.navigation.navigate('Clanding')
+        this.props.navigation.navigate('CLanding')
      }
     }
     async JsonHandler(UID,Pass){
         response = fetch('https://www.egrist.org/user/login? format=hal_json', {
         method: 'POST',
-        header: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'},
-        body: {data: '{"name":UID,"pass": Pass}'},
-        })//.then ((response) => response.json())
-        .then(async (response) => response.text())
-        .then((res) => { return res})
+        header: "Content-Type : application/json",
+        body: JSON.stringify({
+            "name":UID,
+            "pass":Pass
+        }),
+        }).then ((response) => response.json())
+        //.then(async (response) => response.text())
+        .then((json) => { return json})
         .catch(function(error) {
             console.log('There has been a problem with your fetch operation: ' + error.message);
            
