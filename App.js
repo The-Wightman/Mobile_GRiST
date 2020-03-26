@@ -32,7 +32,7 @@ AppRegistry.registerComponent('eGRiST', () => Stack);
 export default function _LoginStack() {
       return (        
         <NavigationContainer>          
-          <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName="SignIn" screenProps={{navigation: this.navigation}}>
+          <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName="Sign In" screenProps={{navigation: this.navigation}}>
           <Stack.Screen name="Sign In" component={Screens.Login}  />
           <Stack.Screen name="signup" component={Screens.signup}  />
           <Stack.Screen name="CLanding" component={_ClinicianNav} />
