@@ -1,12 +1,15 @@
 import * as React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer,StackActions } from '@react-navigation/native';
 import { View,AppRegistry} from 'react-native';
 import * as Screens from '../../Screens'
 import {Colors} from '../../../Styles/index'
+import CustomDrawerContent from './DrawerContainer'
 export const CDrawer = createDrawerNavigator();
 
 AppRegistry.registerComponent('eGRiST', () => ClinDrawer);
+
+
 
 
 export default function _ClinicianNav(){
@@ -18,11 +21,11 @@ export default function _ClinicianNav(){
           <CDrawer.Screen name="My Plan" component={Screens.LandingScreen.default} />
           <CDrawer.Screen name="Review" component={Screens.LandingScreen.default} />
           <CDrawer.Screen name="Search" component={Screens.LandingScreen.default} />          
-          <CDrawer.Screen name="Logout" component={Screens.Login} />
         </CDrawer.Navigator>
      
     );
   }
+
   const styles = ({
     activeTintColor : Colors.White.color,
     activeBackgroundColor: Colors.LightGreen.color,

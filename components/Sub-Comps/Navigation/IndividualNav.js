@@ -5,6 +5,7 @@ import { AppRegistry,Text } from 'react-native';
 import * as Screens from '../../Screens'
 import {Colors} from '../../../Styles/index'
 import CustomDrawerContent from './DrawerContainer'
+
 export const IDrawer = createDrawerNavigator();
 
 AppRegistry.registerComponent('eGRiST', () => IndDrawer);
@@ -17,8 +18,7 @@ export default function _IndividualNav(){
           <IDrawer.Screen name="My Assessments" component={Screens.LandingScreen.default} />
           <IDrawer.Screen name="My Plan" component={Screens.LandingScreen.default} />
           <IDrawer.Screen name="Review" component={Screens.LandingScreen.default} />
-          <IDrawer.Screen name="Search" component={Screens.LandingScreen.default} />
-          <IDrawer.Screen name="Logout" component={Screens.LandingScreen.default} />
+          <IDrawer.Screen name="Search" component={Screens.LandingScreen.default} />          
           </IDrawer.Navigator>
       );
   }
