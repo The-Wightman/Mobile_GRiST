@@ -14,21 +14,26 @@ import {
 import { color } from 'react-native-reanimated';
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
 import MainHeadTemplate from '../Sub-Comps/Header'
-import QuestionBox from '../Sub-Comps/QuestionBoxes'
-const XMLnode = {name:XMLnode,values:"scale",leftlabel:"0 = Very sad",rightlabel:"10 = very Happy",question:"How happy are you",help:"Measure thy happiness",prev:"5"}
+import QuestionBoxTemplate from '../Sub-Comps/QuestionBoxes'
+
+const XMLnode1 = {value:'scale',leftlabel:'0 = Very sad',rightlabel:'10 = very Happy',question:'How happy are you? ',help:'Measure thy happiness',prev:5,persistence: "Hard"}
+const XMLnode2 = {value:'value',leftlabel:'0 = Very sad',rightlabel:'10 = very Happy',question:'How sad are you? ',help:'Measure thy sadness',persistence: "Soft",alert:"OH MY LAWD"}
 
 export default class signup extends Component{ 
   constructor(props) {
     super(props);
-   
+    
   }
   render() {   
         return(
-          <View>
+          <View >
           <MainHeadTemplate navigation={this.props.navigation}/>
           <DefaultTemplate/>
           <Text >Landing screen text???</Text>
-          <QuestionBox {...XMLnode}/>
+          <View style={styles.screenPos}>
+          <QuestionBoxTemplate {...XMLnode1}/>
+          <QuestionBoxTemplate {...XMLnode2}/>
+          </View>
           </View>
 
         )
@@ -44,5 +49,14 @@ const styles = StyleSheet.create({
   title: {
       fontSize: 24,
       color: 'black'
-  }
+  },
+  screenPos: {
+    paddingTop: '15%',
+    width: '100%',
+    height: '70%',
+    alignContent: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+
+},
 })
