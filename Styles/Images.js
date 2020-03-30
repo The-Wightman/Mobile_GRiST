@@ -1,0 +1,10 @@
+export const GristLogo = require('../Assets/gristicon.png');
+export const Background = require('../Assets/Background.png');
+export const DefaultProfile = require('../Assets/DefaultProfile.jpg');
+export const ballon = require('../Assets/QuestionIcons/balloon-white.png');
+export const bin = require('../Assets/QuestionIcons/bin2.png');
+export const document = require('../Assets/QuestionIcons/document-white.png');
+export const exclamation = require('../Assets/QuestionIcons/exclamation.png');
+export const info = require('../Assets/QuestionIcons/information-frame.png');
+export const lock_s = require('../Assets/QuestionIcons/lock-bw.png');
+export const lock_g = require('../Assets/QuestionIcons/lock-yellow.png');
