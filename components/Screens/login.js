@@ -23,30 +23,48 @@ export default class _Login extends React.Component{
         }   
         
     }
-    handleSubmission(UID,Pass,Action){
+    userLogin(UID,Pass,Action){
+    let UserInfo = null
      if  (Validate(UID,null,Pass,Action)){
-       response = this.JsonHandler(UID,Pass);     
-        console.log(response)
-        this.props.navigation.navigate('CLanding')
-     }
+     UserInfo =  this.JsonHandler(UID,Pass)
+        console.log(UserInfo)
+        //if(!Promise.resolve(UserInfo) == UserInfo) {                
+            this.props.navigation.navigate('CLanding')
+    // }
     }
-    async JsonHandler(UID,Pass){
-        response = fetch('https://www.egrist.org/user/login? format=hal_json', {
-        method: 'POST',
-        header: "Content-Type : application/json",
-        body: JSON.stringify({
-            "name":UID,
-            "pass":Pass
+}
+     async JsonHandler(UID,Pass){  
+        let response
+        let responseJSON      
+        const apicall = 'https://www.egrist.org/user/login?_format=hal_json'
+        console.log(UID)
+        console.log(Pass)
+        const details = {
+            header: 'Content-type: application/json','Accept': 'application/json',
+            method: 'POST',                        
+            body: JSON.stringify({
+            "name":UID ,"pass": Pass 
         }),
-        }).then ((response) => response.json())
-        //.then(async (response) => response.text())
-        .then((json) => { return json})
-        .catch(function(error) {
-            console.log('There has been a problem with your fetch operation: ' + error.message);
-           
-        });
-               
-    }
+        }
+        try {
+            response = await fetch(apicall,details)
+            .then(response => response.text())
+            .then(data => console.log(data))
+            .catch(function(error) {
+            console.log('There has been a problem with your fetch operation: ' + error.message);             
+              throw error;
+            })
+            console.log(response)
+            responseJSON = response.json();
+        }
+        catch(err){
+            alert(err)
+        }
+        finally{
+            return responseJSON
+        }
+        } 
+        
     render() {
         return (
             <View>
@@ -64,7 +82,7 @@ export default class _Login extends React.Component{
                     <View style={styles.container}>
                         <TextInput name="username"placeholder="Email" style={styles.TextInputStyle} value={this.state.username} onChangeText={(text) => { this.setState({ username: text})}} />
                         <TextInput name="password" placeholder="Password" style={styles.TextInputStyle} secureTextEntry={true} value={this.state.password} onChangeText={(text) => { this.setState({ password: text})}} />
-                        <TouchableOpacity style={styles.container}onPress={() => this.handleSubmission(this.state.username,this.state.password,"signin")}>
+                        <TouchableOpacity style={styles.container}onPress={() => this.userLogin(this.state.username,this.state.password,"signin")}>
                             <Text style={styles.TextStyle} >Sign In</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => this.props.navigation.navigate('signup')}>
