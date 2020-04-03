@@ -9,8 +9,8 @@ import {StyleSheet,
 import { DrawerContentScrollView,DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import { Colors,Images,Spacing,Buttons } from '../../../Styles'
 
-
-export default function CustomDrawerContent(props) {
+export default function CustomDrawerContent(props) {   
+    
     return (     
       <DrawerContentScrollView {...props} style={styles.ScrollView}>        
          <View style={styles.mainContainer}>
@@ -30,7 +30,11 @@ export default function CustomDrawerContent(props) {
           [
             {text: 'Cancel', onPress: () => {return null}},
             {text: 'Confirm', onPress: () => {
-              props.navigation.navigate('Sign In')
+              fetch('https://www.egrist.org/user/logout?q=user/logout', {
+                method: 'GET',
+                header: "Content-Type : application/json",
+              }).then(props.navigation.navigate('Sign In'))
+              
             }},
           ],
           { cancelable: false }
