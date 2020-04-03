@@ -14,22 +14,30 @@ import {
 import { color } from 'react-native-reanimated';
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
 import MainHeadTemplate from '../Sub-Comps/Header'
-import QuestionBoxTemplate from '../Sub-Comps/QuestionBoxes'
+import AssessmentHeader from '../Sub-Comps/AssesmentHeader'
 
-export default class signup extends Component{ 
+const XMLnode1 = {value:'scale',leftlabel:'0 = Very sad',rightlabel:'10 = very Happy',question:'How happy are you? ',help:'Measure thy happiness',prev:5,persistence: "Hard"}
+const XMLnode2 = {value:'value',leftlabel:'0 = Very sad',rightlabel:'10 = very Happy',question:'How sad are you? ',help:'Measure thy sadness',persistence: "Soft",alert:"OH MY LAWD"}
+
+export default class QuestionWindow extends Component{ 
   constructor(props) {
     super(props);
     
   }
   render() {   
         return(
-          <View >
+          <View  style={styles.screenPos}>
           <MainHeadTemplate navigation={this.props.navigation}/>
+          <AssessmentHeader/>
           <DefaultTemplate/>
          
-          <View style={styles.screenPos}>          
-           <Text >Landing screen text???</Text>
-           </View>
+          <View style={styles.screenPos}>
+         
+        <Text style={styles.TextStyle}>MYASSESSMENT</Text>
+        <QuestionBoxTemplate {...XMLnode1}/>
+          <QuestionBoxTemplate {...XMLnode2}/>
+          
+          </View>
           </View>
 
         )
@@ -55,4 +63,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
 
 },
+TextStyle: {
+    color: Colors.DarkGreen.color,                
+    fontSize: Spacing.TextSizes.navText
+ }
 })

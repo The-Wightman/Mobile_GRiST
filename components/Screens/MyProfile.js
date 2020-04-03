@@ -14,9 +14,9 @@ import {
 import { color } from 'react-native-reanimated';
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
 import MainHeadTemplate from '../Sub-Comps/Header'
-import QuestionBoxTemplate from '../Sub-Comps/QuestionBoxes'
 
-export default class signup extends Component{ 
+
+export default class MyProfile extends Component{ 
   constructor(props) {
     super(props);
     
@@ -26,10 +26,10 @@ export default class signup extends Component{
           <View >
           <MainHeadTemplate navigation={this.props.navigation}/>
           <DefaultTemplate/>
-         
-          <View style={styles.screenPos}>          
-           <Text >Landing screen text???</Text>
-           </View>
+          
+          <View style={styles.screenPos}>
+          <Text style={styles.TextStyle}>MYProfile</Text>
+          </View>
           </View>
 
         )
@@ -55,4 +55,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
 
 },
+TextStyle: {
+    color: Colors.DarkGreen.color,                
+    fontSize: Spacing.TextSizes.navText
+ }
 })
