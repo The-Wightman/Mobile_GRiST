@@ -14,36 +14,117 @@ export default class AssessmentHeader extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isClin : false, 
+            isClin: false, 
+            user: "Eh",
+            assessment: "full",
+            questionSet: "State of mind",
+            username: "David Wightman"
         }        
          
     }
     render() {
-        let UpperLeft ;
+        let UpperLeft;
+        let UpperRight
         let LowerRight;
         let LowerLeft;
         const { navigation } = this.props;
+         if (this.state.isClin) {
+            UpperLeft = (
+            <View>
+            <Text>Person being assessed: {this.state.user}</Text>
+            <Text>Assessment: {this.state.assessment}</Text>
+            </View>
+            )
+            UpperRight = (
+            <View>
+                <TouchableOpacity>
+                    <Text>Key</Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <Text>Quick Tips</Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <Text>The GRiST Process</Text>
+                </TouchableOpacity>
+            </View>
+            )
+            LowerRight = (
+                <View>
+                <TouchableOpacity>
+                    <Text>Risk Judgements</Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                <Text>Risk Formulation</Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                <Text>Safety Plan</Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <Text>Preview Report</Text>
+                </TouchableOpacity>
+                </View>
+            )            
+         } else {
+            UpperLeft = (
+                <View>
+                <Text>Questions selected: {this.state.questionSet}</Text>               
+                </View>
+                )
+            UpperRight = (
+                <View>
+                    <TouchableOpacity>
+                        <Text>Key</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                        <Text>Quick Tips</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                        <Text>Using myGRiST</Text>
+                    </TouchableOpacity>
+                    <Text>Welcome: {this.state.username}</Text>
+                </View>
+                )
+            LowerRight = (
+                <View>
+                    <TouchableOpacity>
+                        <Text>Review Answers</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                        <Text>GRiST Advice & My Plan</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                        <Text>Guide & Next Steps</Text>
+                    </TouchableOpacity>                   
+                </View>
+                )
+         }
+         LowerLeft = (
+            <View style={styles.Internal}>
+                <TouchableOpacity>
+                    <Text>Go Back</Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <Text>Save</Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <Text>Suspend</Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <Text>Finish</Text>
+                </TouchableOpacity>
+            </View>
+            )
 
         return(            
            <View style={styles.container} navigation={navigation}>
-               <View>
-                   <View>
-                        {UpperLeft}
-                   </View>
-                   <View>
-
-                   </View>
+               <View styles={styles.Internal}>                   
+                        {UpperLeft}                   
+                        {UpperRight}                   
                </View>
-               <View style={styles.Internal}>
-                    <View>
-
-                    </View>
-                    <View>
-
-                    </View>
-
-                </View>
-                              
+               <View styles={styles.Internal}>
+                    {LowerLeft}
+                    {LowerRight}                    
+                </View>                              
            </View>
         )
     }
@@ -71,7 +152,7 @@ const styles = StyleSheet.create({
 
     },
     Internal: {
-        flex:1,
+        flex:4,
         justifyContent:"flex-end",
         alignSelf:'center',           
         flexDirection: 'row',
