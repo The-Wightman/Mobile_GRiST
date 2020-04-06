@@ -1,4 +1,4 @@
-import { EmailReg, PassReg, IDReg } from '../Sub-Comps/Regex'
+import { EmailReg, PassReg, IDReg } from './Regex'
 import {  Alert  } from 'react-native'
 export default function Validate(UserID,Email,Password,action) {    
     var isValid = true;

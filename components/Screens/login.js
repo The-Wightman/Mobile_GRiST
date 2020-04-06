@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import { Typography, Colors, Spacing, Images } from '../../Styles'
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
-import Validate from '../Sub-Comps/Validator'
+import Validate from '../Sub-Comps/GenericComps/Validator'
 
 
 export default class _Login extends React.Component{
@@ -35,27 +35,28 @@ export default class _Login extends React.Component{
 }
      async JsonHandler(UID,Pass){  
         let response
-        let responseJSON      
+        let responseJSON   
+        form = new FormData();
+        form.append('name', JSON.stringify(UID));
+        form.append('pass', JSON.stringify(Pass));  
         const apicall = 'https://www.egrist.org/user/login?_format=hal_json'
-        console.log(UID)
-        console.log(Pass)
         const details = {
-            header: 'Content-type: application/json','Accept': 'application/json',
-            method: 'POST',                        
-            body: JSON.stringify({
-            "name":UID ,"pass": Pass 
-        }),
+            header: 'Content-type: application/json',
+            method: 'POST',
+            redirect: 'manual',                        
+            body: form,
         }
         try {
-            response = await fetch(apicall,details)
-            .then(response => response.text())
-            .then(data => console.log(data))
+            response = await fetch(apicall,details)            
+            .then(response => responseJSON = response.text())            
             .catch(function(error) {
-            console.log('There has been a problem with your fetch operation: ' + error.message);             
+            console.log('There has been a problem with your reqeust:' + error.message + 'Please try again and ensure an internet connection is available'
+            + response);             
               throw error;
             })
             console.log(response)
-            responseJSON = response.json();
+            console.log(responseJSON)
+            responseJSON;
         }
         catch(err){
             alert(err)

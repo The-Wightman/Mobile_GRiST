@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 import { Typography, Colors, Spacing, Images} from '../../Styles'
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
-import Validate from '../Sub-Comps/Validator'
+import Validate from '../Sub-Comps/GenericComps/Validator'
 
 
 export default class signup extends Component {

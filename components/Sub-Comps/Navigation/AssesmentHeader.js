@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Images,Colors,Typography } from '../../Styles'
+import { Images,Colors,Typography } from '../../../Styles'
 import {
     StyleSheet,
     Text,
@@ -10,22 +10,38 @@ import {
 
 import { DrawerActions,useNavigation } from '@react-navigation/native';
 
-export default class MainHeader extends React.Component {
+export default class AssessmentHeader extends React.Component {
     constructor(props) {
         super(props);
-     
+        this.state = {
+            isClin : false, 
+        }        
+         
     }
     render() {
+        let UpperLeft ;
+        let LowerRight;
+        let LowerLeft;
         const { navigation } = this.props;
-        return(
-            
+
+        return(            
            <View style={styles.container} navigation={navigation}>
-               <TouchableOpacity style={styles.Icon} onPress={() => this.props.navigation.dispatch(DrawerActions.toggleDrawer())}>
-                <Image source={Images.GristLogo} ></Image>
-               </TouchableOpacity>
+               <View>
+                   <View>
+                        {UpperLeft}
+                   </View>
+                   <View>
+
+                   </View>
+               </View>
                <View style={styles.Internal}>
-                    <Text style={styles.Heade}> My</Text>
-                   <Text style={styles.HeadText}> Assessment</Text>
+                    <View>
+
+                    </View>
+                    <View>
+
+                    </View>
+
                 </View>
                               
            </View>
@@ -38,7 +54,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         flexDirection: 'row',
-        paddingVertical: 30,
+        paddingVertical: 30,        
         zIndex:100,
         height: '10%',
         width:'100%',

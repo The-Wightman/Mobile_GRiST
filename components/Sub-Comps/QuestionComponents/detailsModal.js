@@ -8,7 +8,7 @@ import {
   View,
   TextInput
 } from "react-native";
-import { Images,Colors,Typography,Spacing } from '../../Styles'
+import { Images,Colors,Typography,Spacing } from '../../../Styles'
 
 export default class DetailModal extends React.Component{
     constructor(props) {

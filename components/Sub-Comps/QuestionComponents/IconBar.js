@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Images,Colors,Typography,Spacing } from '../../Styles'
+import { Images,Colors,Typography,Spacing } from '../../../Styles'
 import {
     StyleSheet,
     Text,

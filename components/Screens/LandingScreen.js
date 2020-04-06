@@ -13,8 +13,9 @@ import {
 } from 'react-native';
 import { color } from 'react-native-reanimated';
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
-import MainHeadTemplate from '../Sub-Comps/Header'
-import QuestionBoxTemplate from '../Sub-Comps/QuestionBoxes'
+import MainHeadTemplate from '../Sub-Comps/Navigation/Header'
+import QuestionBoxTemplate from '../Sub-Comps/QuestionComponents/QuestionBoxes'
+import AssessmentHeader from '../Sub-Comps/Navigation/AssesmentHeader'
 
 export default class signup extends Component{ 
   constructor(props) {
@@ -25,8 +26,9 @@ export default class signup extends Component{
         return(
           <View >
           <MainHeadTemplate navigation={this.props.navigation}/>
+          <AssessmentHeader/>
           <DefaultTemplate/>
-         
+          
           <View style={styles.screenPos}>          
            <Text >Landing screen text???</Text>
            </View>
