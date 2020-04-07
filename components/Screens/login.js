@@ -29,7 +29,7 @@ export default class _Login extends React.Component{
      UserInfo =  this.JsonHandler(UID,Pass)
         console.log(UserInfo)
         //if(!Promise.resolve(UserInfo) == UserInfo) {                
-            this.props.navigation.navigate('CLanding')
+            this.props.navigation.navigate('ILanding')
     // }
     }
 }

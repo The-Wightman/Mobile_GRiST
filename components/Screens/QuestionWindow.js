@@ -13,8 +13,10 @@ import {
 } from 'react-native';
 import { color } from 'react-native-reanimated';
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
-import MainHeadTemplate from '../Sub-Comps/Header'
+import MainHeadTemplate from '../Sub-Comps/Navigation/Header'
 import AssessmentHeader from '../Sub-Comps/Navigation/AssesmentHeader'
+import {Colors,Spacing} from '../../Styles/index'
+import QuestionBoxTemplate from '../Sub-Comps/QuestionComponents/QuestionBoxes'
 
 const XMLnode1 = {value:'scale',leftlabel:'0 = Very sad',rightlabel:'10 = very Happy',question:'How happy are you? ',help:'Measure thy happiness',prev:5,persistence: "Hard"}
 const XMLnode2 = {value:'value',leftlabel:'0 = Very sad',rightlabel:'10 = very Happy',question:'How sad are you? ',help:'Measure thy sadness',persistence: "Soft",alert:"OH MY LAWD"}
@@ -26,19 +28,26 @@ export default class QuestionWindow extends Component{
   }
   render() {   
         return(
-          <View  style={styles.screenPos}>
+          <View>
           <MainHeadTemplate navigation={this.props.navigation}/>
           <AssessmentHeader/>
-          <DefaultTemplate/>
-         
-          <View style={styles.screenPos}>
-         
-        <Text style={styles.TextStyle}>MYASSESSMENT</Text>
-        <QuestionBoxTemplate {...XMLnode1}/>
+          <DefaultTemplate/>         
+          <View style={styles.screenPos}>      
+          <ScrollView >
+          <QuestionBoxTemplate {...XMLnode1}/>
           <QuestionBoxTemplate {...XMLnode2}/>
+          <QuestionBoxTemplate {...XMLnode1}/>
+          <QuestionBoxTemplate {...XMLnode2}/>
+          <QuestionBoxTemplate {...XMLnode1}/>
+          <QuestionBoxTemplate {...XMLnode2}/>
+          <QuestionBoxTemplate {...XMLnode1}/>
+          <QuestionBoxTemplate {...XMLnode2}/>
+          </ScrollView>
           
+          
+            </View>
           </View>
-          </View>
+          
 
         )
     }
@@ -54,10 +63,10 @@ const styles = StyleSheet.create({
       fontSize: 24,
       color: 'black'
   },
-  screenPos: {
-    paddingTop: '15%',
+  screenPos: { 
+    marginTop: '55%',       
     width: '100%',
-    height: '70%',
+    height: '100%',
     alignContent: 'center',
     justifyContent: 'center',
     position: 'absolute',

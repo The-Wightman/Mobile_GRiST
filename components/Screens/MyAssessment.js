@@ -14,7 +14,7 @@ import {
 import { color } from 'react-native-reanimated';
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
 import MainHeadTemplate from '../Sub-Comps/Header'
-
+import AssessmentHeader from '../Sub-Comps/Navigation/AssesmentHeader'
 
 export default class MyAssessment extends Component{ 
   constructor(props) {
@@ -25,8 +25,8 @@ export default class MyAssessment extends Component{
         return(
           <View >
           <MainHeadTemplate navigation={this.props.navigation}/>
-          <DefaultTemplate/>
-          
+          <AssessmentHeader/>
+          <DefaultTemplate/>          
           <View style={styles.screenPos}>
           <Text style={styles.TextStyle}>MYASSESSMENT</Text>
           </View>

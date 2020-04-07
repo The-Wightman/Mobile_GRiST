@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 
 import { DrawerActions,useNavigation } from '@react-navigation/native';
-import AssessmentModal from '../AssessmentModals/Asessmentmodal';
+import AssessmentModal from '../AssessmentModals/Assessmentmodal';
 
 export default class AssessmentHeader extends React.Component {
     constructor(props) {
@@ -19,10 +19,12 @@ export default class AssessmentHeader extends React.Component {
             user: "Eh",
             assessment: "full",
             questionSet: "State of mind",
-            username: "David Wightman"
+            username: "David Wightman",
+            modalVisible: false
         }        
          
     }
+    
     render() {
         let UpperLeft;
         let UpperRight
@@ -106,7 +108,7 @@ export default class AssessmentHeader extends React.Component {
          }
          LowerRight = (
             <View style={styles.Internal}>
-                <TouchableOpacity style={styles.Buttons}>
+                <TouchableOpacity style={styles.Buttons} >
                     <Text>Go Back</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.Buttons}>
@@ -131,7 +133,7 @@ export default class AssessmentHeader extends React.Component {
                 {LowerLeft}               
                 {LowerRight}                    
                 </View> 
-                <AssessmentModal name="AssModal"/>                                           
+                <AssessmentModal ref="modal" modalVisible={this.state.modalVisible}/>                                           
            </View>
         )
     }

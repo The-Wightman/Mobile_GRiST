@@ -13,8 +13,8 @@ import {
 } from 'react-native';
 import { color } from 'react-native-reanimated';
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
-import MainHeadTemplate from '../Sub-Comps/Header'
-
+import MainHeadTemplate from '../Sub-Comps/Navigation/Header'
+import {Colors,Spacing} from '../../Styles/index'
 
 export default class MyProfile extends Component{ 
   constructor(props) {
