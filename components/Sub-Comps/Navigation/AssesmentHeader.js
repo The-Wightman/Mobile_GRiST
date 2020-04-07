@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Images,Colors,Typography } from '../../../Styles'
+import { Images,Colors,Typography, Spacing } from '../../../Styles'
 import {
     StyleSheet,
     Text,
@@ -9,12 +9,13 @@ import {
 } from 'react-native'
 
 import { DrawerActions,useNavigation } from '@react-navigation/native';
+import AssessmentModal from '../AssessmentModals/Asessmentmodal';
 
 export default class AssessmentHeader extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isClin: false, 
+            isClin: true, 
             user: "Eh",
             assessment: "full",
             questionSet: "State of mind",
@@ -30,86 +31,91 @@ export default class AssessmentHeader extends React.Component {
         const { navigation } = this.props;
          if (this.state.isClin) {
             UpperLeft = (
-            <View>
-            <Text>Person being assessed: {this.state.user}</Text>
-            <Text>Assessment: {this.state.assessment}</Text>
+            <View style={styles.Internal}>
+            <Text style={styles.HeadText}>Person being assessed: {this.state.user}</Text>
+            <Text style={styles.HeadText}>Assessment: {this.state.assessment}</Text>
             </View>
             )
             UpperRight = (
-            <View>
-                <TouchableOpacity>
+            <View style={styles.Internal}>
+                <TouchableOpacity style={styles.Buttons} >
                     <Text>Key</Text>
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity style={styles.Buttons}>
                     <Text>Quick Tips</Text>
                 </TouchableOpacity>
-                <TouchableOpacity>
-                    <Text>The GRiST Process</Text>
+                <TouchableOpacity style={styles.Buttons}>
+                    <Text>GRiST Process</Text>
                 </TouchableOpacity>
             </View>
             )
-            LowerRight = (
-                <View>
-                <TouchableOpacity>
-                    <Text>Risk Judgements</Text>
+            LowerLeft = (
+                <View style={styles.Internal}>
+                <TouchableOpacity style={styles.Buttons}>
+                    <Text>Risk </Text>
+                    <Text>Judgements</Text>
                 </TouchableOpacity>
-                <TouchableOpacity>
-                <Text>Risk Formulation</Text>
+                <TouchableOpacity style={styles.Buttons}>
+                    <Text>Risk</Text>
+                    <Text>Formulation</Text>
                 </TouchableOpacity>
-                <TouchableOpacity>
-                <Text>Safety Plan</Text>
+                <TouchableOpacity style={styles.Buttons}>
+                    <Text>Safety Plan</Text>
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity style={styles.Buttons}>
                     <Text>Preview Report</Text>
                 </TouchableOpacity>
                 </View>
             )            
          } else {
             UpperLeft = (
-                <View>
-                <Text>Questions selected: {this.state.questionSet}</Text>               
+                <View style={styles.Internal}>
+                <Text style={styles.HeadText}>Questions selected: {this.state.questionSet}</Text>
+                <Text style={styles.HeadText}>Welcome: {this.state.username}</Text>              
                 </View>
                 )
             UpperRight = (
-                <View>
-                    <TouchableOpacity>
+                <View style={styles.Internal}>
+                    <TouchableOpacity style={styles.Buttons}>
                         <Text>Key</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity style={styles.Buttons}>
                         <Text>Quick Tips</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity style={styles.Buttons}>
                         <Text>Using myGRiST</Text>
                     </TouchableOpacity>
-                    <Text>Welcome: {this.state.username}</Text>
+                   
                 </View>
                 )
-            LowerRight = (
-                <View>
-                    <TouchableOpacity>
-                        <Text>Review Answers</Text>
+            LowerLeft = (
+                <View style={styles.Internal}>
+                    <TouchableOpacity style={styles.Buttons}>
+                        <Text>My Answers</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text>GRiST Advice & My Plan</Text>
+                    <TouchableOpacity style={styles.Buttons}>
+                        <Text>GRiST Advice </Text>
+                        <Text>& My Plan</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text>Guide & Next Steps</Text>
+                    <TouchableOpacity style={styles.Buttons}>
+                        <Text>Guide &</Text>
+                        <Text> Next Steps</Text>
                     </TouchableOpacity>                   
                 </View>
                 )
          }
-         LowerLeft = (
+         LowerRight = (
             <View style={styles.Internal}>
-                <TouchableOpacity>
+                <TouchableOpacity style={styles.Buttons}>
                     <Text>Go Back</Text>
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity style={styles.Buttons}>
                     <Text>Save</Text>
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity style={styles.Buttons}>
                     <Text>Suspend</Text>
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity style={styles.Buttons}>
                     <Text>Finish</Text>
                 </TouchableOpacity>
             </View>
@@ -117,63 +123,61 @@ export default class AssessmentHeader extends React.Component {
 
         return(            
            <View style={styles.container} navigation={navigation}>
-               <View styles={styles.Internal}>                   
-                        {UpperLeft}                   
-                        {UpperRight}                   
+               <View style={styles.controller}>                                 
+                {UpperLeft}                                    
+                {UpperRight}                         
                </View>
-               <View styles={styles.Internal}>
-                    {LowerLeft}
-                    {LowerRight}                    
-                </View>                              
+               <View style={styles.controller}>               
+                {LowerLeft}               
+                {LowerRight}                    
+                </View> 
+                <AssessmentModal name="AssModal"/>                                           
            </View>
         )
     }
 }
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        flexDirection: 'row',
-        paddingVertical: 30,        
-        zIndex:100,
-        height: '10%',
+    container: {                
+        height: '18%',
         width:'100%',
         backgroundColor: Colors.White.color
         
-    },
-       Icon: {
-            flex:1,
-            justifyContent:"flex-start",
-            alignSelf:'center',           
-            flexDirection: 'row',
-            
-        
-
+    },     
+    controller: {
+        flex:1,
+        justifyContent:"space-between",
+        alignSelf:'center',           
+        flexDirection: 'column',
+        width:'100%',
+        height:'50%',
+        backgroundColor: Colors.LightGreen.color
     },
     Internal: {
-        flex:4,
-        justifyContent:"flex-end",
-        alignSelf:'center',           
+        flex:1,
+        justifyContent:"space-evenly",  
+        
+        alignContent: 'center',                         
         flexDirection: 'row',
+        maxWidth:'100%',
+        height: '50%'
+        
 },
-Heade: {
-    color: Colors.DarkGreen.color,
-    fontSize: Typography.Header.fontSize
+Buttons:{ 
+    borderWidth:1,
+    borderColor:Colors.LightGrey.color,
+    borderRadius: 8,
+    backgroundColor: Colors.White.color,
+    alignContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',   
+    minWidth:'24%',
+    minHeight:'90%',
+    maxWidth:'25%',
+    textAlign:'center'
 },
 HeadText: {
     color: Colors.White.color,
-    fontSize: Typography.Header.fontSize
-},
-    Title: {
-        flex:1,
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        flexDirection: 'row',
-        color : Colors.White.color
-        
-        
-    
-
+    fontSize: Spacing.TextSizes.navText,
+    maxWidth: '50%'
 }
 })
