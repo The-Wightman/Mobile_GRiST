@@ -10,7 +10,7 @@ import { DrawerContentScrollView,DrawerItemList, DrawerItem } from '@react-navig
 import { Colors,Images,Spacing,Buttons } from '../../../Styles'
 
 export default function CustomDrawerContent(props) {   
-    
+    //var User = AsyncStorage.getItem('UserDetails', (err, result) => {console.log(result)}).then((values) => User = values);
     return (     
       <DrawerContentScrollView {...props} style={styles.ScrollView}>        
          <View style={styles.mainContainer}>
@@ -18,8 +18,8 @@ export default function CustomDrawerContent(props) {
             <Image source={Images.DefaultProfile} style={styles.Image}/>
           </View>
          <View style={styles.Container}>
-          <Text style={styles.Text}> Username / First name </Text>
-          <Text style={styles.Text}> UserEmail@Email.EM.AIL</Text>
+         <Text style={styles.Text}> {User.current_user.name} </Text>
+    <Text style={styles.Text}> {User.uid}</Text>
         </View>
       </View>
       <DrawerItemList {...props} />
@@ -30,7 +30,7 @@ export default function CustomDrawerContent(props) {
           [
             {text: 'Cancel', onPress: () => {return null}},
             {text: 'Confirm', onPress: () => {
-              fetch('https://www.egrist.org/user/logout?q=user/logout', {
+              fetch('http://public-grist-test.aston.ac.uk/user/logout?q=user/logout', {
                 method: 'GET',
                 header: "Content-Type : application/json",
               }).then(props.navigation.navigate('Sign In'))

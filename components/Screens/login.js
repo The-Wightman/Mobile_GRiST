@@ -11,6 +11,7 @@ import {
 import { Typography, Colors, Spacing, Images } from '../../Styles'
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
 import Validate from '../Sub-Comps/GenericComps/Validator'
+import * as ClientControls from '../Sub-Comps/userOutline'
 
 
 export default class _Login extends React.Component{
@@ -24,39 +25,35 @@ export default class _Login extends React.Component{
         
     }
     userLogin(UID,Pass,Action){
-    let UserInfo = null
+    let UserInfo = null    
      if  (Validate(UID,null,Pass,Action)){
-     UserInfo =  this.JsonHandler(UID,Pass)
-        console.log(UserInfo)
-        //if(!Promise.resolve(UserInfo) == UserInfo) {                
+     UserInfo = this.JsonHandler(UID,Pass)       
+    if(UserInfo !== null) { 
+            //ClientControls.setClient(UserInfo)           
             this.props.navigation.navigate('ILanding')
-    // }
+     }
     }
 }
      async JsonHandler(UID,Pass){  
         let response
-        let responseJSON   
-        form = new FormData();
-        form.append('name', JSON.stringify(UID));
-        form.append('pass', JSON.stringify(Pass));  
-        const apicall = 'https://www.egrist.org/user/login?_format=hal_json'
+        let responseJSON
+        const apicall = 'http://public-grist-test.aston.ac.uk/user/login?_format=hal_json'
         const details = {
             header: 'Content-type: application/json',
             method: 'POST',
             redirect: 'manual',                        
-            body: form,
+            body: JSON.stringify({"name":UID,"pass":Pass}),
         }
         try {
             response = await fetch(apicall,details)            
-            .then(response => responseJSON = response.text())            
+            .then(response => response.json())
+            .then(json => responseJSON = json)            
             .catch(function(error) {
             console.log('There has been a problem with your reqeust:' + error.message + 'Please try again and ensure an internet connection is available'
             + response);             
               throw error;
-            })
-            console.log(response)
-            console.log(responseJSON)
-            responseJSON;
+            })            
+            console.log(responseJSON)                    
         }
         catch(err){
             alert(err)
@@ -87,6 +84,7 @@ export default class _Login extends React.Component{
                             <Text style={styles.TextStyle} >Sign In</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => this.props.navigation.navigate('signup')}>
+                            
                             <Text style={styles.TextStyle}>Or sign Up</Text>
                         </TouchableOpacity>
                     </View>
