@@ -1,11 +1,34 @@
 import {AsyncStorage} from 'react-native';
+import {   
+    Alert
+} from 'react-native'
+export async function _storeClient(responseJson){    
+    try {      
+      await AsyncStorage.setItem('responseString', JSON.stringify(responseJson));        
+      
+    } catch (error) {
+      alert(error)
+    } 
 
-async function setClient(ResponseJSON){ 
-    AsyncStorage.multiSet('UserDetails',ResponseJSON);
-    console.log("User details updated")
-}
-async function deleteClient(){
-    await AsyncStorage.clear('UserDetails', null);
-    console.log("User details deleted")
-}
-export {setClient,deleteClient}
+  }
+  export async function _clearClient(){    
+    try {      
+      await AsyncStorage.removeItem('responseString');        
+      
+    } catch (error) {
+      alert(error)
+    } 
+
+  }
+
+export async function _getClient(){    
+    try {
+     var value = await AsyncStorage.getItem('responseString');       
+     return JSON.parse(value)  
+    } catch (error) {
+       alert(error)
+    }
+    
+  };
+  
+
