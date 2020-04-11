@@ -12,6 +12,7 @@ import { Typography, Colors, Spacing, Images } from '../../Styles'
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
 import Validate from '../Sub-Comps/GenericComps/Validator'
 import * as ClientControls from '../Sub-Comps/userOutline'
+import UIDREG from '../Sub-Comps/GenericComps/Regex'
 
 
 export default class _Login extends React.Component{
@@ -24,15 +25,23 @@ export default class _Login extends React.Component{
         }   
         
     }
-    userLogin(UID,Pass,Action){
+   async userLogin(UID,Pass,Action){
     let UserInfo = null    
      if  (Validate(UID,null,Pass,Action)){
-     UserInfo = this.JsonHandler(UID,Pass)       
-    if(UserInfo !== null) { 
-            //ClientControls.setClient(UserInfo)           
-            this.props.navigation.navigate('ILanding')
-     }
-    }
+     UserInfo = await this.JsonHandler(UID,Pass)      
+        if(UserInfo !== null && UserInfo !== undefined) {                         
+             await ClientControls._storeClient(UserInfo)
+             if(UserInfo.current_user.roles[1] == "authenticated")
+                this.props.navigation.navigate('CLanding')         
+            }
+            else if(UserInfo.current_user.roles[1] !== null) {
+                this.props.navigation.navigate('ILanding')
+            }
+            else {
+                Alert.alert("Invalid UID", "The server has not responded with a valid UID and the login request has failed, please contact us online at https://www.egrist.org/contact-us")
+            }
+       }
+    
 }
      async JsonHandler(UID,Pass){  
         let response
@@ -45,20 +54,25 @@ export default class _Login extends React.Component{
             body: JSON.stringify({"name":UID,"pass":Pass}),
         }
         try {
-            response = await fetch(apicall,details)            
+            response = await fetch(apicall,details)
+            .then(response => {
+                if (response.status === 200) {
+                  
+                } else {
+                  throw new Error('The server is currently unable to service your request, this could be due to too many failed login attempts, Internet connection issues, or Recently edited details. Please check your internet and try again.');
+                }
+              })            
             .then(response => response.json())
             .then(json => responseJSON = json)            
-            .catch(function(error) {
-            console.log('There has been a problem with your reqeust:' + error.message + 'Please try again and ensure an internet connection is available'
-            + response);             
+            .catch(function(error) {                        
               throw error;
             })            
-            console.log(responseJSON)                    
+                              
         }
         catch(err){
             alert(err)
         }
-        finally{
+        finally{             
             return responseJSON
         }
         } 

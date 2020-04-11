@@ -8,20 +8,13 @@ import {StyleSheet,
         Alert} from 'react-native';
 import { DrawerContentScrollView,DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import { Colors,Images,Spacing,Buttons } from '../../../Styles'
+import UserProfile from '../userprofile'
+
 
 export default function CustomDrawerContent(props) {   
-    //var User = AsyncStorage.getItem('UserDetails', (err, result) => {console.log(result)}).then((values) => User = values);
-    return (     
+      return (     
       <DrawerContentScrollView {...props} style={styles.ScrollView}>        
-         <View style={styles.mainContainer}>
-          <View style={styles.ImageCont}>
-            <Image source={Images.DefaultProfile} style={styles.Image}/>
-          </View>
-         <View style={styles.Container}>
-         <Text style={styles.Text}> {User.current_user.name} </Text>
-    <Text style={styles.Text}> {User.uid}</Text>
-        </View>
-      </View>
+         <UserProfile/>
       <DrawerItemList {...props} />
       <TouchableOpacity style ={styles.opacity} onPress={()=>
         Alert.alert(
@@ -34,7 +27,7 @@ export default function CustomDrawerContent(props) {
                 method: 'GET',
                 header: "Content-Type : application/json",
               }).then(props.navigation.navigate('Sign In'))
-              
+              ClientControls._clearClient()
             }},
           ],
           { cancelable: false }
