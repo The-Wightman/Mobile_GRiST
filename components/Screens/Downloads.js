@@ -14,37 +14,22 @@ import {
 import { color } from 'react-native-reanimated';
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
 import MainHeadTemplate from '../Sub-Comps/Navigation/Header'
-import {FunctionCard,cardTypes} from '../Sub-Comps/FunctionCard';
+import {Colors,Spacing} from '../../Styles/index'
 
-
-export default class signup extends Component{ 
+export default class Downloads extends Component{ 
   constructor(props) {
     super(props);
     
   }
-  RelevantCards(){
-    let selectedCards;
-      for(x of cardTypes){
-        if(this.props.isClin || x.isClin == "both"){
-          selectedCards += <FunctionCard {...x} />
-        }
-      } 
-    RelevantCards = (<View>{selectedCards}</View>)       
-  } 
-  render() { 
-      let RelevantCards
-      this.RelevantCards
+  render() {   
         return(
           <View >
-          <MainHeadTemplate navigation={this.props.navigation}/>          
-          <DefaultTemplate/>          
-          <View style={styles.screenPos}>   
-          <ScrollView>
-            {RelevantCards}
-          </ScrollView>       
-           <Text >Landing screen text???</Text>
-           <FunctionCard {...cardTypes.Downloads}/>
-           </View>
+          <MainHeadTemplate navigation={this.props.navigation}/>
+          <DefaultTemplate/>
+          
+          <View style={styles.screenPos}>
+          <Text style={styles.TextStyle}>MYProfile</Text>
+          </View>
           </View>
 
         )
@@ -70,4 +55,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
 
 },
+TextStyle: {
+    color: Colors.DarkGreen.color,                
+    fontSize: Spacing.TextSizes.navText
+ }
 })
