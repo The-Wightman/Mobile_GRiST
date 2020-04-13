@@ -9,6 +9,7 @@ import {StyleSheet,
 import { DrawerContentScrollView,DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import { Colors,Images,Spacing,Buttons } from '../../../Styles'
 import UserProfile from '../userprofile'
+import * as ClientControls from '../userOutline'
 
 
 export default function CustomDrawerContent(props) {   
@@ -35,10 +36,6 @@ export default function CustomDrawerContent(props) {
       }>
         <Text style={styles.ButtonText}>Logout</Text>
       </TouchableOpacity >
-      <TouchableOpacity style ={styles.opacity} onPress={() => alert('This modal will contain the break down information')}>
-        <Text  style={styles.ButtonText}  >Help</Text>
-      </TouchableOpacity>     
-
       </DrawerContentScrollView>
        
       

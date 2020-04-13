@@ -12,13 +12,13 @@ AppRegistry.registerComponent('eGRiST', () => IndDrawer);
 
 export default function _IndividualNav(){
     return (
-        <IDrawer.Navigator initialRouteName={"Landing"} drawerContent={props => CustomDrawerContent(props)} drawerType="slide" drawerContentOptions={styles} screenProps={{navigation: this.navigation}}>
-          <IDrawer.Screen name="Landing" component={Screens.LandingScreen.default} />
-          <IDrawer.Screen name="My Profile" component={Screens.LandingScreen.default} />
-          <IDrawer.Screen name="My Assessments" component={Screens.QuestionWindow} />
-          <IDrawer.Screen name="My Plan" component={Screens.LandingScreen.default} />
-          <IDrawer.Screen name="Review" component={Screens.LandingScreen.default} />
-          <IDrawer.Screen name="Search" component={Screens.LandingScreen.default} />          
+        <IDrawer.Navigator initialRouteName={"Home"} drawerContent={props => CustomDrawerContent(props)} drawerType="slide" drawerContentOptions={styles} screenProps={{navigation: this.navigation}}>
+          <IDrawer.Screen name="Home" component={Screens.LandingScreen.default} />
+          <IDrawer.Screen name="My Profile" component={Screens.MyProfile} />
+          <IDrawer.Screen name="My Assessments" component={Screens.AssessmentHome} />
+          <IDrawer.Screen name="My Plan" component={Screens.MyPlan} />
+          <IDrawer.Screen name="My Review" component={Screens.MyReview} />
+          <IDrawer.Screen name="Search" component={Screens.Search} />          
           </IDrawer.Navigator>
       );
   }
