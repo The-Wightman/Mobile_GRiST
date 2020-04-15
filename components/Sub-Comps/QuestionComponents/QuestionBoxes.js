@@ -12,6 +12,7 @@ import { Slider,CheckBox } from 'react-native-elements';
 import IconBar from './IconBar'
 import DetailsModal from './detailsModal'
 
+
 export default class QuestionBox extends React.Component{
     constructor(props) {
         super(props);        
@@ -115,7 +116,8 @@ export default class QuestionBox extends React.Component{
             )
         }
         if (this.props.prev){
-            PreviousAnswer = (<Text>Previous Answer: {this.props.prev}</Text>)
+            PreviousAnswer = (<Text>Previous Answer: {this.props.prev}</Text>)            
+
         }
         
         

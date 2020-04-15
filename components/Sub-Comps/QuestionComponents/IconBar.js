@@ -8,6 +8,7 @@ import {
     TouchableOpacity,
     Alert
 } from 'react-native'
+import {silver_lock, gold_lock} from '../Text_Excerpts'
 
 export default class IconBar extends React.Component{
     constructor(props) {
@@ -20,14 +21,14 @@ export default class IconBar extends React.Component{
        switch(this.props.persistence){
            case 'Hard': 
           PersistenceComp = (
-            <TouchableOpacity onPress={() => Alert.alert('Information',this.props.help)}>
+            <TouchableOpacity onPress={() => Alert.alert('Information',gold_lock)}>
             <Image source={Images.lock_g}/>
             </TouchableOpacity>
            )
            break;
            case 'Soft': 
            PersistenceComp = (
-            <TouchableOpacity onPress={() => Alert.alert('Information',this.props.help)}>
+            <TouchableOpacity onPress={() => Alert.alert('Information',silver_lock)}>
             <Image source={Images.lock_s}/>
             </TouchableOpacity>
            )

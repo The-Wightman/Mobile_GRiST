@@ -15,6 +15,10 @@ import { color } from 'react-native-reanimated';
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
 import MainHeadTemplate from '../Sub-Comps/Navigation/Header'
 import {Colors,Spacing} from '../../Styles/index'
+import QuestionBoxTemplate from '../Sub-Comps/QuestionComponents/QuestionBoxes'
+
+const XMLnode1 = {value:'scale',leftlabel:'0 = Very sad',rightlabel:'10 = very Happy',question:'How happy are you? ',help:'Measure thy happiness',prev:5,persistence: "Hard"}
+const XMLnode2 = {value:'value',leftlabel:'0 = Very sad',rightlabel:'10 = very Happy',question:'How sad are you? ',help:'Measure thy sadness',persistence: "Soft",alert:"OH MY LAWD",prev:"yes"}
 
 export default class MyPatients extends Component{ 
   constructor(props) {
@@ -28,6 +32,8 @@ export default class MyPatients extends Component{
           <DefaultTemplate/>
           
           <View style={styles.screenPos}>
+          <QuestionBoxTemplate {...XMLnode1}/>
+          <QuestionBoxTemplate {...XMLnode2}/>
           <Text style={styles.TextStyle}>MYProfile</Text>
           </View>
           </View>
