@@ -11,6 +11,14 @@ export async function _storeClient(responseJson){
     } 
 
   }
+  export async function _storeRole(role){    
+    try {      
+      await AsyncStorage.setItem('isClin', role);
+    } catch (error) {
+      alert(error)
+    } 
+
+  }
   export async function _clearClient(){    
     try {      
       await AsyncStorage.removeItem('responseString');        
@@ -31,4 +39,13 @@ export async function _getClient(){
     
   };
   
+export async function _getRole(){    
+  try {
+   var value = await AsyncStorage.getItem('isClin');       
+   return value  
+  } catch (error) {
+     alert(error)
+  }
+  
+};
 
