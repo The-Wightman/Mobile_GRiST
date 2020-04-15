@@ -47,10 +47,12 @@ export default class _Login extends React.Component{
      if  (Validate(UID,null,Pass,Action)){
      UserInfo = await this.JsonHandler(UID,Pass)                     
         if(UserInfo !== null && UserInfo !== undefined && typeof(UserInfo) !== undefined){                
-             await ClientControls._storeClient(UserInfo)
-             if(UserInfo.current_user.roles[1] == "authenticated"){
+             await ClientControls._storeClient(UserInfo)             
+             if(UserInfo.current_user.roles[1] == "administrator"){
+                await ClientControls._storeRole("administrator")
                 this.props.navigation.navigate('CLanding')         
             } else if(UserInfo.current_user.roles[1] !== null) {
+                await ClientControls._storeRole("authenticated")
                 this.props.navigation.navigate('ILanding')
             }
             else {
