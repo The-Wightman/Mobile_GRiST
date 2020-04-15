@@ -12,7 +12,7 @@ AppRegistry.registerComponent('eGRiST', () => IndDrawer);
 
 export default function _IndividualNav(){
     return (
-        <IDrawer.Navigator initialRouteName={"Home"} drawerContent={props => CustomDrawerContent(props)} drawerType="slide" drawerContentOptions={styles} screenProps={{navigation: this.navigation}}>
+        <IDrawer.Navigator initialRouteName={"Home"} drawerContent={props => CustomDrawerContent(props)} drawerType="slide" drawerContentOptions={styles} screenProps={{navigation: this.navigation, isClin:false}} >
           <IDrawer.Screen name="Home" component={Screens.LandingScreen.default} />
           <IDrawer.Screen name="My Profile" component={Screens.MyProfile} />
           <IDrawer.Screen name="My Assessments" component={Screens.AssessmentHome} />

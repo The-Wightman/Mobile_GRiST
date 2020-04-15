@@ -15,7 +15,10 @@ import * as ClientControls from '../userOutline'
 export default function CustomDrawerContent(props) {   
       return (     
       <DrawerContentScrollView {...props} style={styles.ScrollView}>        
-         <UserProfile/>
+         <View style={styles.Container}>
+           <UserProfile/>
+        </View>
+        
       <DrawerItemList {...props} />
       <TouchableOpacity style ={styles.opacity} onPress={()=>
         Alert.alert(
