@@ -11,8 +11,7 @@ import { Colors,Images,Spacing,Buttons } from '../../Styles'
 import * as ClientControls from './userOutline'
 
 async function callUser(){          
-      thisUser = await ClientControls._getClient() 
-      console.log(thisUser)           
+      thisUser = await ClientControls._getClient()               
       return thisUser
     
 }
@@ -31,11 +30,9 @@ export default class UserProfile extends React.Component{
     .then( thisUser => this.statemanage(thisUser));
       
     }    
-     statemanage(responsejson){
-        console.log(responsejson)
+     statemanage(responsejson){        
         this.setState({userUID: responsejson.current_user.uid, userName: responsejson.current_user.name});
-        console.log(this.state)
-    }
+        }
     render() {      
       return (
         <View>
