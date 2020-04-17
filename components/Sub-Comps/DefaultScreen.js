@@ -12,15 +12,21 @@ import {
     TouchableOpacity,
     KeyboardAvoidingView,
     ImageBackground,
+    Platform,    
 } from 'react-native'
 import { Typography, Colors, Spacing, Images} from '../../Styles/index'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 export default class DefaultTemplate extends React.Component {    
     render() {
         return(
             <React.Fragment>
             <View style = {styles.Background} >
-            <KeyboardAvoidingView behaviour='padding'>
-            <ImageBackground source={require('../../Assets/Background.png')} style={{width: '100%', height: '100%'}}>                      
+                             
+                    
+            <ImageBackground source={require('../../Assets/Background.png')} style={{width: '100%', height: '100%'}}> 
+            <KeyboardAwareScrollView 
+                    behavior='padding'
+                    style={{width: '100%', height: '100%'}}>                        
             <TouchableWithoutFeedback onPress={Keyboard.dismiss} style={styles.container}>
             <SafeAreaView style={styles.container}>              
             <StatusBar barStyle="light-content" />
@@ -28,8 +34,9 @@ export default class DefaultTemplate extends React.Component {
             
             </SafeAreaView> 
              </TouchableWithoutFeedback> 
+             </KeyboardAwareScrollView> 
              </ImageBackground>
-            </KeyboardAvoidingView>
+           
             </View>
             </React.Fragment>
         )
