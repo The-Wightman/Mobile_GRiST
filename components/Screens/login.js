@@ -119,8 +119,7 @@ export default class _Login extends React.Component{
                         <TouchableOpacity style={styles.container}onPress={() => this.userLogin(this.state.username,this.state.password,"signin")}>
                             <Text style={styles.TextStyle} >Sign In</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('signup')}>
-                            
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('signup')}>                            
                             <Text style={styles.TextStyle}>Or sign Up</Text>
                         </TouchableOpacity>
                     </View>
@@ -170,7 +169,7 @@ const styles = StyleSheet.create({
     TextStyle: {
         color: Colors.DarkGreen.color,
         textAlign: 'center',
-        padding: 10,
+        padding: 5,
         fontSize: Spacing.TextSizes.FieldText
     }
 }

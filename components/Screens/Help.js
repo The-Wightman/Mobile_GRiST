@@ -15,7 +15,8 @@ import { color } from 'react-native-reanimated';
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
 import MainHeadTemplate from '../Sub-Comps/Navigation/Header'
 import {Colors,Spacing} from '../../Styles/index'
-
+import Clin_Help from '../Sub-Comps/Text_Excerpts'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 export default class Help extends Component{ 
   constructor(props) {
     super(props);
@@ -25,10 +26,14 @@ export default class Help extends Component{
         return(
           <View >
           <MainHeadTemplate navigation={this.props.navigation}/>
-          <DefaultTemplate/>
-          
+          <DefaultTemplate/>          
           <View style={styles.screenPos}>
-          <Text style={styles.TextStyle}>MYProfile</Text>
+          <KeyboardAwareScrollView >
+            <View style={styles.container}>
+              {Clin_Help}
+            </View>
+          
+          </KeyboardAwareScrollView>
           </View>
           </View>
 
