@@ -21,26 +21,43 @@ export default class QuestionBox extends React.Component{
             Comment:"",
             Action: "", 
             value: "" ,
+            userInput: "",
             yesBool: false,
             noBool: false,
-            dkBool: false
+            dkBool: false,
+            actionModal:false,
+            commentModal:false,          
                     
               }
+              
             
     }
-    summonModal(name){
-        this.refs.child.setModalVisible()
+    modalAnswer(Text){
+        this.setState({userInput: Text})
     }
-     UpdateInformation(Type, Content){
-        switch(Type){
-        case "Action":
-            this.state.Action = Content
+    clearModals(){
+        this.setState({commentModal: false,actionModal: false, userInput: ""})
+    }
+    summonModal(modal){
+        if (modal == "comment") {
+            this.setState({commentModal: !this.commentModal})
+        }
+        if (modal == "plan"){
+            this.setState({actionModal: !this.actionModal})
+        }
+       
+    }
+     UpdateInformation(){
+         let bool = true
+        switch(bool){
+        case this.state.actionModal = bool:
+            this.state.Action = this.state.userInput
             break;
-            case "Management":
-            this.state.Action = Content
+            case commentModal = bool:
+            this.state.Comment = this.state.userInput
             break;
             default:
-            this.state.Comment = Content
+            
         }
     }
     clearAnswer(){
@@ -81,8 +98,7 @@ export default class QuestionBox extends React.Component{
         
     }
 
-    render() {
-        let modal;
+    render() {        
         let Inputtype;
         let PreviousAnswer;        
         if(this.props.value == "scale"){
@@ -116,30 +132,36 @@ export default class QuestionBox extends React.Component{
             )
         }
         if (this.props.prev){
-            PreviousAnswer = (<Text>Previous Answer: {this.props.prev}</Text>)            
+            PreviousAnswer = (<Text style={styles.TextStyle}>Previous Answer: {this.props.prev}</Text>)            
 
         }
         
         
         return(
-            <View style={{paddingVertical:5}}>
+            <View style={{paddingVertical:6}}>
             <View style={styles.mainContainer}>
-                <View style={styles.topBar}>                
-                 <Text style={styles.TextStyle}>{this.props.question}</Text>                                  
-                 <IconBar persistence={this.props.persistence} alert={this.props.alert} help={this.props.help} />                               
+                <View style={styles.IconBar}> 
+                <View style={{flex:1,maxWidth:'50%'}}>
+                    <Text style={styles.MainQuestion}>{this.props.question}</Text> 
+                </View>               
+               <View > 
+                   <IconBar persistence={this.props.persistence} alert={this.props.alert} help={this.props.help} summonModal={this.summonModal.bind(this)}/>                               
+               </View>                                   
                 </View>
                  {PreviousAnswer}
                  {Inputtype}
                  <TouchableOpacity onPress={() => this.clearAnswer()} >               
-                    <View style={styles.topBar}> 
-                    <Image style={{maxWidth: '15%'}}source={Images.bin}/>
+                    <View style={styles.IconBar}> 
+                    <Image style={styles.Iconsize}source={Images.bin}/>
                     <Text style={styles.TextStyle}>Clear answer</Text>
                     </View>
                    
                 </TouchableOpacity>
-                <DetailsModal name="comment" addmethod={CommodalVisible => this.setModalVisible = CommodalVisible} UpdateInformation={ this.UpdateInformation()} />
-                <DetailsModal name="plan" addmethod={PlanmodalVisible => this.setModalVisible = PlanmodalVisible} type={"Action"} UpdateInformation={ this.UpdateInformation()}/>
-          </View>
+                <View>
+                    <DetailsModal ref={(ref) => this.commentmodal = ref}  UpdateInformation={ this.UpdateInformation.bind(this)} modalVisible={this.state.commentModal} summonModal={this.clearModals.bind(this)} modalAnswer = {this.modalAnswer.bind(this)} type={"comment"} title={"Leave a comment"}/>
+                    <DetailsModal ref={(ref) => this.planmodal = ref}  UpdateInformation={ this.UpdateInformation.bind(this)} modalVisible={this.state.actionModal} summonModal={this.clearModals.bind(this)} modalAnswer = {this.modalAnswer.bind(this)} type={"comment"} title={"Leave an action plan"}/>
+                </View>
+                </View>
           </View>
         )}
 }
@@ -151,18 +173,96 @@ styles = StyleSheet.create({
         borderWidth:1,
          borderColor:Colors.LightGrey.color,
          borderRadius: 15,
-         backgroundColor: Colors.White.color
+         backgroundColor: Colors.White.color,
+         paddingVertical:10
     },
     TextStyle: {
         color: Colors.DarkGreen.color,                
         fontSize: Spacing.TextSizes.navText
-     },
-     topbar: {
-        flex:4, alignItems: 'center', justifyContent: 'space-between', flexDirection:'row'
-     },
+     }, 
+     MainQuestion:{
+        color: Colors.DarkGreen.color,                
+        fontSize: Spacing.TextSizes.FieldText
+     },    
      scaleLabel:{
         alignItems: 'stretch', justifyContent: 'space-between', flexDirection:'row' 
-     }
-     
+     },
+     centeredView: {
+        
+        width: '100%',
+        height: '100%',
+        minWidth: '100%',
+        minHeight: '100%',
+        alignContent: 'center',
+        paddingTop: '25%',
+        position: 'absolute',
+      },
+      modalView: {
+        minWidth:'90%',
+        maxHeight:'100%',                
+        borderWidth:2,
+        marginHorizontal: '5%',
+        backgroundColor: Colors.White.color,
+        borderColor:Colors.LightGrey.color,
+        borderRadius: 8,       
+        alignItems: "center",
+        shadowColor: Colors.DarkGrey.color,
+        shadowOffset: {
+          width: 0,
+          height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5
+      },
+      openButton: {
+        backgroundColor: Colors.LightGreen.color,
+        borderRadius: 20,
+        padding: 10,
+        elevation: 2
+      },
+      textStyle: {
+        color:Colors.White.color,
+        fontWeight: "bold",
+        textAlign: "center",
+        maxWidth: '100%'
+      },
+      
+      modalText: {
+        color:Colors.LightGreen.color,
+        marginBottom: 15,
+        textAlign: "center"
+      },
+      TextInputStyle: {
+        borderColor: Colors.LightGrey.color,
+        borderWidth: 3,
+        padding: 10,
+        color: Colors.Black.color,        
+        width: '75%',
+        height:'60%',
+        backgroundColor: Colors.White.color,
+        
+    },
+    rack:{
+        flex:4, alignItems: 'center', justifyContent: 'space-between', flexDirection:'row'
+    },
+    IconBar:{      
+        flexDirection:'row',       
+        minWidth:'50%',
+        alignContent:'center',
+        justifyContent:'center',
+        paddingTop: 5
+
+      },
+      Iconstyle:{
+          flex: 1,
+          minWidth:30,
+          minHeight:30,
+          marginHorizontal:5
+      },
+      Iconsize:{
+        minWidth:30,
+        minHeight:30
+      }
 })
  

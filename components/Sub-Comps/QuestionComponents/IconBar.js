@@ -21,15 +21,15 @@ export default class IconBar extends React.Component{
        switch(this.props.persistence){
            case 'Hard': 
           PersistenceComp = (
-            <TouchableOpacity onPress={() => Alert.alert('Information',gold_lock)}>
-            <Image source={Images.lock_g}/>
+            <TouchableOpacity style={styles.Iconstyle} onPress={() => Alert.alert('Information',gold_lock)}>
+            <Image style={styles.Iconsize} source={Images.lock_g}/>
             </TouchableOpacity>
            )
            break;
            case 'Soft': 
            PersistenceComp = (
-            <TouchableOpacity onPress={() => Alert.alert('Information',silver_lock)}>
-            <Image source={Images.lock_s}/>
+            <TouchableOpacity style={styles.Iconstyle}  onPress={() => Alert.alert('Information',silver_lock)}>
+            <Image style={styles.Iconsize} source={Images.lock_s}/>
             </TouchableOpacity>
            )
            break;
@@ -37,43 +37,37 @@ export default class IconBar extends React.Component{
        }    
        if (this.props.help){
            HelpComp = (
-        <TouchableOpacity onPress={() => Alert.alert('Information',this.props.help)}>
-        <Image source={Images.info}/>
+        <TouchableOpacity style={styles.Iconstyle} onPress={() => Alert.alert('Information',this.props.help)}>
+        <Image style={styles.Iconsize} source={Images.info}/>
         </TouchableOpacity>
         )
        }
        if (this.props.alert){
             hasAlert=(
-        <TouchableOpacity onPress={() => Alert.alert('Constraint',this.props.alert)}>
-        <Image source={Images.exclamation}/>
+        <TouchableOpacity style={styles.Iconstyle} onPress={() => Alert.alert('Constraint',this.props.alert)}>
+        <Image style={styles.Iconsize} source={Images.exclamation}/>
         </TouchableOpacity>
             )
        }
         let fullBar = (  
-        <View style={this.styles.IconBar}>      
-        <TouchableOpacity >
-            <Image source={Images.ballon}/>
+        <View style={styles.IconBar}>      
+        <TouchableOpacity style={styles.Iconstyle} onPress={() => this.props.summonModal("comment")} >
+            <Image style={styles.Iconsize} source={Images.ballon}/>
         </TouchableOpacity>
-        <TouchableOpacity>
-            <Image source={Images.document}/>
-        </TouchableOpacity>    
-        {PersistenceComp}
+        <TouchableOpacity style={styles.Iconstyle} onPress={() => this.props.summonModal("plan")}>
+            <Image  style={styles.Iconsize} source={Images.document}/>
+        </TouchableOpacity> 
+        {PersistenceComp} 
         {HelpComp}
-        {hasAlert}
+        {hasAlert}       
         </View>
     )       
         return(  
-            <View>          
+            <View style={styles.IconBar}>          
                 {fullBar}
                  
             </View>           
         )
         }
-styles = StyleSheet.create({
-    IconBar: { 
-        flex:0,     
-        maxWidth:'33%',
-       flexDirection:'row'
-     }
-})
+
 }
