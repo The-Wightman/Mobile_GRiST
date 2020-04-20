@@ -15,3 +15,5 @@ export const Patients = require('../Assets/CardImages/Patients.jpg');
 export const plan = require('../Assets/CardImages/plan.png');
 export const review = require('../Assets/CardImages/review.png');
 export const search = require('../Assets/CardImages/search.png');
+export const handbook = require('../Assets/CardImages/handbook.png');
+export const cribsheet = require('../Assets/CardImages/cribsheet.png');
