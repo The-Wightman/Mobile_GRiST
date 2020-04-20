@@ -23,9 +23,44 @@ export default class signup extends Component {
     } 
     handleSubmission(UID,Email,Pass,Action){
         if  (Validate(UID,Email,Pass,Action)){
-            //HANDLE json REQUEST
+            this.JsonHandler(UID,Email,Pass,)
         }
        }
+
+       async JsonHandler(UID,Email,Pass){  
+        let response
+        let responseJSON
+        const apicall = 'http://public-grist-test.aston.ac.uk/user/signup?_format=hal_json'
+        const details = {
+            header: 'Content-type: application/json',
+            method: 'POST',
+            redirect: 'manual',                        
+            body: JSON.stringify({"email":Email,"name":UID,"pass":Pass}),
+        }
+        try {
+            response = await fetch(apicall,details)
+            .then(response => {
+                if (response.status === 200) {
+                responseJSON = response.json()            
+                } else {
+                    console.log(response)
+                  throw new Error('The server is currently unable to service your request, Please check your internet and try again.');
+                }
+              })
+                       
+            .catch(function(error) {                        
+              throw error;
+            })            
+                              
+        }
+        catch(err){
+            alert(err)
+        }
+        finally{  
+            console.log(responseJSON)           
+            return responseJSON
+        }
+        } 
     render() {
         return (
             <View >        
