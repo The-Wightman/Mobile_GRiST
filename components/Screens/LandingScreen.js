@@ -39,13 +39,13 @@ export default class signup extends Component{
     let foundCards = 0;
       for(index = 0; index < cardTypes.length; index++){                                 
         if (role == "administrator"){
-          if(cardTypes[index].isClin == true || cardTypes[index].isClin =="both"){
+          if(cardTypes[index].type == true || cardTypes[index].type =="both"){
               selectedCards[foundCards] =  <View><FunctionCard {...cardTypes[index]} navigation={this.props.navigation} /></View>  
               foundCards++        
             }
          }
       else {
-        if(cardTypes[index].isClin == false || cardTypes[index].isClin =="both"){
+        if(cardTypes[index].type == false || cardTypes[index].type =="both"){
           selectedCards[foundCards] =  <View><FunctionCard {...cardTypes[index]} navigation={this.props.navigation}/></View> 
           foundCards++       
         }
