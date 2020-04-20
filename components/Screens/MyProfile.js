@@ -7,9 +7,9 @@ import {
   Text,
   Picker,
   StatusBar,
-  TextInput,
-  Button,
-  TouchableOpacity,  
+  TextInput,  
+  TouchableOpacity,
+  Alert,  
 } from 'react-native';
 import { color } from 'react-native-reanimated';
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
@@ -17,7 +17,7 @@ import MainHeadTemplate from '../Sub-Comps/Navigation/Header'
 import {Colors,Spacing} from '../../Styles/index'
 import UserProfile from '../Sub-Comps/userprofile'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import {Card, Icon} from 'react-native-elements';
+import {Card,Button,Icon} from 'react-native-elements';
 import * as ClientControls from '../Sub-Comps/userOutline'
 
 async function callInfo(){            
@@ -25,6 +25,37 @@ async function callInfo(){
   return [getcl,getrl]
 
 }
+async function editUser(currentpas,nickname,Email,password,confpass){    
+  const apicall = 'http://public-grist-test.aston.ac.uk/user/'+this.state.USERJSON.current_user.uid +'/edit'
+  const details = {
+      header: 'Content-type: application/json',
+      method: 'POST',
+      redirect: 'manual',                        
+      body: JSON.stringify({"current_pass": currentpas,"mail": email,"name":nickname,"pass[pass1]":password,"pass[pass2]": confpass}),
+  }
+  try {
+      response = await fetch(apicall,details)
+      .then(response => {
+          if (response.status === 200) {
+
+          } else {
+              console.log(response)
+            throw new Error('The server is currently unable to service your request, this could be due to too many failed login attempts, Internet connection issues, or Recently edited details. Please check your internet and try again.');
+          }
+        })
+                 
+      .catch(function(error) {                        
+        throw error;
+      })            
+                        
+  }
+  catch(err){
+      alert(err)
+  }
+  finally{  
+      Alert.alert("Update succesful","You may want to save your current progress and logout to update information locally, changes may take up to a day to apply.")
+  }
+  }
 
 export default class MyProfile extends Component{ 
   constructor(props) {
@@ -32,7 +63,12 @@ export default class MyProfile extends Component{
     this.state = {
       USERJSON: "",
       USERROLE: "",
-      Description: ""
+      Description: "",
+      currentpas:"",
+      username:"",
+      email:"",
+      password:"",
+      confpass:"",
     }
     this.role_desc = {Administrator: "Work on development of GRiST services or 3rd party extensions to the GRiST environment",
     Clinician:"Responsible for a number of patients, performance and management of assessments as well as overseeing thier action plans and comments.",
@@ -88,16 +124,25 @@ export default class MyProfile extends Component{
             </Card>   
             <Card title="Edit My profile">
             <Text style={styles.TextStyle}>
-              This form can be used to edit profile information or you can visit:
+              This form can be used to edit profile information ,to edit more information like timezones and profile images please use the web browser for conveinience:
               </Text>
             <Text style={styles.TextStyle}>
               "https://www.egrist.org/user/YOUR-UID/edit"
             </Text > 
             <View>
-              <Text style={styles.TextStyle}>
-              Content
-              </Text >
-              <TextInput></TextInput>
+            <Text style={styles.TextStyle}>Enter current password</Text>
+              <TextInput placeholder="Current Password" style={styles.TextInputStyle} secureTextEntry={true}  onChangeText={(text) => { this.setState({currentpas: text})}}/>
+            <Text style={styles.TextStyle}>Change your nickname</Text>
+              <TextInput placeholder="Username" style={styles.TextInputStyle}   onChangeText={(text) => { this.setState({ username: text})}}/>
+              <Text style={styles.TextStyle}>Change your email</Text>
+              <TextInput placeholder="Email" style={styles.TextInputStyle}   onChangeText={(text) => { this.setState({ email: text})}}/>
+              <Text style={styles.TextStyle}> Change your password</Text>
+              <TextInput placeholder="Password" style={styles.TextInputStyle} secureTextEntry={true}  onChangeText={(text) => { this.setState({password: text})}}/> 
+              <Text style={styles.TextStyle}>Confirm new password</Text>
+              <TextInput placeholder="Confirm password" style={styles.TextInputStyle} secureTextEntry={true} onChangeText={(text) => { this.setState({passconf: text})}}/>
+              <Button icon={<Icon name='code' color='#ffffff' />}
+              buttonStyle={styles.buttonStyle}
+              title="Submit changes" onPress={() => this.editUser(this.state.currentpas,this.state.username,this.state.email,this.state.password,this.state.confpass)} />                
              </View>
             
             </Card>  
@@ -137,5 +182,19 @@ TextStyle: {
     fontSize: Spacing.TextSizes.navText,
     marginBottom: 10
  },
+ buttonStyle:{
+  borderRadius: 8, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor: Colors.DarkGreen.color,marginTop:10,
+ }
+ ,
+ TextInputStyle: {
+  borderColor: Colors.LightGrey.color,
+  borderWidth: 3,
+  padding: 10,
+  color: Colors.Black.color,
+  maxHeight: 50,
+ 
+  backgroundColor: Colors.White.color,
+  
+},
  Container:{alignItems: 'center', justifyContent: 'center',  paddingTop: 25,minWidth:'100%',backgroundColor:Colors.LightGrey.color},
 })
