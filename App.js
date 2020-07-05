@@ -1,34 +1,30 @@
+//Function: Initial application Load control and non-authed navigation stack
+//Description: App.js is called when the app is first deployed, it is the first screen and the default screen, it oversees creating the non authorised stack to allow users to login
+//Inputs: None
+//Outputs: StackNavigator Stack as constant, function Loginstack
+
+//Import the native gesture handler
 import 'react-native-gesture-handler';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  Picker,
-  StatusBar,
-  TextInput,
-  Button,
+//Import generic react native Library for registering app
+import { 
   AppRegistry,  
 } from 'react-native';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+//Import all of react into the Application
 import * as React from 'react';
+//Import custom naivgation libraries which are exntensions to reacts basic navigation.
 import { NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+//Import user components that handle the various authorised navigations, and the screens related to the unauthed stack.
 import * as Screens from './components/Screens'
 import _ClinicianNav from './components/Sub-Comps/Navigation/ClinicianNav';
 import _IndividualNav from './components/Sub-Comps/Navigation/IndividualNav';
 
+//creat a new stack naviagator and bind it to the app as the default so that when the app is opened they initially call a create navigation container.
 export const Stack = createStackNavigator ();  
 AppRegistry.registerComponent('eGRiST', () => Stack);
 
+//Export the screen list and the routes for the unauthed naviagtion stack, such that when each of these routes are requested in the unauthed domain ,the respective screen is returned.
 export default function _LoginStack() {
       return (        
         <NavigationContainer>          
