@@ -1,3 +1,8 @@
+//Function: 
+//Description: 
+//Inputs: 
+//Outputs: 
+
 import * as React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer,StackActions } from '@react-navigation/native';
@@ -20,7 +25,7 @@ export default function _ClinicianNav(){
           <CDrawer.Screen name="My Patients" component={Screens.MyPatients} />
           <CDrawer.Screen name="Downloads" component={Screens.Downloads} />
           <CDrawer.Screen name="E-Grist Help" component={Screens.Help} />
-          <CDrawer.Screen name="Search" component={Screens.Search} />          
+          <CDrawer.Screen name="Search" component={Screens.Search} />                   
         </CDrawer.Navigator>
      
     );

@@ -1,3 +1,8 @@
+//Function: 
+//Description: 
+//Inputs: 
+//Outputs: 
+
 import * as React from 'react';
 import { createDrawerNavigator,DrawerContentScrollView,DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
@@ -18,7 +23,7 @@ export default function _IndividualNav(){
           <IDrawer.Screen name="My Assessments" component={Screens.AssessmentHome} />
           <IDrawer.Screen name="My Plan" component={Screens.MyPlan} />
           <IDrawer.Screen name="My Review" component={Screens.MyReview} />
-          <IDrawer.Screen name="Search" component={Screens.Search} />          
+          <IDrawer.Screen name="Search" component={Screens.Search} />                    
           </IDrawer.Navigator>
       );
   }

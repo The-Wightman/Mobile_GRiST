@@ -1,3 +1,7 @@
+//Function: 
+//Description: 
+//Inputs: 
+//Outputs: 
 import React, {Component} from 'react';
 import {
   SafeAreaView,
@@ -31,7 +35,7 @@ async function editUser(currentpas,nickname,Email,password,confpass){
       header: 'Content-type: application/json',
       method: 'POST',
       redirect: 'manual',                        
-      body: JSON.stringify({"current_pass": currentpas,"mail": email,"name":nickname,"pass[pass1]":password,"pass[pass2]": confpass}),
+      body: JSON.stringify({"current_pass": currentpas,"mail": Email,"name":nickname,"pass[pass1]":password,"pass[pass2]": confpass}),
   }
   try {
       response = await fetch(apicall,details)
@@ -142,7 +146,7 @@ export default class MyProfile extends Component{
               <TextInput placeholder="Confirm password" style={styles.TextInputStyle} secureTextEntry={true} onChangeText={(text) => { this.setState({passconf: text})}}/>
               <Button icon={<Icon name='code' color='#ffffff' />}
               buttonStyle={styles.buttonStyle}
-              title="Submit changes" onPress={() => this.editUser(this.state.currentpas,this.state.username,this.state.email,this.state.password,this.state.confpass)} />                
+              title="Submit changes" onPress={() => editUser(this.state.currentpas,this.state.username,this.state.email,this.state.password,this.state.confpass)} />                
              </View>
             
             </Card>  

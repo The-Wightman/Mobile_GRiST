@@ -1,3 +1,8 @@
+//Function: 
+//Description: 
+//Inputs: 
+//Outputs: 
+
 import React from 'react';
 import {StyleSheet,
         View,
@@ -35,7 +40,7 @@ export default class UserProfile extends React.Component{
         }
     render() {      
       return (
-        <View>
+        <View style={styles.mainContainer}>
           <View style={styles.mainContainer}>
             <View style={styles.ImageCont}>
               <Image source={Images.DefaultProfile} style={styles.Image}/>
@@ -54,7 +59,7 @@ const styles = StyleSheet.create({
     ButtonText:{fontSize: Spacing.TextSizes.navText, color: Colors.White.color},
     Container:{alignItems: 'center', justifyContent: 'center',  paddingTop: 25},
     ImageCont:{height: '15%',alignItems: 'center', justifyContent: 'center'},
-    Image: { width: 75, height: 75, borderRadius: 75/2 },
+    Image: { width: 100, height:100, borderRadius: 75/2 },
     mainContainer: {backgroundColor: Colors.LightGrey.color ,alignItems: 'center', justifyContent: 'center'},
     ScrollView:{backgroundColor: Colors.LightGrey.color, height:'100%'}
   })

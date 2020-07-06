@@ -1,3 +1,10 @@
+//Function: return downloads screen view and handle pdfs
+//Description: Returns a screen of cards representing the pdfs stored in the program files.
+//             allows for the user to open the files using an on device pdf system of thier choice through the android request handler.
+//Inputs: ScreenProps (User specific information),NavProps (Page specific information)
+//Outputs: PDF views, Render screen of all pdfs
+
+//Common import statments for react native, sub components, & styles
 import React, {Component} from 'react';
 import {
   SafeAreaView,
@@ -9,7 +16,8 @@ import {
   StatusBar,
   TextInput,
   Button,
-  TouchableOpacity,  
+  TouchableOpacity, 
+  Dimensions, 
 } from 'react-native';
 import { color } from 'react-native-reanimated';
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
@@ -17,31 +25,47 @@ import MainHeadTemplate from '../Sub-Comps/Navigation/Header'
 import {Colors,Spacing} from '../../Styles/index'
 import {FunctionCard,cardTypes} from '../Sub-Comps/FunctionCard';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+// import defined variables for the PDFS stored in the assets library
+import Pdf from 'react-native-pdf';
 
+// Create a new Downloads object which handles information from previous pages and pass it this information through the props component
 export default class Downloads extends Component{ 
   constructor(props) {
     super(props);
-    
+    //define a starting state for this page when a user arrives, as well as its variables
+    this.state = {
+      isPDF:false,
+      payload: ""              
+    }
   }
+  // class function to set the chosen pdf and pdf flag
+  summonpdf(payload){    
+    this.setState({isPDF: !isPDF,payload: payload})
+}
+// Call the card types array and for all pdf download cards add them to a new array.
   DownloadCards(){
     let selectedCards = new Array();
     let index = 0;
     let foundCards = 0;
     for(index = 0; index < cardTypes.length; index++){
       if(cardTypes[index].type == "download"){
-        selectedCards[foundCards] =  <View><FunctionCard {...cardTypes[index]} /></View>  
+        selectedCards[foundCards] =  <View><FunctionCard {...cardTypes[index]} summonpdf={this.summonpdf}/></View>  
         foundCards++        
       }
    }
+   //when the correct cards are found , add them to a view variable, then return that variable
    selectedCards = <View>{selectedCards}</View>  
     return selectedCards
   }
-  render() {   
+  render() { 
+    // if the page is not currently showing a PDF
+    if (this.state.isPDF == false){
+      //Return the PDF card list view, callind the download cards function to load the scrolling view area.
         return(
           <View >
           <MainHeadTemplate navigation={this.props.navigation}/>
           <DefaultTemplate/>          
-          <View style={styles.screenPos}>
+          <View style={styles.screenPos}>          
           <KeyboardAwareScrollView>
             {this.DownloadCards()}
           </KeyboardAwareScrollView>
@@ -49,8 +73,19 @@ export default class Downloads extends Component{
           </View>
 
         )
+    } else {
+      //if the app is currently showing a pdf or the pdf is chosen, call the update state function inherent to the class.
+      // then show the desired PDF.
+      return (
+        <View style={styles.container}>
+            <Pdf source={this.state.payload} style={styles.pdf}/>
+        </View>
+    )
+
     }
   }
+}
+//Page specific styling kept seperate as a style sheet to overwriet elements of the generic styling when necessary.
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'black',
@@ -75,5 +110,10 @@ const styles = StyleSheet.create({
 TextStyle: {
     color: Colors.DarkGreen.color,                
     fontSize: Spacing.TextSizes.navText
- }
+ },
+ pdf: {
+  flex:1,
+  width:Dimensions.get('window').width,
+  height:Dimensions.get('window').height,
+}
 })
