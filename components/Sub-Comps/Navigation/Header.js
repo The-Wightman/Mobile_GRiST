@@ -1,3 +1,9 @@
+//Function: generic header for all page screens
+//Description: defined header that can be imported across screen to prevent code reptition and allow for easy modification application wide.
+//Inputs: Style/Navigation Props
+//Outputs: Header component
+
+//Standard react native import statements
 import React, {Component} from 'react';
 import { Images,Colors,Typography } from '../../../Styles'
 import {
@@ -8,15 +14,21 @@ import {
     TouchableOpacity 
 } from 'react-native'
 
+//3rd party navigation library to link the header to the currently loaded Drawer navigator and the unauthed stack navigator.
 import { DrawerActions,useNavigation } from '@react-navigation/native';
 
+// Create a new Header object which handles information from previous pages and pass it this information through the props component
 export default class MainHeader extends React.Component {
     constructor(props) {
         super(props);
      
     }
+    // render the component
     render() {
+        //Set the passed navigation props as a constant for the current component
         const { navigation } = this.props;
+        //return the visual render using the following styling
+        //line 35 features a touchable opcaity calling the drawers toggle function to allow for natural calling and dismissal of the in application navigation.
         return(
             
            <View style={styles.container} navigation={navigation}>
@@ -32,6 +44,7 @@ export default class MainHeader extends React.Component {
         )
     }
 }
+ //component specific styling
 const styles = StyleSheet.create({
     container: {
         flex: 1,
