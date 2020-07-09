@@ -1,3 +1,10 @@
+//Function: Take user input
+//Description: Hide additional user inputs like comments and action plans but provide a dismissable input box when needed.
+//Inputs: Component Props (Assessment questions box/Certain styling elements)
+//Outputs: DetailModal modal.
+
+
+//Import react native and react libraries
 import React, { Component, useState } from "react";
 import {
   Alert,
@@ -8,22 +15,28 @@ import {
   View,
   TextInput
 } from "react-native";
+
+//Styles library import for adjustments at the component level.
 import { Images,Colors,Typography,Spacing } from '../../../Styles'
 
-
-
+// Create a new modal object which handles information from the parent component such as hierarchy and styling
 export default class DetailModal extends React.Component{
     constructor(props) {
-        super(props); 
+        super(props);
+        //define a state object to store the users input
         this.state = {
             Input: "",                        
             } 
                
         }      
     
-
+        //return the following to th screen
     render() { 
+      
       return (
+        //Create a new modal that uses the parents is visible boolean to set the visibility state
+        //the props also contains the parents controls for modal toggling
+        //an example of this can be found on lines 58 and 59 where the props update and props summon commands are used.
     <View style={styles.centeredView}>
       <Modal
         animationType="slide"

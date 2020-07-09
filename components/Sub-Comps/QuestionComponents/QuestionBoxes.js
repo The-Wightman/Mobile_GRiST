@@ -1,5 +1,12 @@
+//Function: Create a generic question box component
+//Description: Create a new componenet that can be fed the xml document from the question list relevant to a single question
+//             and allow both for inputs and visual display of all relevant information in a clean and efficient manner , 
+//             through a single stackable card style component.
+//Inputs: Object XMLnode, Style and navigation props
+//Outputs: Component Questionbox 
+
+//Import standard react and react native libraries
 import React, {Component} from 'react';
-import { Images,Colors,Typography,Spacing } from '../../../Styles'
 import {
     StyleSheet,
     Text,
@@ -8,11 +15,17 @@ import {
     TouchableOpacity, 
     ColorPropType
 } from 'react-native'
+//import styling documents for text colors and images
+import { Images,Colors,Typography,Spacing } from '../../../Styles'
+//import 3rd party libraries for inputs such as sliders for better overall quality.
 import { Slider,CheckBox } from 'react-native-elements';
+//import sub componenets that are required to make a complete question box.
 import IconBar from './IconBar'
 import DetailsModal from './detailsModal'
 
 
+// Create a new Questionbox object which handles information from previous pages and pass it this information through the props component
+//Additionally create a state object within to handle the elements of the XML node that is passed through props.
 export default class QuestionBox extends React.Component{
     constructor(props) {
         super(props);        
@@ -32,12 +45,15 @@ export default class QuestionBox extends React.Component{
               
             
     }
+    //declare a function to take subcomponent modal answers and assign them to the state object for the question for later storage
     modalAnswer(Text){
         this.setState({userInput: Text})
     }
+    //dismiss all modals and clear the usersInput so that any previous text saved is removed.
     clearModals(){
         this.setState({commentModal: false,actionModal: false, userInput: ""})
     }
+    //call the modal for the user to provide further information based on which option was selected from the question box.
     summonModal(modal){
         if (modal == "comment") {
             this.setState({commentModal: !this.commentModal})
@@ -47,6 +63,7 @@ export default class QuestionBox extends React.Component{
         }
        
     }
+    //declare a boolean and use it to check which of the modals was called and update either comment or plan with the provided user input.
      UpdateInformation(){
          let bool = true
         switch(bool){
@@ -60,6 +77,7 @@ export default class QuestionBox extends React.Component{
             
         }
     }
+    //clear any previously given answer and reset the input of sliders to the default middle value if the type is slider.
     clearAnswer(){
         {if(this.props.value=="scale"){
             this.UpdateAnswer("")}
@@ -68,10 +86,12 @@ export default class QuestionBox extends React.Component{
           }
       }
     }
+    //set the answer for this question type to the given user value.
     UpdateAnswer(Answer){
         this.setState({Answer: Answer})
         
     }
+    //Switch statement for overwriting the answers provided, expressly verbose due to having to give a new form to all elements for the visual display to update.
     checkboxAnswer(Answer){
         switch(Answer){
             case "YES":
@@ -94,18 +114,23 @@ export default class QuestionBox extends React.Component{
                 this.state.noBool = false,
                 this.state.dkBool = false
         }
+        //once switch statement finished and the variables are in the correct states update the actual state answer.
         this.setState({Answer: Answer})
         
     }
-
+    //function for disp,laying the constructed component
     render() {        
         let Inputtype;
-        let PreviousAnswer;        
+        let PreviousAnswer; 
+        // if the question type is scaler it requires a slider to allow for input.       
         if(this.props.value == "scale"){
+            //create a custom inputype object with a slider.
+            //assign the values for the scale and question information from the XML node in the props object.
             Inputtype = (
             <View>    
             <View style={{ flex: 1, alignItems: 'stretch', justifyContent: 'center',paddingHorizontal: 20,paddingVertical:20 }}>
                <Slider
+               //pull the current answer from the previous answer if it exists.
                value={this.props.prev}
                onValueChange={value => this.UpdateAnswer(value)}
                minimumValue={0}
@@ -122,7 +147,10 @@ export default class QuestionBox extends React.Component{
            </View>
            </View>
             )}
+            //if the question is not scalar it is a checkbox question
+            //create a usable input type with the 3rd party checkbox and icon library.
         else {
+            //checked icon and unchecked icon denote the visual representation of the inputs, chosen as they closely match the online website version
             Inputtype = (
                 <View style={styles.checkboxContainer}>
                 <CheckBox  title='Yes' checked={this.state.yesBool} checkedIcon='dot-circle-o'  uncheckedIcon='circle-o'  checkedColor={Colors.DarkGreen.color} onPress={() => this.checkboxAnswer("YES" )}/>
@@ -131,12 +159,12 @@ export default class QuestionBox extends React.Component{
                 </View>
             )
         }
+        // if a previous answer exists proivde a display of it underneath the input type to remind the user of previously given information.
         if (this.props.prev){
             PreviousAnswer = (<Text style={styles.TextStyle}>Previous Answer: {this.props.prev}</Text>)            
 
-        }
-        
-        
+        }      
+        //once the component has benn set up return it to be displayed by the screen.
         return(
             <View style={{paddingVertical:6}}>
             <View style={styles.mainContainer}>
@@ -165,6 +193,7 @@ export default class QuestionBox extends React.Component{
           </View>
         )}
 }
+//stylesheet for component specific style overrides and as a hierarchical style sheet for sub components such as the iconbar and modals.
 styles = StyleSheet.create({
     checkboxContainer: {
         alignItems: 'stretch', justifyContent: 'center', flexDirection:'row'
