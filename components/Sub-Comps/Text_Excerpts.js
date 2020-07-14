@@ -1,3 +1,8 @@
+//Function: Hold large text elements
+//Description: certain elements of the mobile app are large form text taken from legal documents and avice pages, to prevent the code becoming bulky and hard to read and allow for single instance adjustment cross app large text excerpts are called from a single point through out the whole app.
+//Inputs: None
+//Outputs: String Text 
+
 import { View,Text } from "react-native"
 import React from 'react';
 export const silver_lock = "This indicates data that may occasionally change across assessments. The answers to these questions are carried over when repeating an assessment, but should be checked to ensure they are still applicable."

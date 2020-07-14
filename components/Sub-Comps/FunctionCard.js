@@ -1,15 +1,19 @@
-//Function: 
-//Description: 
+//Function: Create cards detailing user options.
+//Description: Hold a library of premade cards that can be extended as new features are added. For each option hold information on who can see it and what information that specific card can hold.
 //Inputs: ScreenProps (User specific information),NavProps (Page specific information)
-//Outputs: 
+//Outputs: Class functionCard, ObjectArray Cardtypes
 
+//import react native and react libraries
 import React, { Component } from 'react';
 import {
   Text
 } from 'react-native';
+//import react native elements third party library for base component
 import { Button, Card, Icon } from 'react-native-elements';
+//import style documents from the subcomponents library.
 import { Colors, Images,PDFS } from '../../Styles/index';
 
+//create a new object array containing objects that represent the possible card types and export it to make it accessible.
 export const cardTypes = [
   { Title: "View my Profile", Image: Images.DefaultProfile, Text: "view,Edit and Update profile information for the current logged in profile", buttonText: "Go to Profile", pointer: "My Profile", type: "both" },
   { Title: "View your Patients", Image: Images.Patients, Text: "select and manage your group and patient information or start a new assessment for a patient.", buttonText: "Go to Patients", pointer: "My Patients", type: true },
@@ -21,14 +25,15 @@ export const cardTypes = [
   { Title: "My Review", Image: Images.review, Text: "review previous answers and a learn more about the answers previously given and the impact they may have.", buttonText: "Go to My Review", pointer: "My Review", type: false },
   { Title: "GRiST Cribsheet", Image: Images.cribsheet, Text: "download the GRiST Cribsheet to your mobile device for useful rules of system operation", buttonText: "Download Cribsheet", pointer: "pdfscreen", type: "download", payload:PDFS.PDFcribsheet },
   { Title: "GRiST HandBook", Image: Images.handbook, Text: "download and Read the GRiST handbook to get a better understanding of the system and its functionality", buttonText: "Download Handbook", pointer: "pdfscreen", type: "download", payload: PDFS.PDFhandbook }
-
-
 ]
 
-
+//Create a new class functioncard that extends the basic react component
 export class FunctionCard extends React.Component {
+  //pass it any props objects from the calling function 
   constructor(props) {
+    //and inherit the props of the father component
     super(props);
+    //create a new state object and set the values to empty for the moment.
     this.state = {
       Image: "",
       Text: "",
@@ -38,9 +43,11 @@ export class FunctionCard extends React.Component {
 
   }
 
-  
+  //Return the visual element of the class
   render() {
+    //if the type is one of the three valid primary types
      if(this.props.type == true || this.props.type == false || this.props.type == "both"){
+       //return the basic card layout with the navigation function button.
       return(
         <Card title={this.props.Title} image={this.props.Image}>
           <Text style={{ marginBottom: 10 }}>
@@ -52,6 +59,7 @@ export class FunctionCard extends React.Component {
         </Card>
       )
     }
+    //if the type is download then load a specific button for opening/downloading PDFS.
     if(this.props.type == "download"){
       return (
         <Card title={this.props.Title} image={this.props.Image}>
