@@ -1,3 +1,7 @@
+//Function: 
+//Description: 
+//Inputs: 
+//Outputs: 
 import React, {Component} from 'react';
 import {
   SafeAreaView,

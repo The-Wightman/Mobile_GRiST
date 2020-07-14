@@ -1,3 +1,9 @@
+//Function: Display additional app information
+//Description: Hnadles the creation and rendering of the help screen containing a range of text that provides guidance for using the app and resolving common issues.
+//Inputs: ScreenProps (User specific information),NavProps (Page specific information)
+//Outputs: None
+
+//Common import statments for react native, sub components, & styles
 import React, {Component} from 'react';
 import {
   SafeAreaView,
@@ -19,12 +25,14 @@ import Clin_Help from '../Sub-Comps/Text_Excerpts'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import {Card, Icon} from 'react-native-elements';
 
+// Create a new Help object which handles information from previous pages and pass it this information through the props component
 export default class Help extends Component{ 
   constructor(props) {
     super(props);
     
   }
-  render() {   
+  // create a new render for this page which has distinct cards related to eacxh common issue, with the navigation bar at the top of the application.
+  render() {       
         return(
           <View >
           <MainHeadTemplate navigation={this.props.navigation}/>

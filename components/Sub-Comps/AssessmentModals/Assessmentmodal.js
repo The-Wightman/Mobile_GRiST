@@ -1,3 +1,10 @@
+//Function: Component to be called when modals are needed in assessment
+//Description: provide a text input region that can be attached to other componenets and called/dismissed
+//             using both contact buttons on the component as well as through native gestures.
+//Inputs: Props, Type
+//Outputs: Modal object
+
+//import standard react/react native libraries and styling.
 import React, { Component, useState } from "react";
 import {
   Alert,
@@ -10,6 +17,7 @@ import {
 } from "react-native";
 import { Images,Colors,Typography,Spacing } from '../../../Styles'
 
+// Create a new modal object which handles information from previous pages and pass it this information through the props component
 export default class AssessmentModal extends React.Component{
     constructor(props) {
         super(props); 
@@ -19,7 +27,8 @@ export default class AssessmentModal extends React.Component{
             modalVisible: false
             } 
                
-        }    
+        }  
+    // function for toggline the visibility boolean of this modal instance.  
     setModalVisible(){
       this.setState({modalVisible: !modalVisible})
     }
@@ -28,9 +37,11 @@ export default class AssessmentModal extends React.Component{
       return (
     <View style={styles.centeredView}>
       <Modal
+        //configure how the modal appears on screen and background settings.
         animationType="slide"
         transparent={true}
         visible={this.state.modalVisible}
+        //when the modal is closed provide an alert for the modal closing to the user
         onRequestClose={() => {
           Alert.alert("Modal has been closed.");
         }}
@@ -54,7 +65,7 @@ export default class AssessmentModal extends React.Component{
       </View>
   );
 };
-
+// component specific styling
 styles = StyleSheet.create({
   centeredView: {
     flex: 1,
