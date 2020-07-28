@@ -142,7 +142,7 @@ export default class QuestionBox extends React.Component{
             </View>
            <View style={styles.scaleLabel}>
            <Text style={styles.TextStyle}>{this.props.leftlabel}</Text>
-           <Text style={styles.TextStyle}>Current Value: {this.state.Answer}</Text>
+           <Text style={styles.TextStyle}>Current Answer: {this.state.Answer}</Text>
            <Text style={styles.TextStyle}> {this.props.rightlabel}</Text>
            </View>
            </View>
