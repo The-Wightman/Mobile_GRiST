@@ -6,12 +6,16 @@
 //import react native and react libraries
 import React, { Component } from 'react';
 import {
-  Text
+  Text,
+  ScrollView
 } from 'react-native';
 //import react native elements third party library for base component
 import { Button, Card, Icon } from 'react-native-elements';
 //import style documents from the subcomponents library.
 import { Colors, Images,PDFS } from '../../Styles/index';
+// import defined variables for the PDFS stored in the assets library
+import Pdf from 'react-native-pdf';
+import PDFtemplate from '../Sub-Comps/PDFview'
 
 //create a new object array containing objects that represent the possible card types and export it to make it accessible.
 export const cardTypes = [
@@ -23,8 +27,8 @@ export const cardTypes = [
   { Title: "Start an assessment", Image: Images.Assessment, Text: "start a new assessment, resume an old assessment, or manage existing assessments and answers.", buttonText: "Go to Assessments", pointer: "My Assessment", type: false },
   { Title: "My Plan", Image: Images.plan, Text: "view your next steps and action plans to deal with issues highlighted in your assessments.", buttonText: "Go to My Plan", pointer: "My Plan", type: false },
   { Title: "My Review", Image: Images.review, Text: "review previous answers and a learn more about the answers previously given and the impact they may have.", buttonText: "Go to My Review", pointer: "My Review", type: false },
-  { Title: "GRiST Cribsheet", Image: Images.cribsheet, Text: "download the GRiST Cribsheet to your mobile device for useful rules of system operation", buttonText: "Download Cribsheet", pointer: "pdfscreen", type: "download", payload:PDFS.PDFcribsheet },
-  { Title: "GRiST HandBook", Image: Images.handbook, Text: "download and Read the GRiST handbook to get a better understanding of the system and its functionality", buttonText: "Download Handbook", pointer: "pdfscreen", type: "download", payload: PDFS.PDFhandbook }
+  { Title: "GRiST Cribsheet", Image: Images.cribsheet, Text: "download the GRiST Cribsheet to your mobile device for useful rules of system operation", buttonText: "Download Cribsheet", pointer: "pdfscreen", type: "download", payload:PDFS.PDFcribsheet,URI:"https://www.egrist.org/sites/default/files/grist-crib-sheet_1.pdf" },
+  { Title: "GRiST HandBook", Image: Images.handbook, Text: "download and Read the GRiST handbook to get a better understanding of the system and its functionality", buttonText: "Download Handbook", pointer: "pdfscreen", type: "download", payload: PDFS.PDFhandbook, URI:"https://www.egrist.org/sites/default/files/grist-practitioners-manual.pdf" }
 ]
 
 //Create a new class functioncard that extends the basic react component
@@ -38,9 +42,14 @@ export class FunctionCard extends React.Component {
       Image: "",
       Text: "",
       Navigation: "",
-      pdfsource: ""
+      pdfsource: "",
+      isPDF: false
     }
+    
+  }
 
+  togglePDF(){
+    this.setState({isPDF: !this.state.isPDF})
   }
 
   //Return the visual element of the class
@@ -61,6 +70,7 @@ export class FunctionCard extends React.Component {
     }
     //if the type is download then load a specific button for opening/downloading PDFS.
     if(this.props.type == "download"){
+      if(this.state.isPDF == false){
       return (
         <Card title={this.props.Title} image={this.props.Image}>
           <Text style={{ marginBottom: 10 }}>
@@ -68,9 +78,23 @@ export class FunctionCard extends React.Component {
           </Text><Button
             icon={<Icon name='code' color='#ffffff' />}
             buttonStyle={{ borderRadius: 8, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor: Colors.DarkGreen.color }}
-            title={this.props.buttonText} onPress={() => this.props.summonpdf(this.props.payload)}/>
+            title={this.props.buttonText} onPress={() => this.togglePDF()}/>
         </Card>
       )
+      }
+      else {
+        return (
+          <Card>
+            <Button
+            icon={<Icon name='code' color='#ffffff' />}
+            buttonStyle={{  marginLeft: 0, marginRight: 0, marginBottom: 8, backgroundColor: Colors.DarkGreen.color }}
+            title='Close PDF' onPress={() => this.togglePDF()}/>
+            <PDFtemplate URI={this.props.URI}/>
+          </Card>
+            
+              
+        )
+      }
     }
   }
 
