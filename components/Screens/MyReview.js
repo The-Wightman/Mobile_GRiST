@@ -19,6 +19,7 @@ import { color } from 'react-native-reanimated';
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
 import MainHeadTemplate from '../Sub-Comps/Navigation/Header'
 import {Colors,Spacing} from '../../Styles/index'
+import {Card, Icon} from 'react-native-elements';
 
 export default class MyReview extends Component{ 
   constructor(props) {

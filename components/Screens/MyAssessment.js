@@ -21,6 +21,7 @@ import DefaultTemplate from '../Sub-Comps/DefaultScreen'
 import MainHeadTemplate from '../Sub-Comps/Navigation/Header'
 import AssessmentHeader from '../Sub-Comps/Navigation/AssesmentHeader'
 import {Colors,Spacing} from '../../Styles/index'
+import {Card, Icon} from 'react-native-elements';
 
 export default class MyAssessment extends Component{ 
   constructor(props) {
