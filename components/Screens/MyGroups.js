@@ -37,7 +37,7 @@ export default class MyGroups extends Component{
           <View style={styles.screenPos}>
           <KeyboardAwareScrollView>
           <Card title="My Groups">
-                <Text style={styles.TextStyle}>Frome this screen you can see or expand on all groups the currently signed in account is a part of or administrator/Clinician for.</Text>
+                <Text style={styles.TextStyle}>From this screen you can see or expand on all groups the currently signed in account is a part of or administrator/Clinician for.</Text>
                 <Text style={styles.TextStyle}>Groups are usually for specific regions, clinicians, or programs. With myGrist and myGrace being common groups highlighting that this user has access to these tools for use at any time.</Text>
                 <Text style={styles.TextStyle}>For further information on how to use the tool itself please use either the help & download pages on the app or go online to the website at https://www.egrist.org/</Text>
                 </Card>                  

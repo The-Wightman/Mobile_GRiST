@@ -68,8 +68,8 @@ export default class _Login extends React.Component{
             await ClientControls._storeClient(UserInfo)    
             //check the users role information, for administrators navigate to the Clinician landing page         
              if(UserInfo.current_user.roles[1] == "administrator"){
-                await ClientControls._storeRole("administrator")
-                this.props.navigation.navigate('CLanding')  
+                await ClientControls._storeRole("authenticated")
+                this.props.navigation.navigate('ILanding')  
             // if non admin user navigate to the individual user landing page.       
             } else if(UserInfo.current_user.roles[1] !== null) {
                 await ClientControls._storeRole("authenticated")
@@ -155,7 +155,7 @@ export default class _Login extends React.Component{
         )
     }
 }
-//Page specific styling kept seperate as a style sheet to overwriet elements of the generic styling when necessary.
+//Page specific styling kept seperate as a style sheet to overwrite elements of the generic styling when necessary.
 
 const styles = StyleSheet.create({
     container: {
