@@ -19,6 +19,7 @@ import { color } from 'react-native-reanimated';
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
 import MainHeadTemplate from '../Sub-Comps/Navigation/Header'
 import {Colors,Spacing} from '../../Styles/index'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import {Card, Icon} from 'react-native-elements';
 export default class MyPlan extends Component{ 
   constructor(props) {
@@ -35,7 +36,7 @@ render() {
         <View style={styles.screenPos}>
         <KeyboardAwareScrollView>
         <Card title="My Plan">
-              <Text style={styles.TextStyle}>Review and Read PDFS generated for you plans from previous assessments</Text>
+              <Text style={styles.TextStyle}>Read & Review PDFS generated for you plans from previous assessments</Text>
               <Text style={styles.TextStyle}>Plans are orderred from most recent assessment going down as you proceed down the table, older assessments may take slightly longer to load due to the age of information.</Text>
               <Text style={styles.TextStyle}>If your assessments plans arent loading please contact support through either the APP or at https://www.egrist.org/</Text>
               </Card>                  

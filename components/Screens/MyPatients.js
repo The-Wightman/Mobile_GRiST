@@ -40,7 +40,7 @@ export default class MyPatients extends Component{
           <View style={styles.screenPos}>
           <KeyboardAwareScrollView>
           <Card style={styles.cards}title="My Patients">
-                <Text style={styles.cardTextStyle}>Frome here a list of all patients for the selected group is visible, allowing for you to view all paticipants.</Text>
+                <Text style={styles.cardTextStyle}>From here a list of all patients for the selected group is visible, allowing for you to view all paticipants.</Text>
                 <Text style={styles.cardTextStyle}>As of version 2.4 onwards you will also be able to review patients reports and begin assesments for individual patients from the screen using the option on the table below.</Text>
           </Card>                 
           </KeyboardAwareScrollView>
