@@ -55,37 +55,3 @@ export default class MyPatients extends Component{
         )
     }
   }
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'black',
-    flex: 1,
-    alignItems: 'center',
-    justifyContent:'center',
-  },
-  title: {
-      fontSize: 24,
-      color: 'black'
-  },
-  screenPos: {
-    paddingTop: '15%',
-    width: '100%',
-    height: '90%',
-    alignContent: 'center',
-    justifyContent: 'center',
-    position: 'absolute',
-
-},
-questionTextStyle: {
-    color: Colors.DarkGreen.color,                
-    fontSize: Spacing.TextSizes.navText
- },
- cardTextStyle:{
-  color: Colors.Black.color,                
-  fontSize: Spacing.TextSizes.navText,
-  marginBottom: 10
- },
- cards:{
-   paddingBottom:50,
-   marginBottom:20
- }
-})
