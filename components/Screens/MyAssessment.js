@@ -9,20 +9,13 @@ import {
   StyleSheet,
   ScrollView,
   View,
-  Text,
-  Picker,
-  StatusBar,
-  TextInput,
-  Button,
-  TouchableOpacity,  
-} from 'react-native';
-import { color } from 'react-native-reanimated';
+  Text } from 'react-native';
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
 import MainHeadTemplate from '../Sub-Comps/Navigation/Header'
 import AssessmentHeader from '../Sub-Comps/Navigation/AssesmentHeader'
-import {Colors,Spacing} from '../../Styles/index'
+import {Colors ,Spacing} from '../../Styles/index'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import {Card, Icon} from 'react-native-elements';
+import {Card,Button, Icon} from 'react-native-elements';
 import CustomTable from '../Sub-Comps/tableview'
 
 export default class MyAssessment extends Component{ 
@@ -45,15 +38,23 @@ export default class MyAssessment extends Component{
         <Card title="List of previous assessments">
               <Text style={styles.TextStyle}>This Table Displays a set of your most recent assessments, note that if you have completed a large number of assesments you may need to scroll down the table.</Text>
               <Text style={styles.TextStyle}>If you have not previously completed an assessment using the system we advise you select the Practice assessment option below to familiarise yourself with the system.</Text>
-              <CustomTable></CustomTable>
+              <CustomTable tableHead={['Head', 'Head2', 'Head3', 'Head4']}  tableTitle={['Title', 'Title2', 'Title3', 'Title4']} tableData={[['1', '2', '3'],['a', 'b', 'c'],['1', '2', '3'],['a', 'b', 'c']]}></CustomTable>
         </Card>
         <Card title="Start a New assessment">
               <Text style={styles.TextStyle}>Begin an assessment that can be used to generate action plans, advice, and be reviewed in the future.</Text>
               <Text style={styles.TextStyle}>Completed assessments may take a few minutes to appear in the table as a complete report is generated.</Text>
+              <Button 
+            icon={<Icon name='code' color='#ffffff' />}
+            buttonStyle={{ borderRadius: 8, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor:Colors.DarkGreen.color }}
+            title='Start Assessment' onPress={() => console.log('meme')} />
         </Card> 
         <Card title="Start a practice assesment">
               <Text style={styles.TextStyle}>Begin a practice assessment to introduce the system to you while not recording any data about your answers.</Text>
               <Text style={styles.TextStyle}>Due to practice data not being recorded once a practice is closed its answers cannot be reetrieved and the table of previous assessments will not be populated when a practice assessment is completed.</Text>
+              <Button 
+              icon={<Icon name='code' color='#ffffff' />}
+              buttonStyle={{ borderRadius: 8, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor:Colors.DarkGreen.color }}
+              title='Start Practice' onPress={() => console.log('meme')} />
         </Card>                    
         </KeyboardAwareScrollView>
         </View>      
@@ -76,7 +77,7 @@ color: 'black'
 screenPos: {
 paddingTop: '15%',
 width: '100%',
-height: '70%',
+height: '100%',
 alignContent: 'center',
 justifyContent: 'center',
 position: 'absolute',

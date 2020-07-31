@@ -46,7 +46,7 @@ export default class MyPatients extends Component{
           </Card> 
           <Card title="Patients List">
               <Text style={styles.TextStyle}>This Table keeps a record of all pateints in the currently selected group or main group depending on which is more apropriate for you.</Text>
-              <CustomTable></CustomTable>
+              <CustomTable tableHead={['Head', 'Head2', 'Head3', 'Head4']}  tableTitle={['Title', 'Title2', 'Title3', 'Title4']} tableData={[['1', '2', '3'],['a', 'b', 'c'],['1', '2', '3'],['a', 'b', 'c']]} ></CustomTable>
               </Card>                  
           </KeyboardAwareScrollView>
           </View>          

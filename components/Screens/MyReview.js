@@ -43,7 +43,7 @@ export default class MyReview extends Component{
               </Card>   
               <Card title="Previous Reviews">
               <Text style={styles.TextStyle}>This Table keeps a record of previous Reviews to allow you to reference your submissions and re-familiarise yourself with previous answers or Key concerns.</Text>
-              <CustomTable></CustomTable>
+              <CustomTable tableHead={['Head', 'Head2', 'Head3', 'Head4']}  tableTitle={['Title', 'Title2', 'Title3', 'Title4']} tableData={[['1', '2', '3'],['a', 'b', 'c'],['1', '2', '3'],['a', 'b', 'c']]}></CustomTable>
               </Card>                 
       </KeyboardAwareScrollView>
       </View>          
@@ -66,7 +66,7 @@ title: {
 screenPos: {
 paddingTop: '15%',
 width: '100%',
-height: '70%',
+height: '100%',
 alignContent: 'center',
 justifyContent: 'center',
 position: 'absolute',

@@ -44,7 +44,7 @@ render() {
               </Card>
               <Card title="Previous plans">
               <Text style={styles.TextStyle}>This Table keeps a record of previous Plans to allow you to reference & review your submissions</Text>
-              <CustomTable></CustomTable>
+              <CustomTable tableHead={['Head', 'Head2', 'Head3', 'Head4']}  tableTitle={['Title', 'Title2', 'Title3', 'Title4']} tableData={[['1', '2', '3'],['a', 'b', 'c'],['1', '2', '3'],['a', 'b', 'c']]}></CustomTable>
               </Card>  
                           
         </KeyboardAwareScrollView>
@@ -68,7 +68,7 @@ title: {
 screenPos: {
   paddingTop: '15%',
   width: '100%',
-  height: '70%',
+  height: '100%',
   alignContent: 'center',
   justifyContent: 'center',
   position: 'absolute',
