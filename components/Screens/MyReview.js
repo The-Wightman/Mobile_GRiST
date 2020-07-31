@@ -18,7 +18,7 @@ import {
 import { color } from 'react-native-reanimated';
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
 import MainHeadTemplate from '../Sub-Comps/Navigation/Header'
-import {Colors,Spacing} from '../../Styles/index'
+import {MYstyle} from '../../Styles/index'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import {Card, Icon} from 'react-native-elements';
 import CustomTable from '../Sub-Comps/tableview'
@@ -34,15 +34,15 @@ export default class MyReview extends Component{
       <MainHeadTemplate navigation={this.props.navigation}/>
       <DefaultTemplate/>
       
-      <View style={styles.screenPos}>
+      <View style={MYstyle.screenPos}>
       <KeyboardAwareScrollView>
       <Card title="My Groups">
-              <Text style={styles.TextStyle}>Read & Review PDFS generated for you plans from previous assessments</Text>
-              <Text style={styles.TextStyle}>Plans are orderred from most recent assessment going down as you proceed down the table, older assessments may take slightly longer to load due to the age of information.</Text>
-              <Text style={styles.TextStyle}>If your assessments plans arent loading please contact support through either the APP or at https://www.egrist.org/</Text>
+              <Text style={MYstyle.TextStyle}>Read & Review PDFS generated for you plans from previous assessments</Text>
+              <Text style={MYstyle.TextStyle}>Plans are orderred from most recent assessment going down as you proceed down the table, older assessments may take slightly longer to load due to the age of information.</Text>
+              <Text style={MYstyle.TextStyle}>If your assessments plans arent loading please contact support through either the APP or at https://www.egrist.org/</Text>
               </Card>   
               <Card title="Previous Reviews">
-              <Text style={styles.TextStyle}>This Table keeps a record of previous Reviews to allow you to reference your submissions and re-familiarise yourself with previous answers or Key concerns.</Text>
+              <Text style={MYstyle.TextStyle}>This Table keeps a record of previous Reviews to allow you to reference your submissions and re-familiarise yourself with previous answers or Key concerns.</Text>
               <CustomTable tableHead={['Head', 'Head2', 'Head3', 'Head4']}  tableTitle={['Title', 'Title2', 'Title3', 'Title4']} tableData={[['1', '2', '3'],['a', 'b', 'c'],['1', '2', '3'],['a', 'b', 'c']]}></CustomTable>
               </Card>                 
       </KeyboardAwareScrollView>
@@ -52,29 +52,3 @@ export default class MyReview extends Component{
     )
 }
 }
-const styles = StyleSheet.create({
-container: {
-backgroundColor: 'black',
-flex: 1,
-alignItems: 'center',
-justifyContent:'center',
-},
-title: {
-  fontSize: 24,
-  color: 'black'
-},
-screenPos: {
-paddingTop: '15%',
-width: '100%',
-height: '100%',
-alignContent: 'center',
-justifyContent: 'center',
-position: 'absolute',
-
-},
-TextStyle: {
-color: Colors.Black.color,                
-fontSize: Spacing.TextSizes.navText,
-marginBottom: 10},
-
-})
