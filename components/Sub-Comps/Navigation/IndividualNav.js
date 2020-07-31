@@ -28,7 +28,7 @@ export default function _IndividualNav(){
         <IDrawer.Navigator initialRouteName={"Home"} drawerContent={props => CustomDrawerContent(props)} drawerType="slide" drawerContentOptions={styles} screenProps={{navigation: this.navigation, isClin:false}} >
           <IDrawer.Screen name="Home" component={Screens.LandingScreen.default} />
           <IDrawer.Screen name="My Profile" component={Screens.MyProfile} />
-          <IDrawer.Screen name="My Assessments" component={Screens.AssessmentHome} />
+          <IDrawer.Screen name="My Assessments" component={Screens.MyAssessment} />
           <IDrawer.Screen name="My Plan" component={Screens.MyPlan} />
           <IDrawer.Screen name="My Review" component={Screens.MyReview} />
           <IDrawer.Screen name="Search" component={Screens.Search} />                    

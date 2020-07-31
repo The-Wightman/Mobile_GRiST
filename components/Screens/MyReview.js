@@ -21,6 +21,7 @@ import MainHeadTemplate from '../Sub-Comps/Navigation/Header'
 import {Colors,Spacing} from '../../Styles/index'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import {Card, Icon} from 'react-native-elements';
+import CustomTable from '../Sub-Comps/tableview'
 
 export default class MyReview extends Component{ 
   constructor(props) {
@@ -39,7 +40,11 @@ export default class MyReview extends Component{
               <Text style={styles.TextStyle}>Read & Review PDFS generated for you plans from previous assessments</Text>
               <Text style={styles.TextStyle}>Plans are orderred from most recent assessment going down as you proceed down the table, older assessments may take slightly longer to load due to the age of information.</Text>
               <Text style={styles.TextStyle}>If your assessments plans arent loading please contact support through either the APP or at https://www.egrist.org/</Text>
-              </Card>                  
+              </Card>   
+              <Card title="Previous Reviews">
+              <Text style={styles.TextStyle}>This Table keeps a record of previous Reviews to allow you to reference your submissions and re-familiarise yourself with previous answers or Key concerns.</Text>
+              <CustomTable></CustomTable>
+              </Card>                 
       </KeyboardAwareScrollView>
       </View>          
       </View>
