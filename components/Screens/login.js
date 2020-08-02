@@ -37,7 +37,7 @@ export default class _Login extends React.Component{
         // create an alert for the user describing the process and what will occur
         Alert.alert(
             'Reset Connection',
-            'This can help resolve UID and connection issue but will delete your local information which may cause slight increases to loading times when you next use the app.',
+            'This can help resolve UID and connection issue but will delete your local session information which may cause slight increases to loading times when you next use the app.',
             [
                //provide two text areas with onpress functions, one nulls the function to cancel
               {text: 'Cancel', onPress: () => {return null}},
@@ -65,7 +65,7 @@ export default class _Login extends React.Component{
         //if the information is validated, check if it is not null                  
         if(UserInfo !== null && UserInfo !== undefined && typeof(UserInfo) !== undefined){                
             // store the valid client information in the devices local memory under userinfo 
-            await ClientControls._storeClient(UserInfo)    
+            await ClientControls._storeClient(UserInfo)              
             //check the users role information, for administrators navigate to the Clinician landing page         
              if(UserInfo.current_user.roles[1] == "administrator"){
                 await ClientControls._storeRole("authenticated")

@@ -30,7 +30,7 @@ async function callInfo(){
 
 }
 async function editUser(currentpas,nickname,Email,password,confpass){    
-  const apicall = 'http://public-grist-test.aston.ac.uk/user/'+this.state.USERJSON.current_user.uid +'/edit'
+  const apicall = 'http://public-grist-test.aston.ac.uk/user/'+ this.state.UID +'/edit'
   const details = {
       header: 'Content-type: application/json',
       method: 'POST',
@@ -66,6 +66,7 @@ export default class MyProfile extends Component{
     super(props);
     this.state = {
       USERJSON: "",
+      UID:"",
       USERROLE: "",
       Description: "",
       currentpas:"",
@@ -95,6 +96,7 @@ export default class MyProfile extends Component{
         default:
           this.setState({Description:this.role_desc.Authenticated})
         }
+        this.setState({UID:this.state.USERJSON.current_user.uid})
 
     }
   render() {   
@@ -108,7 +110,10 @@ export default class MyProfile extends Component{
           <View style={styles.container}>
            <UserProfile/>
           </View>
-          <Card title="Your Information">           
+          <Card title="Your Information">    
+          <Text style={styles.TextStyle}>
+               User ID: {this.state.UID}
+            </Text>        
             <Text style={styles.TextStyle}>
                Roles: {this.state.USERROLE}
             </Text>
@@ -131,7 +136,7 @@ export default class MyProfile extends Component{
               This form can be used to edit profile information ,to edit more information like timezones and profile images please use the web browser for conveinience:
               </Text>
             <Text style={styles.TextStyle}>
-              "https://www.egrist.org/user/YOUR-UID/edit"
+            "https://www.egrist.org/user/{this.state.UID}/edit"
             </Text > 
             <View>
             <Text style={styles.TextStyle}>Enter current password</Text>
