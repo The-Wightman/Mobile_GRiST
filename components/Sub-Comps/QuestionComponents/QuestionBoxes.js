@@ -13,7 +13,8 @@ import {
     View,
     Image,   
     TouchableOpacity, 
-    ColorPropType
+    ColorPropType,
+    TextInput
 } from 'react-native'
 //import styling documents for text colors and images
 import { Images,Colors,Typography,Spacing } from '../../../Styles'
@@ -122,8 +123,10 @@ export default class QuestionBox extends React.Component{
     render() {        
         let Inputtype;
         let PreviousAnswer; 
-        // if the question type is scaler it requires a slider to allow for input.       
-        if(this.props.value == "scale"){
+         
+        switch(this.props.value){
+            // if the question type is scaler it requires a slider to allow for input. 
+            case "scale":                 
             //create a custom inputype object with a slider.
             //assign the values for the scale and question information from the XML node in the props object.
             Inputtype = (
@@ -146,19 +149,65 @@ export default class QuestionBox extends React.Component{
            <Text style={styles.TextStyle}> {this.props.rightlabel}</Text>
            </View>
            </View>
-            )}
-            //if the question is not scalar it is a checkbox question
+            )
+             //create a custom inputype object with a slider.
+            //assign the values for the scale and question information from the XML node in the props object.
+            Inputtype = (
+                <View>    
+                <View style={{ flex: 1, alignItems: 'stretch', justifyContent: 'center',paddingHorizontal: 20,paddingVertical:20 }}>
+                   <Slider
+                   //pull the current answer from the previous answer if it exists.
+                   value={this.props.prev}
+                   onValueChange={value => this.UpdateAnswer(value)}
+                   minimumValue={0}
+                   maximumValue={10}
+                   step={1} 
+                   animateTransitions={true} 
+                   thumbTintColor={Colors.DarkGreen.color}              
+                   />
+                </View>
+               <View style={styles.scaleLabel}>
+               <Text style={styles.TextStyle}>{this.props.leftlabel}</Text>
+               <Text style={styles.TextStyle}>Current Answer: {this.state.Answer}</Text>
+               <Text style={styles.TextStyle}> {this.props.rightlabel}</Text>
+               </View>
+               </View>
+                )            
+            break;
+            //if the question is a checkbox question
             //create a usable input type with the 3rd party checkbox and icon library.
-        else {
-            //checked icon and unchecked icon denote the visual representation of the inputs, chosen as they closely match the online website version
+            case "nominal":
+                 //checked icon and unchecked icon denote the visual representation of the inputs, chosen as they closely match the online website version
             Inputtype = (
                 <View style={styles.checkboxContainer}>
                 <CheckBox  title='Yes' checked={this.state.yesBool} checkedIcon='dot-circle-o'  uncheckedIcon='circle-o'  checkedColor={Colors.DarkGreen.color} onPress={() => this.checkboxAnswer("YES" )}/>
                 <CheckBox  title='No' checked={this.state.noBool} checkedIcon='dot-circle-o'  uncheckedIcon='circle-o'  checkedColor={Colors.DarkGreen.color} onPress={() => this.checkboxAnswer("NO" )}/>
                 <CheckBox  title='Dont Know' checked={this.state.dkBool}  checkedIcon='dot-circle-o'  uncheckedIcon='circle-o'  checkedColor={Colors.DarkGreen.color}onPress={() => this.checkboxAnswer("DK")}/>
                 </View>
-            )
-        }
+            )        
+            break;
+            case "integer":
+                Inputtype = (
+                    <View style={styles.IntegerBar}>
+                    <TextInput name="userInput" style={styles.TextInputStyle} onChangeText={(text) => this.UpdateAnswer(text)} />
+                    <CheckBox  title='Dont Know' checked={this.state.dkBool}  checkedIcon='dot-circle-o'  uncheckedIcon='circle-o'  checkedColor={Colors.DarkGreen.color}onPress={() => this.UpdateAnswer("DK")}/>
+                    </View>
+                )       
+            break;
+            case "date-week":
+                Inputtype = (
+                    <View style={styles.IntegerBar}>
+                    <TextInput name="userInput" style={styles.TextInputStyle} onChangeText={(text) => this.UpdateAnswer(text)} />
+                   <CheckBox  title='Dont Know' checked={this.state.dkBool}  checkedIcon='dot-circle-o'  uncheckedIcon='circle-o'  checkedColor={Colors.DarkGreen.color}onPress={() => this.UpdateAnswer("DK")}/>
+                    </View>
+                )       
+            break;
+            default:
+        }     
+        
+           
+            
+           
         // if a previous answer exists proivde a display of it underneath the input type to remind the user of previously given information.
         if (this.props.prev){
             PreviousAnswer = (<Text style={styles.TextStyle}>Previous Answer: {this.props.prev}</Text>)            
@@ -267,7 +316,8 @@ styles = StyleSheet.create({
       modalText: {
         color:Colors.LightGreen.color,
         marginBottom: 15,
-        textAlign: "center"
+        textAlign: "center",
+        fontSize: Spacing.TextSizes.FieldText,
       },
       TextInputStyle: {
         borderColor: Colors.LightGrey.color,
@@ -299,6 +349,7 @@ styles = StyleSheet.create({
       Iconsize:{
         minWidth:30,
         minHeight:30
-      }
+      },
+      IntegerBar:{ flex: 2, alignItems: 'stretch', justifyContent: 'center',alignItems: 'center',paddingHorizontal: 20,paddingVertical:20 }
 })
  
