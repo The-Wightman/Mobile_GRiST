@@ -8,7 +8,7 @@
 import * as React from 'react';
 import { createDrawerNavigator,DrawerContentScrollView,DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import * as Screens from '../../Screens'
-import {Colors} from '../../../Styles/index'
+import {NavStyle} from '../../../Styles/index'
 //import custom drawer styling to allow for personally styled navigation tabs.
 import CustomDrawerContent from './DrawerContainer'
 
@@ -20,7 +20,7 @@ export default function _IndividualNav(){
     return (
       //for the Idrawers new navigator, give it an initial route to use, and pass it the custom drawer style props 
       //then define a number of screen the drawer can navigate too and the names for the routes to be called to navigate to them. 
-        <IDrawer.Navigator initialRouteName={"Home"} drawerContent={props => CustomDrawerContent(props)} drawerType="slide" drawerContentOptions={styles} screenProps={{navigation: this.navigation, isClin:false}} >
+        <IDrawer.Navigator initialRouteName={"Home"} drawerContent={props => CustomDrawerContent(props)} drawerType="slide" drawerContentOptions={NavStyle} screenProps={{navigation: this.navigation, isClin:false}} >
           <IDrawer.Screen name="Home" component={Screens.LandingScreen.default} />
           <IDrawer.Screen name="My Profile" component={Screens.MyProfile} />
           <IDrawer.Screen name="My Assessments" component={Screens.MyAssessment} />
@@ -30,12 +30,4 @@ export default function _IndividualNav(){
           </IDrawer.Navigator>
       );
   }
-  //component specific styling
-  const styles = ({
-    activeTintColor : Colors.White.color,
-    activeBackgroundColor: Colors.LightGreen.color,
-    inactiveTintColor: Colors.White.color,
-    inactiveBackgroundColor: Colors.DarkGreen.color,
-    itemStyle: { marginVertical: 5 },
-    contentContainerStyle: {backgroundColor:Colors.LightGrey.color }
-  })
+ 

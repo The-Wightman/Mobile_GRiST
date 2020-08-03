@@ -33,5 +33,14 @@ const MYstyle = StyleSheet.create({
     marginBottom: 10},
     
     })
-export { Typography, Spacing, Colors, Buttons, Images, PDFS ,MYstyle}
+
+    const NavStyle = ({
+      activeTintColor : Colors.White.color,
+      activeBackgroundColor: Colors.LightGreen.color,
+      inactiveTintColor: Colors.White.color,
+      inactiveBackgroundColor: Colors.DarkGreen.color,
+      itemStyle: { marginVertical: 5 },
+      contentContainerStyle: {backgroundColor:Colors.LightGrey.color }
+    })
+export { Typography, Spacing, Colors, Buttons, Images, PDFS ,MYstyle,NavStyle}
 

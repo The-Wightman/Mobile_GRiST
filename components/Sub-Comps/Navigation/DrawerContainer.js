@@ -26,7 +26,7 @@ export default function CustomDrawerContent(props) {
       return (     
         //take the style props passed to this compenent function and set them as the props of this function
         //this is then repeated on line 32 to ensure the itemlist also has the same props
-        //line 37 to 48 are a replication of a similar logour function called by holding the icon on the login screen.
+        //line 37 to 48 are a replication of a similar logout function called by holding the icon on the login screen.
       <DrawerContentScrollView {...props} style={styles.ScrollView}>             
          <View style={styles.Container}>
            <UserProfile/>
