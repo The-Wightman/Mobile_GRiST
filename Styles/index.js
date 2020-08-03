@@ -20,6 +20,7 @@ const MYstyle = StyleSheet.create({
     },
     screenPos: {
     paddingTop: '15%',
+    paddingBottom: '5%',
     width: '100%',
     height: '100%',
     alignContent: 'center',

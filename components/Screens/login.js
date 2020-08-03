@@ -24,7 +24,7 @@ import * as ClientControls from '../Sub-Comps/userOutline'
 export default class _Login extends React.Component{
     constructor(props) {
         super(props);
-        //creat a state object to store the expected inputs and set them to empty.
+        //create a state object to store the expected inputs and set them to empty.
         this.state = {
         username: "",
         password: "",

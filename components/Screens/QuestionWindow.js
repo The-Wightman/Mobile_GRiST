@@ -33,12 +33,9 @@ export default class QuestionWindow extends Component{
   }
   render() {   
         return(
-          <View>
-          <MainHeadTemplate navigation={this.props.navigation}/>
-          <AssessmentHeader/>
-          <DefaultTemplate/>         
-          <View style={styles.screenPos}>      
-          <ScrollView >
+          <View>          
+          <AssessmentHeader/> 
+          <View style={{flex:1, Height:'auto'}} >
           <QuestionBoxTemplate {...XMLnode1}/>
           <QuestionBoxTemplate {...XMLnode2}/>
           <QuestionBoxTemplate {...XMLnode1}/>
@@ -46,11 +43,16 @@ export default class QuestionWindow extends Component{
           <QuestionBoxTemplate {...XMLnode1}/>
           <QuestionBoxTemplate {...XMLnode2}/>
           <QuestionBoxTemplate {...XMLnode1}/>
+          <QuestionBoxTemplate {...XMLnode2}/> 
+          <QuestionBoxTemplate {...XMLnode1}/>
           <QuestionBoxTemplate {...XMLnode2}/>
-          </ScrollView>
-          
-          
-            </View>
+          <QuestionBoxTemplate {...XMLnode1}/>
+          <QuestionBoxTemplate {...XMLnode2}/>
+          <QuestionBoxTemplate {...XMLnode1}/>
+          <QuestionBoxTemplate {...XMLnode2}/>
+          <QuestionBoxTemplate {...XMLnode1}/>
+          <QuestionBoxTemplate {...XMLnode2}/>          
+          </View>
           </View>
           
 
@@ -69,12 +71,11 @@ const styles = StyleSheet.create({
       color: 'black'
   },
   screenPos: { 
-    marginTop: '55%',       
-    width: '100%',
-    height: '100%',
+    marginTop: '25%',       
+    width: '100%',    
     alignContent: 'center',
-    justifyContent: 'center',
-    position: 'absolute',
+    justifyContent: 'center',    
+    paddingBottom: '10%'
 
 },
 TextStyle: {

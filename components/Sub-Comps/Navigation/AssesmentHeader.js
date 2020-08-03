@@ -161,7 +161,7 @@ export default class AssessmentHeader extends React.Component {
 //component specific styling
 const styles = StyleSheet.create({
     container: {                
-        height: '18%',
+        height: 250,
         width:'100%',
         backgroundColor: Colors.White.color
         
