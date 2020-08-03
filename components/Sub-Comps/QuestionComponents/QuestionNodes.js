@@ -3,7 +3,7 @@
 //Inputs: None
 //Outputs: Question Collection.
 
-export const QuestionSet= [
+export default QuestionSet = [
 {code:"suic" ,values:"scale" ,question:"In your judgement, what is the risk that the person will attempt suicide?" ,help:"Consider the likelihood in the context of the person's circumstances after the assessment if no further action is taken." ,leftlabel:"no risk" ,rightlabel:"maximum risk"},
 {code:"sui-specific" ,layer:"0" ,question:"Do you have reason to be concerned about the person's risk of suicide?" ,values:"layer"},
   {code:"suic-past-att" ,persistent:"hard" ,layer:"0" ,question:"Has the person ever made a suicide attempt? If yes, the questions about them should be answered with reference to the attempts in general rather than any specific one, unless otherwise stated." ,values:"filter-q"},

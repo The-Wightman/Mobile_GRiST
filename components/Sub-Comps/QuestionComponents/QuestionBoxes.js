@@ -124,9 +124,10 @@ export default class QuestionBox extends React.Component{
         let Inputtype;
         let PreviousAnswer; 
          
-        switch(this.props.value){
+        switch(this.props.values){
             // if the question type is scaler it requires a slider to allow for input. 
-            case "scale":                 
+            case "scale":
+            case "layer":                 
             //create a custom inputype object with a slider.
             //assign the values for the scale and question information from the XML node in the props object.
             Inputtype = (
@@ -167,9 +168,9 @@ export default class QuestionBox extends React.Component{
                    />
                 </View>
                <View style={styles.scaleLabel}>
-               <Text style={styles.TextStyle}>"0 = " {this.props.leftlabel}</Text>
+               <Text style={styles.TextStyle}>0: {this.props.leftlabel}</Text>
                <Text style={styles.TextStyle}>Current Answer: {this.state.Answer}</Text>
-               <Text style={styles.TextStyle}>"10 = " {this.props.rightlabel}</Text>
+               <Text style={styles.TextStyle}>10: {this.props.rightlabel}</Text>
                </View>
                </View>
                 )            

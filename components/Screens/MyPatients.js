@@ -3,35 +3,28 @@
 //Inputs: 
 //Outputs: 
 import React, {Component} from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
+import {  
   View,
-  Text,
-  Picker,
-  StatusBar,
-  TextInput,
-  Button,
-  TouchableOpacity,  
+  Text,  
+  TextInput,  
+  StyleSheet   
 } from 'react-native';
-import { color } from 'react-native-reanimated';
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
 import MainHeadTemplate from '../Sub-Comps/Navigation/Header'
-import {MYstyle} from '../../Styles/index'
-import QuestionBoxTemplate from '../Sub-Comps/QuestionComponents/QuestionBoxes'
+import {Colors,MYstyle} from '../../Styles/index'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import {Card, Icon} from 'react-native-elements';
+import {Card, Button, Icon} from 'react-native-elements';
 import CustomTable from '../Sub-Comps/tableview'
-
-const XMLnode1 = {value:'scale',leftlabel:'0 = Very sad',rightlabel:'10 = very Happy',question:'How happy are you? ',help:'Measure thy happiness',prev:5,persistence: "Hard"}
-const XMLnode2 = {value:'value',leftlabel:'0 = Very sad',rightlabel:'10 = very Happy',question:'How sad are you? ',help:'Measure thy sadness',persistence: "Soft",alert:"OH MY LAWD",prev:"yes"}
 
 export default class MyPatients extends Component{ 
   constructor(props) {
     super(props);
-    
-  }
+    this.state = {
+      newPatientID: "",
+      newPatientFore:"",
+      newPatientSur:""
+    } 
+   }
   render() {   
         return(
           <View >
@@ -46,8 +39,21 @@ export default class MyPatients extends Component{
           </Card> 
           <Card title="Patients List">
               <Text style={MYstyle.TextStyle}>This Table keeps a record of all pateints in the currently selected group or main group depending on which is more apropriate for you.</Text>
-              <CustomTable tableHead={['Head', 'Head2', 'Head3', 'Head4']}  tableTitle={['Title', 'Title2', 'Title3', 'Title4']} tableData={[['1', '2', '3'],['a', 'b', 'c'],['1', '2', '3'],['a', 'b', 'c']]} ></CustomTable>
-              </Card>                  
+              <CustomTable tableHead={['Patient ID', 'Forename', 'Surname','Actions']} tableData={[['DVD2013', 'Test', 'Data'],['DVD2013', 'Test', 'Data'],['DVD2013', 'Test', 'Data'],['DVD2013', 'Test', 'Data']]} ></CustomTable>
+              </Card> 
+              <Card style={MYstyle.cards}title="Add a New patient">
+                <Text style={MYstyle.cardTextStyle}>Fill in the form below to add a new patient to the system. You need to ensure the patient id is unique by, for example, basing it on the patient intials and the current date (e.g. jfk171210 for a patient created on the 17th December, 2010) or by using the unique identifiers you already have for your patients.</Text>
+                <Text style={MYstyle.cardTextStyle}>Patient ID</Text>
+                <TextInput name="patientID" style={styles.TextInputStyle} onChangeText={(text) => this.setState({newPatientID: text})} />
+                <Text style={MYstyle.cardTextStyle}>Forename</Text>
+                <TextInput name="forename" style={styles.TextInputStyle} onChangeText={(text) => this.setState({newPatientFore: text})} />
+                <Text style={MYstyle.cardTextStyle}>Surname</Text>
+                <TextInput name="surname" style={styles.TextInputStyle} onChangeText={(text) => this.setState({newPatientSur: text})} />
+                <Button 
+                  icon={<Icon name='code' color='#ffffff' />}
+                  buttonStyle={{ borderRadius: 8, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor:Colors.DarkGreen.color }}
+                  title='Add Patient' onPress={() => this.UpdateSelection("Full")} />
+          </Card>                 
           </KeyboardAwareScrollView>
           </View>          
           </View>
@@ -55,3 +61,18 @@ export default class MyPatients extends Component{
         )
     }
   }
+
+const styles = StyleSheet.create({
+  TextInputStyle: {
+    borderColor: Colors.LightGrey.color,
+    borderWidth: 3,
+    alignContent:'center',
+    justifyContent:'center',
+    paddingBottom: 10,
+    marginBottom: 10,
+    color: Colors.Black.color,
+    maxHeight: 50,    
+    backgroundColor: Colors.White.color,
+    
+}
+})

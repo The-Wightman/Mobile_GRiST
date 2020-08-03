@@ -34,14 +34,15 @@ export default class QuestionWindow extends Component{
     super(props);
     
   }
-
+  
   render() {   
-    this.items = QuestionSet.map((question, key) => <QuestionBox key={} {...item.id}/>);
+     let assessmentboxes = QuestionSet.map((question) => <QuestionBox key={question.code} {...question}/>);
+     
         return(
           <View>          
           <AssessmentHeader/> 
           <View style={{flex:1, Height:'auto'}} >
-                   
+                  {assessmentboxes}
           </View>
           </View>
           
@@ -49,6 +50,7 @@ export default class QuestionWindow extends Component{
         )
     }
   }
+
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'black',

@@ -68,8 +68,8 @@ export default class _Login extends React.Component{
             await ClientControls._storeClient(UserInfo)              
             //check the users role information, for administrators navigate to the Clinician landing page         
              if(UserInfo.current_user.roles[1] == "administrator"){
-                await ClientControls._storeRole("authenticated")
-                this.props.navigation.navigate('ILanding')  
+                await ClientControls._storeRole("administrator")
+                this.props.navigation.navigate('CLanding')  
             // if non admin user navigate to the individual user landing page.       
             } else if(UserInfo.current_user.roles[1] !== null) {
                 await ClientControls._storeRole("authenticated")
