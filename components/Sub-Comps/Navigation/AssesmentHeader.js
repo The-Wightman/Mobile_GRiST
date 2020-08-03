@@ -47,7 +47,7 @@ export default class AssessmentHeader extends React.Component {
             //make upper left store information of the current patient
             UpperLeft = (
             <View style={styles.Internal}>
-            <Text style={styles.HeadText}>Person being assessed: {this.state.user}</Text>
+            <Text style={styles.HeadText}>Person being assessed: {this.state.username}</Text>
             <Text style={styles.HeadText}>Assessment: {this.state.assessment}</Text>
             </View>
             )

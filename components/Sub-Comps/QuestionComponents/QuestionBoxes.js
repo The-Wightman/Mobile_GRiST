@@ -41,7 +41,7 @@ export default class QuestionBox extends React.Component{
             dkBool: false,
             actionModal:false,
             commentModal:false,          
-                    
+            Qcode:""       
               }
               
             
@@ -167,9 +167,9 @@ export default class QuestionBox extends React.Component{
                    />
                 </View>
                <View style={styles.scaleLabel}>
-               <Text style={styles.TextStyle}>{this.props.leftlabel}</Text>
+               <Text style={styles.TextStyle}>"0 = " {this.props.leftlabel}</Text>
                <Text style={styles.TextStyle}>Current Answer: {this.state.Answer}</Text>
-               <Text style={styles.TextStyle}> {this.props.rightlabel}</Text>
+               <Text style={styles.TextStyle}>"10 = " {this.props.rightlabel}</Text>
                </View>
                </View>
                 )            
