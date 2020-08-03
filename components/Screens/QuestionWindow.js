@@ -24,7 +24,7 @@ import {Colors,Spacing} from '../../Styles/index'
 import QuestionBoxTemplate from '../Sub-Comps/QuestionComponents/QuestionBoxes'
 
 const XMLnode1 = {value:'scale',leftlabel:'0 = Very sad',rightlabel:'10 = very Happy',question:'How happy are you? ',help:'Measure thy happiness',prev:5,persistence: "Hard"}
-const XMLnode2 = {value:'value',leftlabel:'0 = Very sad',rightlabel:'10 = very Happy',question:'How sad are you? ',help:'Measure thy sadness',persistence: "Soft",alert:"OH MY LAWD"}
+const XMLnode2 = {value:'value',leftlabel:'0 = Very sad',rightlabel:'10 = very Happy',question:'How sad are you? ',help:'Measure thy sadness',prev:"yes", persistence: "Soft",alert:"OH MY LAWD"}
 
 export default class QuestionWindow extends Component{ 
   constructor(props) {

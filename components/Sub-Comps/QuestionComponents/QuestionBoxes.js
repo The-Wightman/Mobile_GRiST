@@ -168,14 +168,15 @@ export default class QuestionBox extends React.Component{
         return(
             <View style={{paddingVertical:6}}>
             <View style={styles.mainContainer}>
-                <View style={styles.IconBar}> 
-                <View style={{flex:1,maxWidth:'50%'}}>
-                    <Text style={styles.MainQuestion}>{this.props.question}</Text> 
-                </View>               
-               <View > 
+           
+                <View style={styles.IconBar}>                                
+               <View> 
                    <IconBar persistence={this.props.persistence} alert={this.props.alert} help={this.props.help} summonModal={this.summonModal.bind(this)}/>                               
                </View>                                   
                 </View>
+                <View>
+                    <Text style={styles.MainQuestion}>{this.props.question}</Text> 
+            </View> 
                  {PreviousAnswer}
                  {Inputtype}
                  <TouchableOpacity onPress={() => this.clearAnswer()} >               
@@ -207,11 +208,17 @@ styles = StyleSheet.create({
     },
     TextStyle: {
         color: Colors.DarkGreen.color,                
-        fontSize: Spacing.TextSizes.navText
+        fontSize: Spacing.TextSizes.navText,
+        textAlign: "center",
+        maxWidth: '100%',
+        paddingTop: 3
      }, 
      MainQuestion:{
         color: Colors.DarkGreen.color,                
-        fontSize: Spacing.TextSizes.FieldText
+        fontSize: Spacing.TextSizes.FieldText,
+        minWidth:'100%',
+        justifyContent: 'center',
+        textAlign: 'center'
      },    
      scaleLabel:{
         alignItems: 'stretch', justifyContent: 'space-between', flexDirection:'row' 
@@ -277,10 +284,10 @@ styles = StyleSheet.create({
     },
     IconBar:{      
         flexDirection:'row',       
-        minWidth:'50%',
+        minWidth:'90%',
         alignContent:'center',
         justifyContent:'center',
-        paddingTop: 5
+        marginBottom: 5
 
       },
       Iconstyle:{
