@@ -7,8 +7,6 @@
 //import React & react native libraries
 import * as React from 'react';
 import { createDrawerNavigator,DrawerContentScrollView,DrawerItemList, DrawerItem } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
-import { AppRegistry,Text } from 'react-native';
 import * as Screens from '../../Screens'
 import {Colors} from '../../../Styles/index'
 //import custom drawer styling to allow for personally styled navigation tabs.
@@ -16,9 +14,6 @@ import CustomDrawerContent from './DrawerContainer'
 
 // export Idrawer as a new drawer navigator when the app is loaded.
 export const IDrawer = createDrawerNavigator();
-
-//register the Individual drawer as a component that can be called Application wide
-AppRegistry.registerComponent('eGRiST', () => IndDrawer);
 
 //Function to return a custom setup loaded into the IDRAWER const.
 export default function _IndividualNav(){

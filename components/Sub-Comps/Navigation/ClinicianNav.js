@@ -7,8 +7,6 @@
 //import React & react native libraries
 import * as React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer,StackActions } from '@react-navigation/native';
-import { View,AppRegistry} from 'react-native';
 import * as Screens from '../../Screens'
 import {Colors} from '../../../Styles/index'
 //import custom drawer styling to allow for personally styled navigation tabs.
@@ -16,10 +14,7 @@ import CustomDrawerContent from './DrawerContainer'
 // export Cdrawer as a new drawer navigator when the app is loaded.
 export const CDrawer = createDrawerNavigator();
 
-//register the clinician drawer as a component that can be called Application wide
-AppRegistry.registerComponent('eGRiST', () => ClinDrawer);
-
-//Function to return a custome setup loaded into the CDRAWER const.
+//Function to return a custom setup loaded into the CDRAWER const.
 export default function _ClinicianNav(){
     return (     
       //for the cdrawers new navigator, give it an initial route to use, and pass it the custom drawer style props 

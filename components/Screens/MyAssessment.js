@@ -13,7 +13,7 @@ import {
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
 import MainHeadTemplate from '../Sub-Comps/Navigation/Header'
 import AssessmentHeader from '../Sub-Comps/Navigation/AssesmentHeader'
-import {MYstyle} from '../../Styles/index'
+import {Colors,MYstyle} from '../../Styles/index'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import {Card,Button, Icon} from 'react-native-elements';
 import CustomTable from '../Sub-Comps/tableview'
