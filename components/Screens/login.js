@@ -18,6 +18,7 @@ import { Typography, Colors, Spacing, Images } from '../../Styles'
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
 import Validate from '../Sub-Comps/GenericComps/Validator'
 import * as ClientControls from '../Sub-Comps/userOutline'
+import ValidateLogin from '../Sub-Comps/GenericComps/Validator'
 
 
 // Create a new login object which handles information from previous pages and pass it this information through the props component
@@ -59,7 +60,7 @@ export default class _Login extends React.Component{
    async userLogin(UID,Pass,Action){
     let UserInfo = null 
     //call the validate function on the provided information 
-     if  (Validate(UID,null,Pass,Action)){
+     if  (ValidateLogin(UID,null,Pass,Action)){
         //wait for JSONhandler to process the variables UID and pass before proceeding
      UserInfo = await this.JsonHandler(UID,Pass)  
         //if the information is validated, check if it is not null                  

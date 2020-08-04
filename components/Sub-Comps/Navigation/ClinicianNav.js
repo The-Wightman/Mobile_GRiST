@@ -11,6 +11,7 @@ import * as Screens from '../../Screens'
 import {NavStyle} from '../../../Styles/index'
 //import custom drawer styling to allow for personally styled navigation tabs.
 import CustomDrawerContent from './DrawerContainer'
+import _IndividualNav from '../Navigation/IndividualNav';
 // export Cdrawer as a new drawer navigator when the app is loaded.
 export const CDrawer = createDrawerNavigator();
 
@@ -25,7 +26,8 @@ export default function _ClinicianNav(){
           <CDrawer.Screen name="My Patients" component={Screens.MyPatients} />
           <CDrawer.Screen name="Downloads" component={Screens.Downloads} />
           <CDrawer.Screen name="E-Grist Help" component={Screens.Help} />
-          <CDrawer.Screen name="Search" component={Screens.Search} />                   
+          <CDrawer.Screen name="Search" component={Screens.Search} />
+          <CDrawer.Screen name="ILanding" component={_IndividualNav} />                    
         </CDrawer.Navigator>
      
     );
