@@ -18,14 +18,25 @@ import {KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import {Card,Button, Icon} from 'react-native-elements';
 import CustomTable from '../Sub-Comps/tableview'
 import Questionwindow from '../Screens/QuestionWindow'
+import * as ClientControls from '../Sub-Comps/userOutline'
+
 
 export default class MyAssessment extends Component{ 
   constructor(props) {
     super(props);
     //create a state object to store the tracking variables and set them to empty.
     this.state = {
-      CurrentOption: "Home"
+      CurrentOption: "Home",
+      user:""
       }      
+  }
+  //When the screen components are rendered,only information avaiable at call is shown, once display is complete the mount flag is checked.
+  //once the flag is checked the component did mount function is automaitcally called.
+  componentDidMount(){
+    //get the current users role information from storage
+    UserAdmin = ClientControls._getRole()
+    //once this is complete set the state for the user to match the role and set isloading to false.
+    .then( UserAdmin => this.setState({user: UserAdmin}))    
   }
   UpdateSelection(AssessType){
     switch(AssessType){
@@ -41,13 +52,28 @@ export default class MyAssessment extends Component{
   }
   
  //Return a render with the following information
- render() { 
+ render() {
+   let introelement= "" 
+   if(this.state.user = "administrator"){
+     introelement = (
+     <Card style={MYstyle.cards}title="My Assessments">      
+     <Text style={MYstyle.TextStyle}>From here a list of all assesments for the selected group is visible, allowing for you to view all assessments or begin a new practice/full assesment as the need demands.</Text>
+     <Text style={MYstyle.TextStyle}>As of version 2.4 onwards you will also be able to review patients reports and begin assessments for individual patients from the screen using the option on the table below.</Text>
+     <Button 
+          icon={<Icon name='code' color='#ffffff' />}
+          buttonStyle={{ borderRadius: 8, marginTop:8, marginBottom: 8, backgroundColor:Colors.DarkGreen.color }}
+          title='Return to Overview' onPress={() => this.props.navigation.navigate("CLanding",{screen: "My Patients"})} />
+</Card> )
+   } else {
+    introelement = (
+      <Card style={MYstyle.cards}title="My Assessments">      
+      <Text style={MYstyle.TextStyle}>From here a list of all assesments for the selected group is visible, allowing for you to view all assessments or begin a new practice/full assesment as the need demands.</Text>
+      <Text style={MYstyle.TextStyle}>As of version 2.4 onwards you will also be able to review patients reports and begin assessments for individual patients from the screen using the option on the table below.</Text>
+ </Card> )
+   }
   let commoncontent = (
     <View>
-    <Card style={MYstyle.cards}title="My Assessments">
-              <Text style={MYstyle.cardTextStyle}>From here a list of all patients for the selected group is visible, allowing for you to view all paticipants.</Text>
-              <Text style={MYstyle.cardTextStyle}>As of version 2.4 onwards you will also be able to review patients reports and begin assessments for individual patients from the screen using the option on the table below.</Text>
-        </Card> 
+        {introelement}
         <Card title="List of previous assessments">
               <Text style={MYstyle.TextStyle}>This Table Displays a set of your most recent assessments, note that if you have completed a large number of assessments you may need to scroll down the table.</Text>
               <Text style={MYstyle.TextStyle}>If you have not previously completed an assessment using the system we advise you select the Practice assessment option below to familiarise yourself with the system.</Text>
