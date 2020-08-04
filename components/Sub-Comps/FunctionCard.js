@@ -20,7 +20,7 @@ import PDFtemplate from '../Sub-Comps/PDFview'
 //create a new object array containing objects that represent the possible card types and export it to make it accessible.
 export const cardTypes = [
   { Title: "View my Profile", Image: Images.DefaultProfile, Text: "view,Edit and Update profile information for the current logged in profile", buttonText: "Go to Profile", pointer: "My Profile", type: "both" },
-  { Title: "View your Patients", Image: Images.Patients, Text: "select and manage your group and patient information or start a new assessment for a patient.", buttonText: "Go to Patients", pointer: "My Patients", type: true },
+  { Title: "View your Patients", Image: Images.Patients, Text: "select and manage your patient groups information or start a new assessment for a patient.", buttonText: "Go to Patients", pointer: "My Patients", type: true },
   { Title: "View your Groups", Image: Images.group, Text: "View which groups you are a member of and see detailed information about them", buttonText: "Go to Groups", pointer: "My Groups", type: "both" },
   { Title: "Downloads", Image: Images.downloads, Text: "download handbooks and documentation detailing how to work with GRIST and the outputs the system provides.", buttonText: " Go To Downloads", pointer: "Downloads", type: true },
   { Title: "Help & Information", Image: Images.Help, Text: "view the help, information, & assistance documentation for the e-GRiST System and mobile application", buttonText: "Go To Help", pointer: "E-Grist Help", type: true },
