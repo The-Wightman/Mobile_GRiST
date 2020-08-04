@@ -24,7 +24,7 @@ import * as ClientControls from '../userOutline'
 //comments are not done inline due to issues with common commenting practice {{-- --}} not being recognised by EXPO
 export default function CustomDrawerContent(props) {  
   const prop2 = props;
-  prop2.state.routes = prop2.state.routes.slice(0,6);
+  prop2.state.routes = prop2.state.routes.slice(0,7);
       return (     
         //take the style props passed to this compenent function and set them as the props of this function
         //this is then repeated on line 32 to ensure the itemlist also has the same props

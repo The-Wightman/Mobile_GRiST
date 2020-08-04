@@ -23,6 +23,7 @@ export default function _ClinicianNav(){
         <CDrawer.Navigator initialRouteName={"Home"} drawerContent={props => CustomDrawerContent(props)} drawerType="slide" drawerContentOptions={NavStyle} screenProps={{navigation: this.navigation, isClin:true}}>
           <CDrawer.Screen name="Home" component={Screens.LandingScreen.default} />
           <CDrawer.Screen name="My Profile" component={Screens.MyProfile} />
+          <CDrawer.Screen name="My Groups" component={Screens.MyGroups} />
           <CDrawer.Screen name="My Patients" component={Screens.MyPatients} />
           <CDrawer.Screen name="Downloads" component={Screens.Downloads} />
           <CDrawer.Screen name="E-Grist Help" component={Screens.Help} />
