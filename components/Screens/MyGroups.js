@@ -44,7 +44,7 @@ export default class MyGroups extends Component{
                 </Card> 
                 <Card title="Table of current groups">
               <Text style={MYstyle.TextStyle}>This Table Displays all of the groups you are currently a member or administrator of.</Text>
-              <CustomTable tableHead={['Head', 'Head2', 'Head3', 'Head4']}  tableTitle={['Title', 'Title2', 'Title3', 'Title4']} tableData={[['1', '2', '3'],['a', 'b', 'c'],['1', '2', '3'],['a', 'b', 'c']]}></CustomTable>
+              <CustomTable tableHead={['Group', 'Description']} headflex={[1, 3]} dataflex={[1, 3]} tableData={[['1', '2'],['a', 'b'],['1', '2'],['a', 'b']]}></CustomTable>
               </Card>                   
           </KeyboardAwareScrollView>
           </View>          

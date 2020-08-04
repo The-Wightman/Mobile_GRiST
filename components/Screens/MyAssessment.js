@@ -74,17 +74,23 @@ export default class MyAssessment extends Component{
   let commoncontent = (
     <View>
         {introelement}
-        <Card title="List of previous assessments">
+        <Card title="List of previous online assessments">
               <Text style={MYstyle.TextStyle}>This Table Displays a set of your most recent assessments, note that if you have completed a large number of assessments you may need to scroll down the table.</Text>
               <Text style={MYstyle.TextStyle}>If you have not previously completed an assessment using the system we advise you select the Practice assessment option below to familiarise yourself with the system.</Text>
-              <CustomTable tableHead={['Head', 'Head2', 'Head3', 'Head4']}  tableTitle={['Title', 'Title2', 'Title3', 'Title4']} tableData={[['1', '2', '3'],['a', 'b', 'c'],['1', '2', '3'],['a', 'b', 'c']]}></CustomTable>
+              <CustomTable tableHead={['Date', 'Status', 'Delete']} headflex={[1, 1, 1]} dataflex={[1, 1, 1]} tableData={[['1', '2', '3'],['a', 'b', 'c'],['1', '2', '3'],['a', 'b', 'c']]}></CustomTable>
+        </Card>
+        <Card title="List of previous offline assessments">
+              <Text style={MYstyle.TextStyle}>This table only displays assessments completed locally that have not been submitted to the server</Text>
+              <Text style={MYstyle.TextStyle}>If you have not completed any offline assesments or all of your assesments have been uploaded then this table may be blank</Text>
+              <Text style={MYstyle.TextStyle}>For fixing erros in uncompleted assessment please use the online tool, for reports and comment diary switch to the My Plans and My reviews.</Text>
+              <CustomTable tableHead={['Date', 'Status', 'Delete']} headflex={[1, 1, 1]} dataflex={[1, 1, 1]} tableData={[['1', '2', '3'],['a', 'b', 'c'],['1', '2', '3'],['a', 'b', 'c']]}></CustomTable>
         </Card>
     </View>
   )
   let PracticeAssessment = (  
     <Card title="Start a practice assessment">
           <Text style={MYstyle.TextStyle}>Begin a practice assessment to introduce the system to you while not recording any data about your answers.</Text>
-          <Text style={MYstyle.TextStyle}>Due to practice data not being recorded once a practice is closed its answers cannot be reetrieved and the table of previous assessments will not be populated when a practice assessment is completed.</Text>
+          <Text style={MYstyle.TextStyle}>Due to practice data not being recorded once a practice is closed its answers cannot be retrieved and the table of previous assessments will not be populated when a practice assessment is completed.</Text>
           <Button 
           icon={<Icon name='code' color='#ffffff' />}
           buttonStyle={{ borderRadius: 8, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor:Colors.DarkGreen.color }}

@@ -45,7 +45,7 @@ render() {
               </Card>
               <Card title="Previous plans">
               <Text style={MYstyle.TextStyle}>This Table keeps a record of previous Plans to allow you to reference & review your submissions</Text>
-              <CustomTable tableHead={['Head', 'Head2', 'Head3', 'Head4']}  tableTitle={['Title', 'Title2', 'Title3', 'Title4']} tableData={[['1', '2', '3'],['a', 'b', 'c'],['1', '2', '3'],['a', 'b', 'c']]}></CustomTable>
+              <CustomTable tableHead={['Date', 'Plan', 'Actions']} headflex={[1, 1, 1]} dataflex={[1, 1, 1]} tableData={[['1', '2', '3'],['a', 'b', 'c'],['1', '2', '3'],['a', 'b', 'c']]}></CustomTable>
               </Card>  
                           
         </KeyboardAwareScrollView>

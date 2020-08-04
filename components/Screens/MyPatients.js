@@ -41,7 +41,7 @@ export default class MyPatients extends Component{
          </Card> 
           <Card title="Patients List">
               <Text style={MYstyle.TextStyle}>This Table keeps a record of all pateints in the currently selected group or main group depending on which is more apropriate for you.</Text>
-              <CustomTable tableHead={['Patient ID', 'Forename', 'Surname','Actions']} tableData={[['DVD2013', 'Test', 'Data'],['DVD2013', 'Test', 'Data'],['DVD2013', 'Test', 'Data'],['DVD2013', 'Test', 'Data']]} ></CustomTable>
+              <CustomTable tableHead={['Patient ID', 'Forename', 'Surname','Actions']} headflex={[1, 1, 1,1]} dataflex={[1, 1, 1,1]}tableData={[['DVD2013', 'Test', 'Data',''],['DVD2013', 'Test', 'Data',''],['DVD2013', 'Test', 'Data',''],['DVD2013', 'Test', 'Data','']]} ></CustomTable>
               <Button 
                   icon={<Icon name='code' color='#ffffff' />}
                   buttonStyle={{ borderRadius: 8, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor:Colors.DarkGreen.color }}
