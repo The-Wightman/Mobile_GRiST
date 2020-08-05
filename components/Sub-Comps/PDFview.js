@@ -15,7 +15,7 @@ export default class PDFTemplate extends React.Component {
       
        
     render() {
-        const PDFinfo={uri:this.props.URI,cache:true};
+        let PDFinfo={uri:this.props.URI,cache:true};
            return (
             <ScrollView >
                 <Pdf
@@ -32,6 +32,7 @@ export default class PDFTemplate extends React.Component {
                     }}
                     onError={(error)=>{
                         console.log(error);
+                        PDFinfo = {uri:this.props.FILE,cache:true}
                     }}
                     onPressLink={(uri)=>{
                         console.log(`Link presse: ${uri}`)
