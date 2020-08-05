@@ -28,8 +28,16 @@ export const cardTypes = [
   { Title: "Start an assessment", Image: Images.Assessment, Text: "start a new assessment, resume an old assessment, or manage existing assessments and answers.", buttonText: "Go to Assessments", pointer: "My Assessments", type: false },
   { Title: "My Plan", Image: Images.plan, Text: "view your next steps and action plans to deal with issues highlighted in your assessments.", buttonText: "Go to My Plan", pointer: "My Plan", type: false },
   { Title: "My Review", Image: Images.review, Text: "review previous answers and a learn more about the answers previously given and the impact they may have.", buttonText: "Go to My Review", pointer: "My Review", type: false },
-  { Title: "GRiST Cribsheet", Image: Images.cribsheet, Text: "download the GRiST Cribsheet to your mobile device for useful rules of system operation", buttonText: "Download Cribsheet", pointer: "pdfscreen", type: "download", payload:PDFS.PDFcribsheet,URI:"https://www.egrist.org/sites/default/files/grist-crib-sheet_1.pdf", file:"bundle-assets://pdfs/grist-crib-sheet_1.pdf" },
-  { Title: "GRiST HandBook", Image: Images.handbook, Text: "download and Read the GRiST handbook to get a better understanding of the system and its functionality", buttonText: "Download Handbook", pointer: "pdfscreen", type: "download", payload: PDFS.PDFhandbook, URI:"https://www.egrist.org/sites/default/files/grist-practitioners-manual.pdf", file:"bundle-assets://pdfs/grist-practitioners-manual.pdf"}
+  { Title: "GRiST Cribsheet", Image: Images.cribsheet, Text: "download the GRiST Cribsheet to your mobile device for useful rules of system operation", buttonText: "Download Cribsheet", pointer: "pdfscreen", type: "download",
+   payload:PDFS.PDFcribsheet,
+   URI:"https://www.egrist.org/sites/default/files/grist-crib-sheet_1.pdf",
+   afile:"bundle-assets://pdfs/grist-crib-sheet_1.pdf",
+   ifile:'./../../Assets/PDFS/grist-crib-sheet_1.pdf' },
+  { Title: "GRiST HandBook", Image: Images.handbook, Text: "download and Read the GRiST handbook to get a better understanding of the system and its functionality", buttonText: "Download Handbook", pointer: "pdfscreen", type: "download", 
+  payload: PDFS.PDFhandbook, 
+  URI:"https://www.egrist.org/sites/default/files/grist-practitioners-manual.pdf",
+  afile:"bundle-assets://pdfs/grist-practitioners-manual.pdf",
+  ifile:'./../../Assets/PDFS/grist-practitioners-manual.pdf'}
 ]
 
 //Create a new class functioncard that extends the basic react component

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Dimensions, View,ScrollView } from 'react-native';
+import { StyleSheet, Dimensions, View,ScrollView,Platform } from 'react-native';
 
 import Pdf from 'react-native-pdf';
 
@@ -24,18 +24,22 @@ export default class PDFTemplate extends React.Component {
                         this.setState({pages:numberOfPages});
                     }}
                     onPageChanged={(page,numberOfPages)=>{
-                        this.setState({pages:numberOfPages})
-                        console.log(`current page: ${page}`),
-                        console.log(`numpage: ${numberOfPages}`),
-                        console.log(`state: ${this.state.pages}`);
+                        this.setState({pages:numberOfPages})                      
                         
                     }}
                     onError={(error)=>{
                         console.log(error);
-                        PDFinfo = {uri:this.props.FILE,cache:true}
+                        //If the platform is an android then use the bundled asset folder
+                        if(Platform.OS === 'android'){
+                        PDFinfo = {uri:this.props.afile,cache:true}
+                        }
+                        //else it is an IOS platform and we can use the require file style
+                        else {
+                        PDFinfo = (this.props.ifile);
+                        }
                     }}
                     onPressLink={(uri)=>{
-                        console.log(`Link presse: ${uri}`)
+                        console.log(`Link pressed: ${uri}`)
                     }}
                     style={styles.pdf,{height:Dimensions.get('window').height*(this.state.pages*0.73)}}/>
             </ScrollView>
