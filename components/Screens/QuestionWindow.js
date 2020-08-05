@@ -36,7 +36,7 @@ export default class QuestionWindow extends Component{
   }
   
   render() {   
-     let assessmentboxes = QuestionSet.map((question) => <QuestionBox key={question.code} {...question}/>);
+     let assessmentboxes = QuestionSet.slice(0,10).map((question) => <QuestionBox key={question.code} {...question}/>);
      
         return(
           <View>          

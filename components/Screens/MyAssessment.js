@@ -82,7 +82,7 @@ export default class MyAssessment extends Component{
         <Card title="List of previous offline assessments">
               <Text style={MYstyle.TextStyle}>This table only displays assessments completed locally that have not been submitted to the server</Text>
               <Text style={MYstyle.TextStyle}>If you have not completed any offline assesments or all of your assesments have been uploaded then this table may be blank</Text>
-              <Text style={MYstyle.TextStyle}>For fixing erros in uncompleted assessment please use the online tool, for reports and comment diary switch to the My Plans and My reviews.</Text>
+              <Text style={MYstyle.TextStyle}>For fixing errors in uncompleted assessments please use the online tool, for reports and comment diary switch to the My Plans and My reviews.</Text>
               <CustomTable tableHead={['Date', 'Status', 'Delete']} headflex={[1, 1, 1]} dataflex={[1, 1, 1]} tableData={[['1', '2', '3'],['a', 'b', 'c'],['1', '2', '3'],['a', 'b', 'c']]}></CustomTable>
         </Card>
     </View>
