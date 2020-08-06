@@ -16,6 +16,8 @@ import {
   TextInput
 } from "react-native";
 import { Images,Colors,Typography,Spacing } from '../../../Styles'
+import { Switch } from "react-native-gesture-handler";
+import  {GRiST_Process,Quick_Tips} from '../Text_Excerpts'
 
 // Create a new modal object which handles information from previous pages and pass it this information through the props component
 export default class AssessmentModal extends React.Component{
@@ -23,24 +25,83 @@ export default class AssessmentModal extends React.Component{
         super(props); 
         this.state = {
             Input: "",
-            Type: "",
-            modalVisible: false
+            Type: ""
+            
             } 
                
         }  
-    // function for toggline the visibility boolean of this modal instance.  
-    setModalVisible(){
-      this.setState({modalVisible: !modalVisible})
-    }
+  
 
     render() { 
+      let modalcontent
+    switch(this.props.type){
+      case "key":
+      case "tips":
+      case "process":
+      case "indvhelp":
+        modalcontent = (
+          <View>
+          <Text style={styles.modalText}>{this.props.title}</Text>
+                  
+          <View style={styles.rack}><TouchableHighlight
+            style={styles.openButton}
+            onPress={() => {  
+              this.props.setModalVisible(false)              
+                          
+            }}
+          >
+            <Text style={styles.textStyle}>Submit Changes</Text>
+          </TouchableHighlight>
+          <TouchableHighlight style={styles.openButton}
+            onPress={() => {                  
+              this.props.setModalVisible(false)              
+            }}>
+            <Text style={styles.textStyle}>Go Back</Text>
+          </TouchableHighlight>
+          </View>
+          </View>
+        )
+      break
+      case "formulation":
+      case "plan": 
+        modalcontent = (
+          <View>
+          <Text style={styles.modalText}>{this.props.title}</Text>
+          <TextInput name="Answer" style={styles.TextInputStyle} value={this.props.existing} onChangeText={(text) => { this.setState({ Input: text})}} />
+          <View style={styles.rack}><TouchableHighlight
+            style={styles.openButton}
+            onPress={() => {  
+              this.props.setModalVisible(false)              
+              
+             
+            }}
+          >
+            <Text style={styles.textStyle}>Submit Changes</Text>
+          </TouchableHighlight>
+          <TouchableHighlight style={styles.openButton}
+            onPress={() => {                  
+              this.props.setModalVisible(false)              
+            }}>
+            <Text style={styles.textStyle}>Go Back</Text>
+          </TouchableHighlight>
+          </View>
+          </View>
+        )     
+      break
+      case "judgement":
+      break
+      case "preview":
+      break
+      default:
+
+    }
       return (
     <View style={styles.centeredView}>
       <Modal
         //configure how the modal appears on screen and background settings.
         animationType="slide"
         transparent={true}
-        visible={this.state.modalVisible}
+        visible={this.props.modalVisible}
         //when the modal is closed provide an alert for the modal closing to the user
         onRequestClose={() => {
           Alert.alert("Modal has been closed.");
@@ -49,16 +110,7 @@ export default class AssessmentModal extends React.Component{
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Text style={styles.modalText}>{this.props.title}</Text>
-            <TextInput name="Answer" style={styles.TextInputStyle} value={this.props.existing} onChangeText={(text) => { this.setState({ Input: text})}} />
-            <TouchableHighlight
-              style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
-              onPress={() => {
-                this.setModalVisible();
-                updateInformation(Type,this.state.Input)
-              }}
-            >
-              <Text style={styles.textStyle}>Close</Text>
-            </TouchableHighlight>
+            {modalcontent}
           </View>
         </View>
       </Modal>
@@ -113,5 +165,8 @@ styles = StyleSheet.create({
     backgroundColor: Colors.White.color,
     
 },
+rack:{
+  flex:4, alignItems: 'center', justifyContent: 'space-between', flexDirection:'row'
+}
 })
 }

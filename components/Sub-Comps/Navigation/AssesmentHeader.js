@@ -11,7 +11,8 @@ import {
     Text,
     View,
     Image,   
-    TouchableOpacity 
+    TouchableOpacity, 
+    Modal
 } from 'react-native'
 
 import { DrawerActions,useNavigation } from '@react-navigation/native';
@@ -29,10 +30,15 @@ export default class AssessmentHeader extends React.Component {
             assessment: "full",
             questionSet: "State of mind",
             username: "David Wightman",
-            modalVisible: false
+            modalVisible: false,
+            modalType: "",
+            modalTitle: ""
         }        
-         
+        
     }
+    setModalVisible(newstate){
+        this.setState({modalVisible: newstate})
+      }
     //create render of the screen
     render() {
         //define empty dynamic variables for the quadrants of the header
@@ -54,14 +60,14 @@ export default class AssessmentHeader extends React.Component {
             // make the upper right store the assistant information for clinicians
             UpperRight = (
             <View style={styles.Internal}>
-                <TouchableOpacity style={styles.Buttons} >
-                    <Text>Key</Text>
+                <TouchableOpacity style={styles.Buttons} onPress={() => {this.setModalVisible(),this.setState({modalType:"key",modalTitle: "Key Breakdown"}) }} >
+                    <Text style={styles.TextStyle}>Key</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.Buttons}>
-                    <Text>Quick Tips</Text>
+                    <Text style={styles.TextStyle}>Quick Tips</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.Buttons}>
-                    <Text>GRiST Process</Text>
+                    <Text style={styles.TextStyle}>GRiST Process</Text>
                 </TouchableOpacity>
             </View>
             )
@@ -69,18 +75,18 @@ export default class AssessmentHeader extends React.Component {
             LowerLeft = (
                 <View style={styles.Internal}>
                 <TouchableOpacity style={styles.Buttons}>
-                    <Text>Risk </Text>
-                    <Text>Judgements</Text>
+                    <Text style={styles.TextStyle}>Risk </Text>
+                    <Text style={styles.TextStyle}>Judgements</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.Buttons}>
-                    <Text>Risk</Text>
-                    <Text>Formulation</Text>
+                    <Text style={styles.TextStyle}>Risk</Text>
+                    <Text style={styles.TextStyle}>Formulation</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.Buttons}>
-                    <Text>Safety Plan</Text>
+                    <Text style={styles.TextStyle}>Safety Plan</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.Buttons}>
-                    <Text>Preview Report</Text>
+                    <Text style={styles.TextStyle}>Preview Report</Text>
                 </TouchableOpacity>
                 </View>
             )  
@@ -97,13 +103,13 @@ export default class AssessmentHeader extends React.Component {
             UpperRight = (
                 <View style={styles.Internal}>
                     <TouchableOpacity style={styles.Buttons}>
-                        <Text>Key</Text>
+                        <Text style={styles.TextStyle}>Key</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.Buttons}>
-                        <Text>Quick Tips</Text>
+                        <Text style={styles.TextStyle}>Quick Tips</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.Buttons}>
-                        <Text>Using myGRiST</Text>
+                        <Text style={styles.TextStyle}>Using myGRiST</Text>
                     </TouchableOpacity>
                    
                 </View>
@@ -112,33 +118,30 @@ export default class AssessmentHeader extends React.Component {
             LowerLeft = (
                 <View style={styles.Internal}>
                     <TouchableOpacity style={styles.Buttons}>
-                        <Text>My Answers</Text>
+                        <Text style={styles.TextStyle}>My Answers</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.Buttons}>
-                        <Text>GRiST Advice </Text>
-                        <Text>& My Plan</Text>
+                        <Text style={styles.TextStyle}>GRiST Advice </Text>
+                        <Text style={styles.TextStyle}>& My Plan</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.Buttons}>
-                        <Text>Guide &</Text>
-                        <Text> Next Steps</Text>
+                        <Text style={styles.TextStyle}>Guide &</Text>
+                        <Text style={styles.TextStyle}> Next Steps</Text>
                     </TouchableOpacity>                   
                 </View>
                 )
          }
          //the lower right quadrant is the same for all users as it oversees assesment handling such as leaving or saving progress.
          LowerRight = (
-            <View style={styles.Internal}>
-                <TouchableOpacity style={styles.Buttons} >
-                    <Text>Go Back</Text>
+            <View style={styles.Internal}>                
+                <TouchableOpacity style={styles.Buttons}>
+                    <Text style={styles.TextStyle}>Save</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.Buttons}>
-                    <Text>Save</Text>
+                    <Text style={styles.TextStyle}>Suspend</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.Buttons}>
-                    <Text>Suspend</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.Buttons}>
-                    <Text>Finish</Text>
+                    <Text style={styles.TextStyle}>Finish</Text>
                 </TouchableOpacity>
             </View>
             )
@@ -153,7 +156,12 @@ export default class AssessmentHeader extends React.Component {
                 {LowerLeft}               
                 {LowerRight}                    
                 </View> 
-                <AssessmentModal ref="modal" modalVisible={this.state.modalVisible}/>                                           
+                <AssessmentModal 
+                ref={modal => {this.modal = modal}}
+                modalType={this.state.modalType}
+                modalVisible={this.state.modalVisible}
+                setModalVisible={this.setModalVisible.bind(this)}
+                Title = {this.state.modalTitle} />                                           
            </View>
         )
     }
@@ -202,5 +210,9 @@ HeadText: {
     color: Colors.White.color,
     fontSize: Spacing.TextSizes.navText,
     maxWidth: '50%'
+},
+TextStyle: {
+    fontSize: Spacing.TextSizes.smallText,
+    textAlign:'center'
 }
 })
