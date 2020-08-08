@@ -14,7 +14,7 @@ export default class CustomTable extends Component {
           <Row data={this.props.tableHead} flexArr={this.props.headflex} style={styles.head} textStyle={styles.text}/>
           <TableWrapper style={styles.wrapper}>
             <Col data={this.props.tableTitle} style={styles.title} heightArr={[28,28]} textStyle={styles.text}/>
-            <Rows data={this.props.tableData} flexArr={this.props.dataflex} style={styles.row} textStyle={styles.text}/>
+            <Rows data={this.props.tableData} flexArr={this.props.dataflex} style={this.props.rowHeight} textStyle={styles.text}/>
           </TableWrapper>
         </Table>
       </View>
@@ -23,10 +23,9 @@ export default class CustomTable extends Component {
 }
  
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#fff' },
+  container: { flex: 1, padding: 16, padding: 30, backgroundColor: '#fff' },
   head: {  height: 40,  backgroundColor: '#f1f8ff'  },
   wrapper: { flexDirection: 'row' },
-  title: { flex: 1, backgroundColor: '#f6f8fa' },
-  row: {  height: 28  },
+  title: { flex: 1, backgroundColor: '#f6f8fa' },  
   text: { textAlign: 'center' }
 });

@@ -53,14 +53,14 @@ export default class signup extends Component{
       for(index = 0; index < cardTypes.length; index++){                                 
         if (role == "administrator"){
           // if they are an admin find all options that are either admin or all user clearence
-          if(cardTypes[index].type == true || cardTypes[index].type =="both"){
+          if(cardTypes[index].type == "admin" || cardTypes[index].type =="all"){
               selectedCards[foundCards] =  <View><FunctionCard {...cardTypes[index]} navigation={this.props.navigation} /></View>  
               foundCards++        
             }
          }
       else {
         //else if the user is not an admin find all and client user clearence
-        if(cardTypes[index].type == false || cardTypes[index].type =="both"){
+        if(cardTypes[index].type == "nonadmin" || cardTypes[index].type =="all"){
           selectedCards[foundCards] =  <View><FunctionCard {...cardTypes[index]} navigation={this.props.navigation}/></View> 
           foundCards++       
         }

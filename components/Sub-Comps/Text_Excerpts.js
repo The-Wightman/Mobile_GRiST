@@ -13,7 +13,7 @@ export const gold_lock = "This indicates data that will almost never change acro
 export class Process extends React.Component{
     render() { 
         return (
-    <ScrollView style={{maxHeight:'75%',width:'100%'}}>
+    <ScrollView style={{maxHeight:'65%',width:'100%'}}>
         <Text>"Stage 1 diagnosing or assessing the levels of risk in each category (suicide, self harm, harm to others, etc) and how to address each one: the specific risk judgements and action plans."</Text>
             <Text>  1.This is where the basic data collection takes place, which can be for the varying contexts of assessments that are selected on the home page (screening, full, repeat, etc).</Text>
             <Text>  2.Data can be provided in any order by selecting topics from the mind map. This will take you to all the questions within that topic.</Text>
@@ -32,7 +32,7 @@ export class Process extends React.Component{
 export class Tips extends React.Component{
     render() { 
         return (
-        <ScrollView style={{maxHeight:'75%'}}>
+        <ScrollView style={{maxHeight:'65%'}}>
         <Text>Providing scores for items with a zero to ten scale</Text>
         <Text>  1.Use the descriptors at each end of the scale for a clear definition of how to interpret the maximum and minimum values.</Text>
         <Text>  2.Give the value that feels right and do not agonise about it because it will not improve your intuitive judgement.</Text>
@@ -70,25 +70,25 @@ export class Tips extends React.Component{
 export class Key extends React.Component{    
     render() { 
         return (
-             <ScrollView style={{maxHeight:'75%'}}>    
-            <CustomTable style={{width: 200}}tableHead={['Icon', 'Description', ]} headflex={[1, 4]} dataflex={[1,4]} 
+        <ScrollView style={{maxHeight:'65%',minWidth:'90%'}}>
+        <CustomTable style={{minHeight:'100%',minWidth:'90%'}} tableHead={['Icon', 'Description', ]} headflex={[1, 6]} dataflex={[1,6]} 
     tableData={[
-        [<Image style={styles.KeyIconsize} source={Images.document}/>,'Clicking on a management icon will enable you to add information on management of this aspect'],
+        [<Image style={styles.KeyIconsize} source={Images.document}/>,'Tapping on a management icon will enable you to add information on management of this aspect'],
         [<Image style={styles.KeyIconsize} source={Images.ballon}/>,'Select this icon to enter a comment that explains your answer, if you think it is needed and if the comment is directly relevant to the question.'],
-        [<Image style={styles.KeyIconsize} source={Images.exclamation}/>,'Tapping this icon will reveal an alrt box with information that may impact your answer.'],
+        [<Image style={styles.KeyIconsize} source={Images.exclamation}/>,'Tapping this icon will reveal an alert box with information that may impact your answer.'],
         [<Image style={styles.KeyIconsize} source={Images.info}/>,'Tapping this icon will reveal some help text to clarify the question'],
         [<Image style={styles.KeyIconsize} source={Images.lock_s}/>,silver_lock],
         [<Image style={styles.KeyIconsize} source={Images.lock_g}/>,gold_lock],
         
     ]}
-    ></CustomTable>
-    
-</ScrollView>)}
+    ></CustomTable> 
+    </ScrollView>   
+)}
 };
 export class Indvhelp extends React.Component{
     render() { 
         return (
-    <ScrollView style={{maxHeight:'75%'}}>
+    <ScrollView style={{maxHeight:'65%'}}>
         <Text>
 On the Screen, you will see the questions associated with the selected sub-topic or the whole set of questions if no topic is selected.
 Above the questions on the right hand-side of the panel are buttons that help you navigate between screens and through the assessment process:

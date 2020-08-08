@@ -56,7 +56,7 @@ export default class AssessmentModal extends React.Component{
       case "process":
       case "indvhelp":
         modalcontent = (
-          <View>
+          <View style={this.styles.centeredView}>
             {textExcerpt}                         
           <View style={styles.rack}>
           <TouchableHighlight style={styles.openButton}
@@ -73,17 +73,19 @@ export default class AssessmentModal extends React.Component{
       case "plan": 
 
         let preamble
-        if (this.props.modalType == "Plan"){
-          preamble = <Text>Use this box to record your thoughts about risk management as they emerge during the assessment.</Text>
+        if (this.props.modalType == "plan"){
+          preamble = <Text style={styles.textpadd}>Use this box to record your thoughts about risk management as they emerge during the assessment.</Text>
         }
         else {
-          preamble = <Text>Use this box to summarise your overall thoughts about the person's risk(s). Which ones need addressing? How quickly does action need to be taken? What past, present and persistent factors in the person's life are the main influences?</Text>
+          preamble = <Text style={styles.textpadd}>Use this box to summarise your overall thoughts about the person's risk(s). Which ones need addressing? How quickly does action need to be taken? What past, present and persistent factors in the person's life are the main influences?</Text>
         }
         modalcontent = (
-          <View>  
-            {preamble}        
-          <TextInput name="Answer"  multiline numberOfLines={4} style={styles.TextInputStyle} value={this.props.existing} onChangeText={(text) => { this.setState({ Input: text})}} />
-          <View style={styles.rack}><TouchableHighlight
+          <View>
+          <View style={this.styles.centeredView}>  
+            {preamble}                  
+          <TextInput name="Answer"  multiline style={this.styles.TextInputStyle} value={this.props.existing} onChangeText={(text) => { this.setState({ Input: text})}} />
+          <View style={styles.rack}>
+            <TouchableHighlight
             style={styles.openButton}
             onPress={() => {  
               this.props.setModalVisible(false)              
@@ -101,42 +103,15 @@ export default class AssessmentModal extends React.Component{
           </TouchableHighlight>
           </View>
           </View>
+          </View>
         )     
       break
-      case "judgement":
-        modalcontent = (
-          <View>          
-           <Text>TESTING TESTING PLEASE RESPOND</Text>      
-          <View style={styles.rack}>
-          <TouchableHighlight style={styles.openButton}
-            onPress={() => {                  
-              this.props.setModalVisible(false)              
-            }}>
-            <Text style={styles.textStyle}>Go Back</Text>
-          </TouchableHighlight>
-          </View>
-          </View>
-        )
-      break
-      case "preview":
-        modalcontent = (
-          <View>          
-           <Text>TESTING TESTING PLEASE RESPOND</Text>      
-          <View style={styles.rack}>
-          <TouchableHighlight style={styles.openButton}
-            onPress={() => {                  
-              this.props.setModalVisible(false)              
-            }}>
-            <Text style={styles.textStyle}>Go Back</Text>
-          </TouchableHighlight>
-          </View>
-          </View>
-        )
-      break
+      case "judgement":      
+      case "preview":        
       default:
         modalcontent = (
-          <View>          
-           <Text>An error has occured during the loading process or this feature is yet to be implemented, please consult the help documentation or get in touch using our online website.</Text>      
+          <View style={this.styles.centeredView}>          
+           <Text style={styles.textpadd}>An error has occured during the loading process or this feature is yet to be implemented, please consult the help documentation or get in touch using our online website.</Text>      
           <View style={styles.rack}>
           <TouchableHighlight style={styles.openButton}
             onPress={() => {                  
@@ -156,8 +131,8 @@ export default class AssessmentModal extends React.Component{
         transparent={true}
         visible={this.props.modalVisible}
         //when the modal is closed provide an alert for the modal closing to the user
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
+        onRequestClose={() => {          
+          this.props.setModalVisible(false);
         }}
       >
         <View style={styles.centeredView}>
@@ -165,6 +140,7 @@ export default class AssessmentModal extends React.Component{
             <Text style={styles.modalText}>{this.props.title}</Text>
             {modalcontent}
           </View>
+          
         </View>
       </Modal>
       </View>
@@ -175,11 +151,11 @@ styles = StyleSheet.create({
   centeredView: {    
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22
+    marginTop: 15,
+    minWidth:'90%', 
   },
   modalView: {
-    minWidth:'90%',
-    maxHeight:'100%',                
+    minWidth:'90%',                    
     borderWidth:2,
     marginHorizontal: '5%',
     backgroundColor: Colors.White.color,
@@ -206,6 +182,9 @@ styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center"
   },
+  textpadd:{
+    paddingHorizontal: 10
+  },  
   modalText: {
     color:Colors.LightGreen.color,
     marginBottom: 15,
@@ -217,14 +196,15 @@ styles = StyleSheet.create({
     borderWidth: 3,
     padding: 10,
     color: Colors.Black.color,        
-    minWidth: '75%',
-    height:'20%',
+    width: '75%',
+    maxHeight: '50%' ,  
     backgroundColor: Colors.White.color,
-    flex:1   
+    flex:1 ,
+    padding:30  
 
 },
 rack:{
-  flex:1, alignItems: 'center', flexDirection:'row', alignContent:'center',justifyContent:'center', backgroundColor: "#111111",borderWidth:2,
+  flex:1, alignItems: 'center', flexDirection:'row', alignContent:'center',justifyContent:'center', backgroundColor: "#111111",borderWidth:2,width:'75%',height: '60%'
 }
 })
 }

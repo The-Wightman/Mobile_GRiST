@@ -32,7 +32,9 @@ export default class AssessmentHeader extends React.Component {
             username: "David Wightman",
             modalVisible: false,
             modalType: "",
-            modalTitle: ""
+            modalTitle: "",
+            formulation: "",
+            safetyPlan: ""
         }        
         
     }
