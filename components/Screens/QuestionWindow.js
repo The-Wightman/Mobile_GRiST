@@ -23,17 +23,28 @@ import AssessmentHeader from '../Sub-Comps/Navigation/AssesmentHeader'
 import {Colors,Spacing} from '../../Styles/index'
 import QuestionBoxTemplate from '../Sub-Comps/QuestionComponents/QuestionBoxes'
 import QuestionSet from '../Sub-Comps/QuestionComponents/QuestionNodes'
-import QuestionBox from '../Sub-Comps/QuestionComponents/QuestionBoxes';
+import QuestionBox from '../Sub-Comps/QuestionComponents/QuestionBoxes'
+import workingage_xml_structure from '../Sub-Comps/QuestionComponents/Questionorder'
 
 export default class QuestionWindow extends Component{ 
   constructor(props) {
     super(props);
+
+    var XMLParser = require('react-xml-parser');
+    var xmlObj = new XMLParser().parseFromString(workingage_xml_structure);  
+    var IntialQuestions= ""; 
+    console.log(xmlObj);
+    console.log(xmlObj.children)
+    xmlObj.children.map((question) => <QuestionBox key={question.attributes} {...question}/>)
     
+    
+
   }
-  
   render() {   
      let assessmentboxes = QuestionSet.slice(0,10).map((question) => <QuestionBox key={question.code} {...question}/>);
-     
+       
+             
+
         return(
           <View>          
           <AssessmentHeader/> 
