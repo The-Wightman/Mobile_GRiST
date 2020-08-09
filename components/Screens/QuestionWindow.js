@@ -55,7 +55,8 @@ getIntialQuestions(){
 UpdateCurrentQuestions(Code){
   var xml = new this.state.XMLParser().parseFromString(workingage_xml_structure); 
   console.log(Code)
-  var AnsweredNodeTree = xml.getElementsByTagName(Code)
+  var stringCode = Code + ""
+  var AnsweredNodeTree = xml.children.
   console.log(AnsweredNodeTree)
   var questionstructure = this.state.questionstructure
   var parentlayer = questionstructure.Code
@@ -91,7 +92,8 @@ UpdateCurrentQuestions(Code){
     } 
     console.log(questionstructure)
     return [generatedBoxes,questionstructure]
-   }    
+   }  
+
 
 
   render() {       
