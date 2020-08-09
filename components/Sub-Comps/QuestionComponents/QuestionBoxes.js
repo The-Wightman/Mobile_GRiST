@@ -41,8 +41,9 @@ export default class QuestionBox extends React.Component{
             dkBool: false,
             actionModal:false,
             commentModal:false,          
-            Qcode:""       
+            Qcode:this.props.code      
               }
+              
               
             
     }
@@ -90,8 +91,14 @@ export default class QuestionBox extends React.Component{
     //set the answer for this question type to the given user value.
     UpdateAnswer(Answer){
         this.setState({Answer: Answer})
+       this.callparentfunction()
         
     }
+    callparentfunction(){
+        this.props.UpdateCurrentQuestions(this.props.code)
+        }
+        
+    
     //Switch statement for overwriting the answers provided, expressly verbose due to having to give a new form to all elements for the visual display to update.
     checkboxAnswer(Answer){
         switch(Answer){

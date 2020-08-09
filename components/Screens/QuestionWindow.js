@@ -32,6 +32,7 @@ export default class QuestionWindow extends Component{
     this.state = {
       visibleQuestions: null,
       XMLParser: require('react-xml-parser'),
+      XMLDocument: "",
       questionstructure: {}
     }
     
@@ -40,32 +41,58 @@ componentDidMount(){
   var response = this.getIntialQuestions()
   this.setState({visibleQuestions : response[0],questionstructure: response[1]});
 }
-UpdateCurrentQuestions(Code){
-  var xml = new this.state.XMLParser()
-  var AnsweredNodeTree = xml.getElementsByTagName('Name')
-  return null
-
-}
 getIntialQuestions(){  
-  var xmlObj = new this.state.XMLParser().parseFromString(workingage_xml_structure);  
+  var xmlObj = new this.state.XMLParser().parseFromString(workingage_xml_structure); 
+  this.setState({XMLDocument: xmlObj}) 
   var InitialQuestions = "";
-  var assessmentboxes2 = []
+  var BoxStructure = []
   var questionstructure = {}           
   InitialQuestions = xmlObj.children.map((question) => question.attributes.code)  
-  for(let entry of InitialQuestions){
-    assessmentboxes2.push(this.filterByValue(QuestionSet,entry))
-  }
-  for(let x=0;x<assessmentboxes2.length;x++){
-    assessmentboxes2[x] = <QuestionBox key={assessmentboxes2[x][0].code} {...assessmentboxes2[x][0]}/>
-  }      
-  return [assessmentboxes2,questionstructure]
+  BoxStructure = this.XMLtoQuestion(InitialQuestions,questionstructure)     
+  return [BoxStructure[0],BoxStructure[1]]
   
+}
+UpdateCurrentQuestions(Code){
+  var xml = new this.state.XMLParser().parseFromString(workingage_xml_structure); 
+  console.log(Code)
+  var AnsweredNodeTree = xml.getElementsByTagName(Code)
+  console.log(AnsweredNodeTree)
+  var questionstructure = this.state.questionstructure
+  var parentlayer = questionstructure.Code
+  var newQuestions = AnsweredNodeTree.children.map((question) => question.attributes.Code)
+  newBoxes = this.XMLtoQuestion(newQuestions,questionstructure,parentlayer)
+  
+  var arr = questionstructure.getOwnPropertyNames(x)
+
+
+  this.setState({visibleQuestions : newBoxes[0],questionstructure: newBoxes[1]});
+  //for (var key in arr) {   
+  //  
+  //}
+  //return null
+
 }
   filterByValue(array, string) {
     return array.filter(o =>
         Object.keys(o).some(k => o[k].toLowerCase() == string));
-        
-}
+    }
+   XMLtoQuestion(questioncodes,givenstructure,curlayer){
+     if (curlayer == null){
+       curlayer = 1
+     }
+     let questionstructure = givenstructure
+    let generatedBoxes =[]
+    for(let entry of questioncodes){
+      generatedBoxes.push(this.filterByValue(QuestionSet,entry))
+    }
+    for(let x=0;x<generatedBoxes.length;x++){
+      questionstructure[generatedBoxes[x][0].code] = curlayer + "." + x + "."
+      generatedBoxes[x] = <QuestionBox key={generatedBoxes[x][0].code} UpdateCurrentQuestions={this.UpdateCurrentQuestions.bind(this)} {...generatedBoxes[x][0]} />
+    } 
+    console.log(questionstructure)
+    return [generatedBoxes,questionstructure]
+   }    
+
 
   render() {       
      let assessmentboxes = this.state.visibleQuestions 
