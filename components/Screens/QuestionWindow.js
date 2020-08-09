@@ -93,7 +93,8 @@ UpdateCurrentQuestions(Code){
     console.log(questionstructure)
     return [generatedBoxes,questionstructure]
    }  
-
+   XMLRestructurer(XMLobject)
+    Var 
 
 
   render() {       
