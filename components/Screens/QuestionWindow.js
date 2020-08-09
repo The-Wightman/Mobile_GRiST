@@ -28,24 +28,48 @@ import workingage_xml_structure from '../Sub-Comps/QuestionComponents/Questionor
 
 export default class QuestionWindow extends Component{ 
   constructor(props) {
-    super(props);
-
-    var XMLParser = require('react-xml-parser');
-    var xmlObj = new XMLParser().parseFromString(workingage_xml_structure);  
-    var IntialQuestions= ""; 
-    console.log(xmlObj);
-    console.log(xmlObj.children)
-    xmlObj.children.map((question) => <QuestionBox key={question.attributes} {...question}/>)
+    super(props);   
+    this.state = {
+      visibleQuestions: null,
+      XMLParser: require('react-xml-parser'),
+      questionstructure: {}
+    }
     
-    
+}
+componentDidMount(){
+  var response = this.getIntialQuestions()
+  this.setState({visibleQuestions : response[0],questionstructure: response[1]});
+}
+UpdateCurrentQuestions(Code){
+  var xml = new this.state.XMLParser()
+  var AnsweredNodeTree = xml.getElementsByTagName('Name')
+  return null
 
+}
+getIntialQuestions(){  
+  var xmlObj = new this.state.XMLParser().parseFromString(workingage_xml_structure);  
+  var InitialQuestions = "";
+  var assessmentboxes2 = []
+  var questionstructure = {}           
+  InitialQuestions = xmlObj.children.map((question) => question.attributes.code)  
+  for(let entry of InitialQuestions){
+    assessmentboxes2.push(this.filterByValue(QuestionSet,entry))
   }
-  render() {   
-     let assessmentboxes = QuestionSet.slice(0,10).map((question) => <QuestionBox key={question.code} {...question}/>);
-       
-             
+  for(let x=0;x<assessmentboxes2.length;x++){
+    assessmentboxes2[x] = <QuestionBox key={assessmentboxes2[x][0].code} {...assessmentboxes2[x][0]}/>
+  }      
+  return [assessmentboxes2,questionstructure]
+  
+}
+  filterByValue(array, string) {
+    return array.filter(o =>
+        Object.keys(o).some(k => o[k].toLowerCase() == string));
+        
+}
 
-        return(
+  render() {       
+     let assessmentboxes = this.state.visibleQuestions 
+         return(
           <View>          
           <AssessmentHeader/> 
           <View style={{flex:1, Height:'auto'}} >
