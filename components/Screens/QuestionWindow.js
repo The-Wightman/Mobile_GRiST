@@ -47,54 +47,67 @@ getIntialQuestions(){
   var InitialQuestions = "";
   var BoxStructure = []
   var questionstructure = {}           
-  InitialQuestions = xmlObj.children.map((question) => question.attributes.code)  
-  BoxStructure = this.XMLtoQuestion(InitialQuestions,questionstructure)     
+  InitialQuestions = xmlObj.children.map((question) => question.attributes.code)
+  var labels = xmlObj.children.map((question) => question.attributes.label)  
+  BoxStructure = this.XMLtoQuestion(InitialQuestions,questionstructure,null,labels)     
   return [BoxStructure[0],BoxStructure[1]]
   
 }
 UpdateCurrentQuestions(Code){
-  var xml = new this.state.XMLParser().parseFromString(workingage_xml_structure); 
-  console.log(Code)
-  var stringCode = Code + ""
-  var AnsweredNodeTree = xml.children.
+  var XMLParser = require('react-xml-parser');  
+  var xml = new XMLParser().parseFromString(workingage_xml_structure);   
+  var AnsweredNodeTree = this.XMLRestructurer(xml,Code) 
   console.log(AnsweredNodeTree)
   var questionstructure = this.state.questionstructure
   var parentlayer = questionstructure.Code
-  var newQuestions = AnsweredNodeTree.children.map((question) => question.attributes.Code)
-  newBoxes = this.XMLtoQuestion(newQuestions,questionstructure,parentlayer)
+  var newQuestions = AnsweredNodeTree.children.map((question) => question.attributes.code)
+  var labels = AnsweredNodeTree.children.map((question) => question.attributes.label)
+  var newBoxes = this.XMLtoQuestion(newQuestions,questionstructure,parentlayer,labels)  
+  this.state.visibleQuestions.push(newBoxes[0]) 
+
+  this.setState({questionstructure: newBoxes[1]});
   
-  var arr = questionstructure.getOwnPropertyNames(x)
-
-
-  this.setState({visibleQuestions : newBoxes[0],questionstructure: newBoxes[1]});
-  //for (var key in arr) {   
-  //  
-  //}
-  //return null
 
 }
   filterByValue(array, string) {
     return array.filter(o =>
-        Object.keys(o).some(k => o[k].toLowerCase() == string));
+        Object.keys(o).find(k => o[k].toLowerCase() == string));
     }
-   XMLtoQuestion(questioncodes,givenstructure,curlayer){
+   XMLtoQuestion(questioncodes,givenstructure,curlayer,labels){
      if (curlayer == null){
        curlayer = 1
      }
-     let questionstructure = givenstructure
+    let questionstructure = givenstructure
     let generatedBoxes =[]
     for(let entry of questioncodes){
-      generatedBoxes.push(this.filterByValue(QuestionSet,entry))
+      generatedBoxes.push(this.filterByValue(QuestionSet,entry))      
     }
+    console.log(generatedBoxes)
     for(let x=0;x<generatedBoxes.length;x++){
+      if(generatedBoxes[x] != 0){
       questionstructure[generatedBoxes[x][0].code] = curlayer + "." + x + "."
       generatedBoxes[x] = <QuestionBox key={generatedBoxes[x][0].code} UpdateCurrentQuestions={this.UpdateCurrentQuestions.bind(this)} {...generatedBoxes[x][0]} />
+      }
+      else{
+        generatedBoxes[x] = <QuestionBox UpdateCurrentQuestions={this.UpdateCurrentQuestions.bind(this)} code={questioncodes[x]} question={"Answer detailed questions on " + labels[x] + " now?"}/>
+      }
     } 
-    console.log(questionstructure)
+    console.log(generatedBoxes)
     return [generatedBoxes,questionstructure]
    }  
-   XMLRestructurer(XMLobject)
-    Var 
+   XMLRestructurer(object,code){
+    if (object.attributes.code == code) {
+        return object;
+    } else {
+        for (var child of object.children) {
+            var objWithCode = this.XMLRestructurer(child, code);
+            if (!!objWithCode) {
+                return objWithCode;
+            }
+        }
+        return {}
+    }
+} 
 
 
   render() {       

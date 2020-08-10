@@ -123,7 +123,7 @@ export default class QuestionBox extends React.Component{
                 this.state.dkBool = false
         }
         //once switch statement finished and the variables are in the correct states update the actual state answer.
-        this.setState({Answer: Answer})
+       this.UpdateAnswer(Answer)
         
     }
     //function for disp,laying the constructed component
@@ -211,6 +211,13 @@ export default class QuestionBox extends React.Component{
                 )       
             break;
             default:
+                Inputtype = (
+                    <View style={styles.checkboxContainer}>
+                    <CheckBox  title='Yes' checked={this.state.yesBool} checkedIcon='dot-circle-o'  uncheckedIcon='circle-o'  checkedColor={Colors.DarkGreen.color} onPress={() => this.checkboxAnswer("YES" )}/>
+                    <CheckBox  title='No' checked={this.state.noBool} checkedIcon='dot-circle-o'  uncheckedIcon='circle-o'  checkedColor={Colors.DarkGreen.color} onPress={() => this.checkboxAnswer("NO" )}/>
+                    <CheckBox  title='Dont Know' checked={this.state.dkBool}  checkedIcon='dot-circle-o'  uncheckedIcon='circle-o'  checkedColor={Colors.DarkGreen.color}onPress={() => this.checkboxAnswer("DK")}/>
+                    </View>
+                )     
         }     
         
            
