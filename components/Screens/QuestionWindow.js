@@ -42,7 +42,8 @@ componentDidMount(){
   this.setState({visibleQuestions : response[0],questionstructure: response[1]});
 }
 getIntialQuestions(){  
-  var xmlObj = new this.state.XMLParser().parseFromString(workingage_xml_structure); 
+  var xmlObj = new this.state.XMLParser().parseFromString(workingage_xml_structure);
+  console.log(xmlObj) 
   this.setState({XMLDocument: xmlObj}) 
   var InitialQuestions = "";
   var BoxStructure = []
@@ -53,10 +54,8 @@ getIntialQuestions(){
   return [BoxStructure[0],BoxStructure[1]]
   
 }
-UpdateCurrentQuestions(Code){
-  var XMLParser = require('react-xml-parser');  
-  var xml = new XMLParser().parseFromString(workingage_xml_structure);   
-  var AnsweredNodeTree = this.XMLRestructurer(xml,Code) 
+UpdateCurrentQuestions(Code){     
+  var AnsweredNodeTree = this.XMLRestructurer(this.state.XMLDocument,Code) 
   console.log(AnsweredNodeTree)
   var questionstructure = this.state.questionstructure
   var parentlayer = questionstructure.Code
@@ -82,7 +81,7 @@ UpdateCurrentQuestions(Code){
     for(let entry of questioncodes){
       generatedBoxes.push(this.filterByValue(QuestionSet,entry))      
     }
-    console.log(generatedBoxes)
+    //console.log(generatedBoxes)
     for(let x=0;x<generatedBoxes.length;x++){
       if(generatedBoxes[x] != 0){
       questionstructure[generatedBoxes[x][0].code] = curlayer + "." + x + "."
@@ -92,16 +91,20 @@ UpdateCurrentQuestions(Code){
         generatedBoxes[x] = <QuestionBox UpdateCurrentQuestions={this.UpdateCurrentQuestions.bind(this)} code={questioncodes[x]} question={"Answer detailed questions on " + labels[x] + " now?"}/>
       }
     } 
-    console.log(generatedBoxes)
+    //console.log(generatedBoxes)
     return [generatedBoxes,questionstructure]
-   }  
-   XMLRestructurer(object,code){
-    if (object.attributes.code == code) {
+   }
+   isObjectEmpty(obj){
+    return Object.getOwnPropertyNames(obj).length >= 1
+ }  
+   XMLRestructurer(object,Code){
+    if (object.attributes.code == Code) {
         return object;
-    } else {
-        for (var child of object.children) {
-            var objWithCode = this.XMLRestructurer(child, code);
-            if (!!objWithCode) {
+    } else {      
+        for (var child of object.children) {                    
+            var objWithCode = this.XMLRestructurer(child, Code);
+          
+            if (this.isObjectEmpty(objWithCode)) {
                 return objWithCode;
             }
         }

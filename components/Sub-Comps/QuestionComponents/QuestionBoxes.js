@@ -91,7 +91,7 @@ export default class QuestionBox extends React.Component{
     //set the answer for this question type to the given user value.
     UpdateAnswer(Answer){
         this.setState({Answer: Answer})
-       this.callparentfunction()
+        this.callparentfunction()
         
     }
     callparentfunction(){
@@ -143,7 +143,7 @@ export default class QuestionBox extends React.Component{
                <Slider
                //pull the current answer from the previous answer if it exists.
                value={this.props.prev}
-               onValueChange={value => this.UpdateAnswer(value)}
+               onSlidingComplete={value => this.UpdateAnswer(value)}
                minimumValue={0}
                maximumValue={10}
                step={1} 
@@ -230,6 +230,7 @@ export default class QuestionBox extends React.Component{
         }      
         //once the component has benn set up return it to be displayed by the screen.
         return(
+            
             <View style={{paddingVertical:6}}>
             <View style={styles.mainContainer}>
            
