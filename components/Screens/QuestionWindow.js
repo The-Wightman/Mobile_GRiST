@@ -77,9 +77,7 @@ UpdateCurrentQuestions(Code){
      if (curlayer == null){
        curlayer = 1
      }
-    let reducedcodes = []
-    console.log(questioncodes)
-    console.log(givenstructure)  
+    let reducedcodes = []    
     let structurekeys = Object.keys(givenstructure)      
     if (Array.isArray(structurekeys) && structurekeys.length > 0){
     for(let x=0;x<questioncodes.length;x++){
@@ -87,8 +85,7 @@ UpdateCurrentQuestions(Code){
           reducedcodes.push(questioncodes[x])
           
         }
-    }
-    console.log(reducedcodes)
+    }    
     questioncodes = reducedcodes
     }
     let questionstructure = givenstructure
