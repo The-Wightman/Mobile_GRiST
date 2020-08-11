@@ -31,6 +31,7 @@ export default class QuestionWindow extends Component{
     super(props);   
     this.state = {
       visibleQuestions: null,
+      visQuestObjects: null,
       XMLParser: require('react-xml-parser'),
       XMLDocument: "",
       questionstructure: {}
@@ -39,9 +40,13 @@ export default class QuestionWindow extends Component{
 }
 componentDidMount(){
   var response = this.getIntialQuestions()
-  this.setState({visibleQuestions : response[0],questionstructure: response[1]});
+  console.log(response[0])
+  console.log(response[2])
+  this.setState({visibleQuestions : response[0],questionstructure: response[1], visQuestObjects: response[2]});
+  console.log(this.state.visQuestObjects)
 }
 getIntialQuestions(){  
+  console.log("NEW RUN")
   var xmlObj = new this.state.XMLParser().parseFromString(workingage_xml_structure);
   //console.log(xmlObj) 
   this.setState({XMLDocument: xmlObj}) 
@@ -50,24 +55,49 @@ getIntialQuestions(){
   var questionstructure = {}           
   InitialQuestions = xmlObj.children.map((question) => question.attributes.code)
   var labels = xmlObj.children.map((question) => question.attributes.label)  
-  BoxStructure = this.XMLtoQuestion(InitialQuestions,questionstructure,null,labels)     
-  return [BoxStructure[0],BoxStructure[1]]
+  BoxStructure = this.XMLtoQuestion(InitialQuestions,questionstructure,null,labels) 
+  var preSortBoxes = [...BoxStructure[0]]
+  console.log(preSortBoxes) 
+  for(let x=0;x<BoxStructure[0].length;x++){ 
+    BoxStructure[0][x] = BoxStructure[0][x].Question 
+  }
+  return [BoxStructure[0],BoxStructure[1],preSortBoxes]
   
 }
 UpdateCurrentQuestions(Code){     
   var AnsweredNodeTree = this.XMLRestructurer(this.state.XMLDocument,Code) 
   //console.log(AnsweredNodeTree)
   var questionstructure = this.state.questionstructure
-  var parentlayer = questionstructure.Code
+  var parentlayer = questionstructure[Code]
+  //console.log(parentlayer)
   var newQuestions = AnsweredNodeTree.children.map((question) => question.attributes.code)
   var labels = AnsweredNodeTree.children.map((question) => question.attributes.label)
-  var newBoxes = this.XMLtoQuestion(newQuestions,questionstructure,parentlayer,labels)  
-  this.state.visibleQuestions.push(newBoxes[0])   
-  this.setState({questionstructure: newBoxes[1]});
-  var testset = [...new Set(this.state.visibleQuestions)]
-  console.log(testset)
-  
+  var newBoxes = this.XMLtoQuestion(newQuestions,questionstructure,parentlayer,labels) 
+  //console.log(this.state.visQuestObjects)
+  var oldBoxes = this.state.visQuestObjects
+  var allBoxes = oldBoxes.concat(newBoxes[0])
+ this.setState({questionstructure: newBoxes[1]})
+  let structurekeys = Object.values(newBoxes[1])
+  structurekeys.sort()  
+ ;
+  //console.log(this.state.visibleQuestions)
+  console.log(structurekeys)
+  console.log(allBoxes)
+  //console.log(testset)
+  let sortedquestions = []
+  for(let x=0;x<structurekeys.length;x++){ 
+    sortedquestions[x] = this.searchforKey(structurekeys[x],allBoxes)     
+  }
+ // console.log(sortedquestions)
+  this.setState({visibleQuestions: sortedquestions,visQuestObjects:allBoxes});
 
+}
+searchforKey(nameKey, myArray){
+  for (var i=0; i < myArray.length; i++) {
+      if (myArray[i].key === nameKey) {
+          return myArray[i].Question;
+      }
+  }
 }
   filterByValue(array, string) {
     return array.filter(o =>
@@ -98,15 +128,15 @@ UpdateCurrentQuestions(Code){
     for(let x=0;x<generatedBoxes.length;x++){      
      
       if(generatedBoxes[x] != 0){
-      questionstructure[generatedBoxes[x][0].code] = curlayer + "." + x + "."
-      generatedBoxes[x] = <QuestionBox key={generatedBoxes[x][0].code} UpdateCurrentQuestions={this.UpdateCurrentQuestions.bind(this)} {...generatedBoxes[x][0]} />
+      questionstructure[generatedBoxes[x][0].code] = curlayer + "0" + x
+      generatedBoxes[x] = {key:curlayer + "0" + x, Question: <QuestionBox key={generatedBoxes[x][0].code} UpdateCurrentQuestions={this.UpdateCurrentQuestions.bind(this)} {...generatedBoxes[x][0]} />}
       }
       else{
-        questionstructure[questioncodes[x]] = curlayer + "." + x + "."
-        generatedBoxes[x] = <QuestionBox UpdateCurrentQuestions={this.UpdateCurrentQuestions.bind(this)} code={questioncodes[x]} question={"Answer detailed questions on " + labels[x] + " now?"}/>
+        questionstructure[questioncodes[x]] = curlayer + "0" + x
+        generatedBoxes[x] = {key: curlayer + "0" + x, Question: <QuestionBox UpdateCurrentQuestions={this.UpdateCurrentQuestions.bind(this)} code={questioncodes[x]} question={"Answer further questions on " + labels[x] + " now?"}/>}
       }
     }
-    //console.log(generatedBoxes)
+    
     return [generatedBoxes,questionstructure]
   
    }
@@ -130,9 +160,7 @@ UpdateCurrentQuestions(Code){
 } 
 
 
-  render() {   
-    //console.log(this.state.questionstructure)
-    //console.log(this.state.visibleQuestions)    
+  render() {         
      let assessmentboxes = this.state.visibleQuestions 
          return(
           <View>          
