@@ -25,6 +25,7 @@ import QuestionBoxTemplate from '../Sub-Comps/QuestionComponents/QuestionBoxes'
 import QuestionSet from '../Sub-Comps/QuestionComponents/QuestionNodes'
 import QuestionBox from '../Sub-Comps/QuestionComponents/QuestionBoxes'
 import workingage_xml_structure from '../Sub-Comps/QuestionComponents/Questionorder'
+import * as ClientControls from '../Sub-Comps/userOutline'
 
 export default class QuestionWindow extends Component{ 
   constructor(props) {
@@ -34,7 +35,8 @@ export default class QuestionWindow extends Component{
       visQuestObjects: null,
       XMLParser: require('react-xml-parser'),
       XMLDocument: "",
-      questionstructure: {}
+      questionstructure: {},
+      userAnswers: {}
     }
     
 }
@@ -43,14 +45,34 @@ componentDidMount(){
   this.setState({visibleQuestions : response[0],questionstructure: response[1], visQuestObjects: response[2]});
   
 }
-answerHandler(Type){
+  submitAnswer(code,Array){   
+      let updatedAnswers = this.state.userAnswers  // creating copy of state variable jasper
+      updatedAnswers[code] = Array;                // update the name property, assign a new value                 
+      this.setState({userAnswers: updatedAnswers}) // return new object jasper object
+    
+}
+async answerHandler(Type){
+  let getuser = await ClientControls._getClient()
+  let getAssessments = await ClientControls._getAssessArray(getuser.current_user.uid) 
+  let storedAnswers = {...this.state.userAnswers}
+  console.log(storedAnswers)
+  console.log(getAssessments)
+  //in the even the user has no locally stored assessments then we must create the master array and wrap the first assessment with it.
+  if(getAssessments == null){
+    storedAnswers = [storedAnswers]
+  } else{
+  storedAnswers = getAssessments.push(storedAnswers)
+  }
   switch(Type){
     case "save":
+      await ClientControls._storeAssessArray(getuser.current_user.uid,storedAnswers)
       break
     case "suspend":
+      await ClientControls._storeAssessArray(getuser.current_user.uid,storedAnswers)
       this.props.closeWindow()
         break
     case "finish":
+      await ClientControls._storeAssessArray(getuser.current_user.uid,storedAnswers)
       this.props.closeWindow()
         break
     default:
@@ -131,11 +153,11 @@ searchforKey(nameKey, myArray){
      
       if(generatedBoxes[x] != 0){
       questionstructure[generatedBoxes[x][0].code] = curlayer + "0" + x
-      generatedBoxes[x] = {key:curlayer + "0" + x, Question: <QuestionBox key={generatedBoxes[x][0].code} UpdateCurrentQuestions={this.UpdateCurrentQuestions.bind(this)} {...generatedBoxes[x][0]} />}
+      generatedBoxes[x] = {key:curlayer + "0" + x, Question: <QuestionBox key={generatedBoxes[x][0].code}  submitAnswers={this.submitAnswer.bind(this)} UpdateCurrentQuestions={this.UpdateCurrentQuestions.bind(this)} {...generatedBoxes[x][0]} />}
       }
       else{
         questionstructure[questioncodes[x]] = curlayer + "0" + x
-        generatedBoxes[x] = {key: curlayer + "0" + x, Question: <QuestionBox  key={questioncodes[x]} UpdateCurrentQuestions={this.UpdateCurrentQuestions.bind(this)} code={questioncodes[x]} question={"Answer further questions on " + labels[x] + " now?"}/>}
+        generatedBoxes[x] = {key: curlayer + "0" + x, Question: <QuestionBox  key={questioncodes[x]}   submitAnswers={this.submitAnswer.bind(this)} UpdateCurrentQuestions={this.UpdateCurrentQuestions.bind(this)} code={questioncodes[x]} question={"Answer further questions on " + labels[x] + " now?"}/>}
       }
     }
     
@@ -163,7 +185,7 @@ searchforKey(nameKey, myArray){
 
 
   render() {      
-    console.log(this.props.children)   
+       
      let assessmentboxes = this.state.visibleQuestions 
          return(
           <View>          

@@ -96,11 +96,13 @@ export default class QuestionBox extends React.Component{
     }
     callparentfunction(){
         this.props.UpdateCurrentQuestions(this.props.code)
+        this.props.submitAnswers(this.state.Qcode,this.returnAnswers())
         }
         
     returnAnswers(){
         if(this.state.Answer !== "" || this.state.Action !== "" || this.state.Comment !== ""){
-            return [this.props.code,this.state.Answer,this.state.Action, this.state.Comment]
+            let qinfo = [this.state.Answer,this.state.Action, this.state.Comment]
+            return qinfo
         }
     }
     //Switch statement for overwriting the answers provided, expressly verbose due to having to give a new form to all elements for the visual display to update.
@@ -138,35 +140,13 @@ export default class QuestionBox extends React.Component{
         switch(this.props.values){
             // if the question type is scaler it requires a slider to allow for input. 
             case "scale":
-            case "layer":                 
-            //create a custom inputype object with a slider.
-            //assign the values for the scale and question information from the XML node in the props object.
-            Inputtype = (
-            <View>    
-            <View style={{ flex: 1, alignItems: 'stretch', justifyContent: 'center',paddingHorizontal: 20,paddingVertical:20 }}>
-               <Slider
-               //pull the current answer from the previous answer if it exists.
-               value={this.props.prev}
-               onSlidingComplete={value => this.UpdateAnswer(value)}
-               minimumValue={0}
-               maximumValue={10}
-               step={1} 
-               animateTransitions={true} 
-               thumbTintColor={Colors.DarkGreen.color}              
-               />
-            </View>
-           <View style={styles.scaleLabel}>
-           <Text style={styles.TextStyle}>{this.props.leftlabel}</Text>
-           <Text style={styles.TextStyle}>Current Answer: {this.state.Answer}</Text>
-           <Text style={styles.TextStyle}> {this.props.rightlabel}</Text>
-           </View>
-           </View>
-            )
+            case "layer": 
              //create a custom inputype object with a slider.
             //assign the values for the scale and question information from the XML node in the props object.
             Inputtype = (
                 <View>    
                 <View style={{ flex: 1, alignItems: 'stretch', justifyContent: 'center',paddingHorizontal: 20,paddingVertical:20 }}>
+                <Text style={styles.TextStyle}>Current Answer: {this.state.Answer}</Text>
                    <Slider
                    //pull the current answer from the previous answer if it exists.
                    value={this.props.prev}
@@ -180,7 +160,7 @@ export default class QuestionBox extends React.Component{
                 </View>
                <View style={styles.scaleLabel}>
                <Text style={styles.TextStyle}>0: {this.props.leftlabel}</Text>
-               <Text style={styles.TextStyle}>Current Answer: {this.state.Answer}</Text>
+              
                <Text style={styles.TextStyle}>10: {this.props.rightlabel}</Text>
                </View>
                </View>

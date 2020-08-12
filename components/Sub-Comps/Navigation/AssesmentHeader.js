@@ -177,9 +177,10 @@ export default class AssessmentHeader extends React.Component {
 //component specific styling
 const styles = StyleSheet.create({
     container: {                
-        height:'15%',
+        height:250,
         width:'100%',
-        backgroundColor: Colors.White.color      
+        backgroundColor: Colors.White.color 
+
     },     
     controller: {
         flex:1,
@@ -187,7 +188,8 @@ const styles = StyleSheet.create({
         alignSelf:'center',           
         flexDirection: 'column',
         width:'100%',        
-        backgroundColor: Colors.LightGreen.color
+        backgroundColor: Colors.LightGreen.color,
+        height: '50%'
     },
     Internal: {
         flex:1,

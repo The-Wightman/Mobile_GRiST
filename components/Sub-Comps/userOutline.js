@@ -56,6 +56,17 @@ export async function _storeClient(responseJson){
     }
     
   };
+   //function to clear currently stored user assesment information
+   export async function _clearAssessArray(UID){    
+    try {  
+      //wait for the Storage library to return from clearing the key value pair succesfully    
+      await AsyncStorage.removeItem(UserUID + 'Assessments');        
+      //catch issues and present them as an error to the user
+    } catch (error) {
+      alert(error)
+    } 
+
+  }
   
   //function to clear currently stored user session information
   export async function _clearClient(){    
