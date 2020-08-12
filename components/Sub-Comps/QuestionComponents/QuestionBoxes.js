@@ -98,7 +98,11 @@ export default class QuestionBox extends React.Component{
         this.props.UpdateCurrentQuestions(this.props.code)
         }
         
-    
+    returnAnswers(){
+        if(this.state.Answer !== "" || this.state.Action !== "" || this.state.Comment !== ""){
+            return [this.props.code,this.state.Answer,this.state.Action, this.state.Comment]
+        }
+    }
     //Switch statement for overwriting the answers provided, expressly verbose due to having to give a new form to all elements for the visual display to update.
     checkboxAnswer(Answer){
         switch(Answer){

@@ -134,7 +134,9 @@ export default class AssessmentHeader extends React.Component {
                 )
          }
          //the lower right quadrant is the same for all users as it oversees assesment handling such as leaving or saving progress.
+         if(this.props.type !== "Practice"){
          LowerRight = (
+             
             <View style={styles.Internal}>                
                 <TouchableOpacity style={styles.Buttons} onPress={() => console.log("save")}>
                     <Text style={styles.TextStyle}>Save</Text>
@@ -145,8 +147,11 @@ export default class AssessmentHeader extends React.Component {
                 <TouchableOpacity style={styles.Buttons} onPress={() => console.log("finish")}>
                     <Text style={styles.TextStyle}>Finish</Text>
                 </TouchableOpacity>
-            </View>
+            </View>             
             )
+         }else {
+             <View style={styles.Internal}></View>
+         }
             //take the loaded variables and return them as a render to the screen
         return(            
            <View style={styles.container} navigation={navigation}>
@@ -172,18 +177,16 @@ export default class AssessmentHeader extends React.Component {
 //component specific styling
 const styles = StyleSheet.create({
     container: {                
-        height: 250,
+        height:'15%',
         width:'100%',
-        backgroundColor: Colors.White.color
-        
+        backgroundColor: Colors.White.color      
     },     
     controller: {
         flex:1,
         justifyContent:"space-between",
         alignSelf:'center',           
         flexDirection: 'column',
-        width:'100%',
-        height:'50%',
+        width:'100%',        
         backgroundColor: Colors.LightGreen.color
     },
     Internal: {
@@ -192,9 +195,7 @@ const styles = StyleSheet.create({
         
         alignContent: 'center',                         
         flexDirection: 'row',
-        maxWidth:'100%',
-        height: '50%'
-        
+        maxWidth:'100%',                
 },
 Buttons:{ 
     borderWidth:1,
@@ -204,9 +205,9 @@ Buttons:{
     alignContent: 'center',
     alignItems: 'center',
     justifyContent: 'center',   
-    minWidth:'24%',
-    minHeight:'90%',
+    minWidth:'24%',    
     maxWidth:'25%',
+    maxHeight: 100,
     textAlign:'center'
 },
 HeadText: {

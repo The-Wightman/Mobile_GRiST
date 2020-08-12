@@ -39,16 +39,25 @@ export default class QuestionWindow extends Component{
     
 }
 componentDidMount(){
-  var response = this.getIntialQuestions()
-  console.log(response[0])
-  console.log(response[2])
+  var response = this.getIntialQuestions()  
   this.setState({visibleQuestions : response[0],questionstructure: response[1], visQuestObjects: response[2]});
-  console.log(this.state.visQuestObjects)
+  
+}
+answerHandler(Type){
+  switch(Type){
+    case "save":
+      break
+    case "suspend":
+        break
+    case "finish":
+        break
+    default:
+  }
+
 }
 getIntialQuestions(){  
   console.log("NEW RUN")
-  var xmlObj = new this.state.XMLParser().parseFromString(workingage_xml_structure);
-  //console.log(xmlObj) 
+  var xmlObj = new this.state.XMLParser().parseFromString(workingage_xml_structure);  
   this.setState({XMLDocument: xmlObj}) 
   var InitialQuestions = "";
   var BoxStructure = []
@@ -57,7 +66,7 @@ getIntialQuestions(){
   var labels = xmlObj.children.map((question) => question.attributes.label)  
   BoxStructure = this.XMLtoQuestion(InitialQuestions,questionstructure,null,labels) 
   var preSortBoxes = [...BoxStructure[0]]
-  console.log(preSortBoxes) 
+ 
   for(let x=0;x<BoxStructure[0].length;x++){ 
     BoxStructure[0][x] = BoxStructure[0][x].Question 
   }
@@ -66,29 +75,20 @@ getIntialQuestions(){
 }
 UpdateCurrentQuestions(Code){     
   var AnsweredNodeTree = this.XMLRestructurer(this.state.XMLDocument,Code) 
-  //console.log(AnsweredNodeTree)
   var questionstructure = this.state.questionstructure
   var parentlayer = questionstructure[Code]
-  //console.log(parentlayer)
   var newQuestions = AnsweredNodeTree.children.map((question) => question.attributes.code)
   var labels = AnsweredNodeTree.children.map((question) => question.attributes.label)
-  var newBoxes = this.XMLtoQuestion(newQuestions,questionstructure,parentlayer,labels) 
-  //console.log(this.state.visQuestObjects)
+  var newBoxes = this.XMLtoQuestion(newQuestions,questionstructure,parentlayer,labels)   
   var oldBoxes = this.state.visQuestObjects
   var allBoxes = oldBoxes.concat(newBoxes[0])
  this.setState({questionstructure: newBoxes[1]})
   let structurekeys = Object.values(newBoxes[1])
   structurekeys.sort()  
- ;
-  //console.log(this.state.visibleQuestions)
-  console.log(structurekeys)
-  console.log(allBoxes)
-  //console.log(testset)
   let sortedquestions = []
   for(let x=0;x<structurekeys.length;x++){ 
     sortedquestions[x] = this.searchforKey(structurekeys[x],allBoxes)     
   }
- // console.log(sortedquestions)
   this.setState({visibleQuestions: sortedquestions,visQuestObjects:allBoxes});
 
 }
@@ -133,7 +133,7 @@ searchforKey(nameKey, myArray){
       }
       else{
         questionstructure[questioncodes[x]] = curlayer + "0" + x
-        generatedBoxes[x] = {key: curlayer + "0" + x, Question: <QuestionBox UpdateCurrentQuestions={this.UpdateCurrentQuestions.bind(this)} code={questioncodes[x]} question={"Answer further questions on " + labels[x] + " now?"}/>}
+        generatedBoxes[x] = {key: curlayer + "0" + x, Question: <QuestionBox  key={questioncodes[x]} UpdateCurrentQuestions={this.UpdateCurrentQuestions.bind(this)} code={questioncodes[x]} question={"Answer further questions on " + labels[x] + " now?"}/>}
       }
     }
     
@@ -160,11 +160,12 @@ searchforKey(nameKey, myArray){
 } 
 
 
-  render() {         
+  render() {      
+    console.log(this.props.children)   
      let assessmentboxes = this.state.visibleQuestions 
          return(
           <View>          
-          <AssessmentHeader/> 
+          <AssessmentHeader type={this.props.FavAsstype}/> 
           <View style={{flex:1, Height:'auto'}} >
                   {assessmentboxes}
           </View>

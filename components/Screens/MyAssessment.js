@@ -116,7 +116,7 @@ export default class MyAssessment extends Component{
         buttonStyle={{ borderRadius: 8, marginLeft: 0, marginRight: 0, marginBottom: 10, backgroundColor:Colors.DarkGreen.color }}
         title='Close Assessment' onPress={() => this.UpdateSelection("Home")} />
         <ScrollView>
-          <Questionwindow/> 
+          <Questionwindow FavAsstype={this.state.CurrentOption}/> 
         </ScrollView>
              
       </Card>)        
@@ -129,7 +129,7 @@ export default class MyAssessment extends Component{
         buttonStyle={{ borderRadius: 8, marginLeft: 0, marginRight: 0, marginBottom: 10, backgroundColor:Colors.DarkGreen.color }}
         title='Close Assessment' onPress={() => this.UpdateSelection("Home")} />
         <ScrollView>
-          <Questionwindow/> 
+          <Questionwindow FavAsstype={this.state.CurrentOption}/> 
         </ScrollView>     
       </Card>)
     break;
