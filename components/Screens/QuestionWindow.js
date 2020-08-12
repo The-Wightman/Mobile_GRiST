@@ -48,8 +48,10 @@ answerHandler(Type){
     case "save":
       break
     case "suspend":
+      this.props.closeWindow()
         break
     case "finish":
+      this.props.closeWindow()
         break
     default:
   }
@@ -165,7 +167,7 @@ searchforKey(nameKey, myArray){
      let assessmentboxes = this.state.visibleQuestions 
          return(
           <View>          
-          <AssessmentHeader type={this.props.FavAsstype}/> 
+          <AssessmentHeader type={this.props.chosenAsstype} answerHandler={this.answerHandler.bind(this)}/> 
           <View style={{flex:1, Height:'auto'}} >
                   {assessmentboxes}
           </View>

@@ -138,13 +138,13 @@ export default class AssessmentHeader extends React.Component {
          LowerRight = (
              
             <View style={styles.Internal}>                
-                <TouchableOpacity style={styles.Buttons} onPress={() => console.log("save")}>
+                <TouchableOpacity style={styles.Buttons} onPress={() => this.props.answerHandler("save")}>
                     <Text style={styles.TextStyle}>Save</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.Buttons} onPress={() => console.log("suspend")}>
+                <TouchableOpacity style={styles.Buttons} onPress={() => this.props.answerHandler("suspend")}>
                     <Text style={styles.TextStyle}>Suspend</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.Buttons} onPress={() => console.log("finish")}>
+                <TouchableOpacity style={styles.Buttons} onPress={() => this.props.answerHandler("finish")}>
                     <Text style={styles.TextStyle}>Finish</Text>
                 </TouchableOpacity>
             </View>             
