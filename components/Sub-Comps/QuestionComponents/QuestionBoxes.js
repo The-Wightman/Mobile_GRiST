@@ -146,6 +146,12 @@ export default class QuestionBox extends React.Component{
             case "layer": 
              //create a custom inputype object with a slider.
             //assign the values for the scale and question information from the XML node in the props object.
+            let rLabel = this.props.rightlabel
+            let lLabel = this.props.leftlabel
+            if (rLabel == null || lLabel== null){
+                lLabel= "Low Concern"
+                rLabel = "High Concern"
+            }
             Inputtype = (
                 <View>    
                 <View style={{ flex: 1, alignItems: 'stretch', justifyContent: 'center',paddingHorizontal: 20,paddingVertical:20 }}>
@@ -162,9 +168,9 @@ export default class QuestionBox extends React.Component{
                    />
                 </View>
                <View style={styles.scaleLabel}>
-               <Text style={styles.TextStyle}>0: {this.props.leftlabel}</Text>
+               <Text style={styles.TextStyle}>0: {lLabel}</Text>
               
-               <Text style={styles.TextStyle}>10: {this.props.rightlabel}</Text>
+               <Text style={styles.TextStyle}>10: {rLabel}</Text>
                </View>
                </View>
                 )            
