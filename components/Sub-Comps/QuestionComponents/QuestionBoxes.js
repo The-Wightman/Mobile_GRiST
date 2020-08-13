@@ -89,13 +89,15 @@ export default class QuestionBox extends React.Component{
       }
     }
     //set the answer for this question type to the given user value.
-    UpdateAnswer(Answer){
-        this.setState({Answer: Answer})
-        this.callparentfunction()
-        
+    UpdateAnswer(givenAnswer){        
+        this.setState({Answer: givenAnswer},this.callparentfunction(givenAnswer));     
+               
     }
-    callparentfunction(){
-        this.props.UpdateCurrentQuestions(this.props.code)
+    callparentfunction(Answer){  
+        console.log(Answer)
+        if(!(Answer == "NO" || Answer == "DK" )){
+            this.props.UpdateCurrentQuestions(this.props.code)
+        }        
         this.props.submitAnswers(this.state.Qcode,this.returnAnswers())
         }
         
@@ -130,6 +132,7 @@ export default class QuestionBox extends React.Component{
         }
         //once switch statement finished and the variables are in the correct states update the actual state answer.
        this.UpdateAnswer(Answer)
+       
         
     }
     //function for disp,laying the constructed component
@@ -165,19 +168,7 @@ export default class QuestionBox extends React.Component{
                </View>
                </View>
                 )            
-            break;
-            //if the question is a checkbox question
-            //create a usable input type with the 3rd party checkbox and icon library.
-            case "nominal":
-                 //checked icon and unchecked icon denote the visual representation of the inputs, chosen as they closely match the online website version
-            Inputtype = (
-                <View style={styles.checkboxContainer}>
-                <CheckBox  title='Yes' checked={this.state.yesBool} checkedIcon='dot-circle-o'  uncheckedIcon='circle-o'  checkedColor={Colors.DarkGreen.color} onPress={() => this.checkboxAnswer("YES" )}/>
-                <CheckBox  title='No' checked={this.state.noBool} checkedIcon='dot-circle-o'  uncheckedIcon='circle-o'  checkedColor={Colors.DarkGreen.color} onPress={() => this.checkboxAnswer("NO" )}/>
-                <CheckBox  title='Dont Know' checked={this.state.dkBool}  checkedIcon='dot-circle-o'  uncheckedIcon='circle-o'  checkedColor={Colors.DarkGreen.color}onPress={() => this.checkboxAnswer("DK")}/>
-                </View>
-            )        
-            break;
+            break;            
             case "integer":
                 Inputtype = (
                     <View style={styles.IntegerBar}>
@@ -194,7 +185,11 @@ export default class QuestionBox extends React.Component{
                     </View>
                 )       
             break;
+            //if the question is a checkbox question or no type is given (filter and screening questions)
+            //create a usable input type with the 3rd party checkbox and icon library
+            case "nominal":
             default:
+                //checked icon and unchecked icon denote the visual representation of the inputs, chosen as they closely match the online website version
                 Inputtype = (
                     <View style={styles.checkboxContainer}>
                     <CheckBox  title='Yes' checked={this.state.yesBool} checkedIcon='dot-circle-o'  uncheckedIcon='circle-o'  checkedColor={Colors.DarkGreen.color} onPress={() => this.checkboxAnswer("YES" )}/>

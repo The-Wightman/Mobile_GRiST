@@ -26,6 +26,7 @@ import QuestionSet from '../Sub-Comps/QuestionComponents/QuestionNodes'
 import QuestionBox from '../Sub-Comps/QuestionComponents/QuestionBoxes'
 import workingage_xml_structure from '../Sub-Comps/QuestionComponents/Questionorder'
 import * as ClientControls from '../Sub-Comps/userOutline'
+import moment from 'moment';
 
 export default class QuestionWindow extends Component{ 
   constructor(props) {
@@ -54,25 +55,22 @@ componentDidMount(){
 async answerHandler(Type){
   let getuser = await ClientControls._getClient()
   let getAssessments = await ClientControls._getAssessArray(getuser.current_user.uid) 
-  let storedAnswers = {...this.state.userAnswers}
-  console.log(storedAnswers)
+  let storedAnswers = {...this.state.userAnswers} 
   console.log(getAssessments)
-  //in the even the user has no locally stored assessments then we must create the master array and wrap the first assessment with it.
-  if(getAssessments == null){
-    storedAnswers = [storedAnswers]
-  } else{
-  storedAnswers = getAssessments.push(storedAnswers)
-  }
+  console.log(storedAnswers) 
+  //in the even the user has no locally stored assessments then we must create the master array and wrap the first assessment with it.   
+  var date = moment().utcOffset('+1.00').format('YYYY-MM-DD hh:mm:ss a');
+  getAssessments[date] = storedAnswers
   switch(Type){
     case "save":
-      await ClientControls._storeAssessArray(getuser.current_user.uid,storedAnswers)
+      await ClientControls._storeAssessArray(getuser.current_user.uid,getAssessments)
       break
     case "suspend":
-      await ClientControls._storeAssessArray(getuser.current_user.uid,storedAnswers)
+      await ClientControls._storeAssessArray(getuser.current_user.uid,getAssessments)
       this.props.closeWindow()
         break
     case "finish":
-      await ClientControls._storeAssessArray(getuser.current_user.uid,storedAnswers)
+      await ClientControls._storeAssessArray(getuser.current_user.uid,getAssessments)
       this.props.closeWindow()
         break
     default:
