@@ -27,7 +27,7 @@ export default function ValidateLogin(UserID,Email,Password,action) {
         if (PassReg.test(Password)) {
            isValid = true
         } else {
-            //else alert the user the seelcted password si not strong enough
+            //else alert the user the selected password is not strong enough
             message += "The password entered was not secure enough \n\n"
             isValid = false
         }
@@ -46,7 +46,10 @@ export default function ValidateLogin(UserID,Email,Password,action) {
             ],
             { cancelable: false },
         );
-    }   
+    }
+    if(action == ""){
+        isValid = false
+    }  
     //return the boolean to the calling function to signal wether information is acceptable or not.
     return isValid;
 } 
