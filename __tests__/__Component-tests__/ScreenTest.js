@@ -6,7 +6,7 @@ import 'react-native';
 import React from 'react';
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';
-import {Login,LandingScreen,OverlayScreen,signup,QuestionWindow,MyProfile,MyPatients,MyGroups,MyPlan,MyAssessment,Search,MyReview,Help,Downloads,AssessmentHome} from '../components/Screens';
+import {Login,LandingScreen,OverlayScreen,signup,QuestionWindow,MyProfile,MyPatients,MyGroups,MyPlan,MyAssessment,Search,MyReview,Help,Downloads,AssessmentHome} from '../../components/Screens';
 
 it('renders correctly', () => {
   const help = renderer.create(<Help />);
