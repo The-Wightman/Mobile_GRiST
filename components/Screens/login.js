@@ -65,7 +65,8 @@ export default class _Login extends React.Component{
      UserInfo = await this.JsonHandler(UID,Pass)  
         //if the information is validated, check if it is not null                  
         if(UserInfo !== null && UserInfo !== undefined && typeof(UserInfo) !== undefined){                
-            // store the valid client information in the devices local memory under userinfo 
+            // store the valid client information in the devices local memory under userinfo
+            console.log(UserInfo) 
             await ClientControls._storeClient(UserInfo)              
             //check the users role information, for administrators navigate to the Clinician landing page         
              if(UserInfo.current_user.roles[1] == "administrator"){
