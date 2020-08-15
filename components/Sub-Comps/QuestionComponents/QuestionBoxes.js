@@ -78,6 +78,7 @@ export default class QuestionBox extends React.Component{
             default:
             
         }
+        this.props.submitAnswers(this.state.Qcode,this.returnAnswers())
     }
     //clear any previously given answer and reset the input of sliders to the default middle value if the type is slider.
     clearAnswer(){
@@ -135,7 +136,7 @@ export default class QuestionBox extends React.Component{
        
         
     }
-    //function for disp,laying the constructed component
+    //function for displaying the constructed component
     render() {        
         let Inputtype;
         let PreviousAnswer; 

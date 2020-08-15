@@ -26,10 +26,10 @@ export default class AssessmentHeader extends React.Component {
         //Load the state object with default information to ensure that the header components are visible
         this.state = {
             isClin: true, 
-            user: "Eh",
-            assessment: "full",
-            questionSet: "State of mind",
-            username: "David Wightman",
+            user: this.props.usernick,
+            assessment: this.props.type,
+            questionSet: this.props.subtype,
+            username: this.props.useremail,
             modalVisible: false,
             modalType: "",
             modalTitle: "",
