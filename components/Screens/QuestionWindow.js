@@ -218,17 +218,25 @@ searchforKey(nameKey, myArray){
         //assign it a layer code to allow it to be sorted
       questionstructure[generatedBoxes[x][0].code] = curlayer + "0" + x
       //generate a question box using the node information as the question boxes props
-      generatedBoxes[x] = {key:curlayer + "0" + x, Question: <QuestionBox key={generatedBoxes[x][0].code}  submitAnswers={this.submitAnswer.bind(this)} UpdateCurrentQuestions={this.UpdateCurrentQuestions.bind(this)} {...generatedBoxes[x][0]} />}
+      generatedBoxes[x] = {key:curlayer + "0" + x,
+                           Question: <QuestionBox key={generatedBoxes[x][0].code}
+                                                  submitAnswers={this.submitAnswer.bind(this)}
+                                                  UpdateCurrentQuestions={this.UpdateCurrentQuestions.bind(this)}
+                                                  {...generatedBoxes[x][0]} />}
       }
       // if the code does not have a corresponding node in the qeustion tree it is likely a filter question and simply needs a yes or no to if the user wants to see these questions.
       else{
         //assign it a layer code to allow it to be sorted
         questionstructure[questioncodes[x]] = curlayer + "0" + x
         //provide the basic prop information for the question box to default and assign it a code and key value.Set the question equal to the label information from the XML tree object.
-        generatedBoxes[x] = {key: curlayer + "0" + x, Question: <QuestionBox  key={questioncodes[x]}   submitAnswers={this.submitAnswer.bind(this)} UpdateCurrentQuestions={this.UpdateCurrentQuestions.bind(this)} code={questioncodes[x]} question={"Answer further questions on " + labels[x] + " now?"}/>}
+        generatedBoxes[x] = {key: curlayer + "0" + x,
+                             Question: <QuestionBox  key={questioncodes[x]} 
+                                                     submitAnswers={this.submitAnswer.bind(this)}
+                                                     UpdateCurrentQuestions={this.UpdateCurrentQuestions.bind(this)}
+                                                     code={questioncodes[x]} question={"Answer further questions on " + labels[x] + " now?"}/>}
       }
     }
-    //return the newlty generated question boxes and the new question structure.
+    //return the newly generated question boxes and the new question structure.
     return [generatedBoxes,questionstructure]
   
    }

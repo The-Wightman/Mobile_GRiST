@@ -6,7 +6,11 @@
 export default QuestionSet = [
 {code:"suic" ,values:"scale" ,question:"In your judgement, what is the risk that the person will attempt suicide?" ,help:"Consider the likelihood in the context of the person's circumstances after the assessment if no further action is taken." ,leftlabel:"no risk" ,rightlabel:"maximum risk"},
 {code:"sui-specific" ,layer:"0" ,question:"Do you have reason to be concerned about the person's risk of suicide?" ,values:"layer"},
-  {code:"suic-past-att" ,persistent:"hard" ,layer:"0" ,question:"Has the person ever made a suicide attempt? If yes, the questions about them should be answered with reference to the attempts in general rather than any specific one, unless otherwise stated." ,values:"filter-q"},
+  {code:"suic-past-att" ,
+  persistent:"hard" ,
+  layer:"0" ,
+  question:"Has the person ever made a suicide attempt? If yes, the questions about them should be answered with reference to the attempts in general rather than any specific one, unless otherwise stated." ,
+  values:"filter-q"},
   {code:"suic-most-rec" ,persistent:"soft" ,answerconstraint:"((&gt;: [suic &gt;&gt; sui-specific &gt;&gt; suic-past-att &gt;&gt; suic-occur &gt;&gt; suic-patt-att &gt;&gt; suic-first-occ]))" ,layer:"0" ,question:"When was the most recent suicide attempt?" ,help:"Don't worry if you don't know the exact date. An approximate date or just the year and/or month is fine." ,values:"date-week"},
   {code:"suic-patt-att" ,persistent:"hard" ,layer:"0" ,autoanswer:"[NO suic-first-occ suic &gt;&gt; sui-specific &gt;&gt; suic-past-att &gt;&gt; suic-occur &gt;&gt; suic-most-rec][NO suic-how-many '1']" ,question:"Has there been more than one suicide attempt?" ,values:"filter-q"},
   {code:"suic-first-occ" ,persistent:"hard" ,values:"date-week" ,question:"When was the first suicide attempt?" ,help:"This is measuring the duration of the risk behaviour in the person's life as opposed to recency. If recency decreases, the duration increases but the effect of recency is much more important on the overall risk judgement."},

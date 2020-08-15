@@ -12,7 +12,7 @@ import {
 //function to handle the server response string,and store it locally for reference when validating internal app functions
 export async function _storeClient(responseJson){    
   try {  
-      //wait for the Asyncstroage set function to create a new key value pair, overwriting any previous information such as session keys.    
+      //wait for the Asyncstorage set function to create a new key value pair, overwriting any previous information such as session keys.    
       await AsyncStorage.setItem('responseString', JSON.stringify(responseJson));        
       
       //catch issues and present them as an error to the user

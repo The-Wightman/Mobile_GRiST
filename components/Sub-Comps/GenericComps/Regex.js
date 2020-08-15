@@ -6,7 +6,7 @@
 // regular expression to validate that an email pattern contains an @ symbol and a relevant set of closing statments such as .co.uk or .org
 export const EmailReg = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 
-// validate that a password has both uper case and lower case, is atleast 8 characters long and up to any length
+// validate that a password has both upper case and lower case, is atleast 8 characters long and up to any length
 export const PassReg = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/);
 
 //Validate that a users ID only contains letters and numbers preventing special characters
