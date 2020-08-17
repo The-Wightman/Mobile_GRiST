@@ -17,18 +17,35 @@ import { Colors, Images,PDFS } from '../../Styles/index';
 import Pdf from 'react-native-pdf';
 import PDFtemplate from '../Sub-Comps/PDFview'
 
+//create a type enum
+export const cardEnum = {
+  Admin: "admin",
+  All: "all",
+  NonAdmin: "nonadmin",
+  Download: "download",
+}
+
 //create a new object array containing objects that represent the possible card types and export it to make it accessible.
 export const cardTypes = [
-  { Title: "View my Profile", Image: Images.DefaultProfile, Text: "view,Edit and Update profile information for the current logged in profile", buttonText: "Go to Profile", pointer: "My Profile", type: "both" },
-  { Title: "View your Patients", Image: Images.Patients, Text: "select and manage your group and patient information or start a new assessment for a patient.", buttonText: "Go to Patients", pointer: "My Patients", type: true },
-  { Title: "Downloads", Image: Images.downloads, Text: "download handbooks and documentation detailing how to work with GRIST and the outputs the system provides.", buttonText: " Go To Downloads", pointer: "Downloads", type: true },
-  { Title: "Help & Information", Image: Images.Help, Text: "view the help, information, & assistance documentation for the e-GRiST System and mobile application", buttonText: "Go To Help", pointer: "E-Grist Help", type: true },
-  { Title: "Search the App", Image: Images.search, Text: "search the grist mobile tool for your chosen feature, information, or option", buttonText: "Go to Search", pointer: "Search", type: "both" },
-  { Title: "Start an assessment", Image: Images.Assessment, Text: "start a new assessment, resume an old assessment, or manage existing assessments and answers.", buttonText: "Go to Assessments", pointer: "My Assessment", type: false },
-  { Title: "My Plan", Image: Images.plan, Text: "view your next steps and action plans to deal with issues highlighted in your assessments.", buttonText: "Go to My Plan", pointer: "My Plan", type: false },
-  { Title: "My Review", Image: Images.review, Text: "review previous answers and a learn more about the answers previously given and the impact they may have.", buttonText: "Go to My Review", pointer: "My Review", type: false },
-  { Title: "GRiST Cribsheet", Image: Images.cribsheet, Text: "download the GRiST Cribsheet to your mobile device for useful rules of system operation", buttonText: "Download Cribsheet", pointer: "pdfscreen", type: "download", payload:PDFS.PDFcribsheet,URI:"https://www.egrist.org/sites/default/files/grist-crib-sheet_1.pdf" },
-  { Title: "GRiST HandBook", Image: Images.handbook, Text: "download and Read the GRiST handbook to get a better understanding of the system and its functionality", buttonText: "Download Handbook", pointer: "pdfscreen", type: "download", payload: PDFS.PDFhandbook, URI:"https://www.egrist.org/sites/default/files/grist-practitioners-manual.pdf" }
+  { Title: "View my Profile", Image: Images.DefaultProfile, Text: "view,Edit and Update profile information for the current logged in profile", buttonText: "Go to Profile", pointer: "My Profile", type: cardEnum.All },
+  { Title: "View your Patients", Image: Images.Patients, Text: "select and manage your patient groups information or start a new assessment for a patient.", buttonText: "Go to Patients", pointer: "My Patients", type: cardEnum.Admin },
+  { Title: "View your Groups", Image: Images.group, Text: "View which groups you are a member of and see detailed information about them", buttonText: "Go to Groups", pointer: "My Groups", type: cardEnum.All },
+  { Title: "Downloads", Image: Images.downloads, Text: "download handbooks and documentation detailing how to work with GRIST and the outputs the system provides.", buttonText: " Go To Downloads", pointer: "Downloads", type: cardEnum.Admin },
+  { Title: "Help & Information", Image: Images.Help, Text: "view the help, information, & assistance documentation for the e-GRiST System and mobile application", buttonText: "Go To Help", pointer: "E-Grist Help", type: cardEnum.Admin },
+  { Title: "Search the App", Image: Images.search, Text: "search the grist mobile tool for your chosen feature, information, or option", buttonText: "Go to Search", pointer: "Search", type: cardEnum.All },
+  { Title: "Start an assessment", Image: Images.Assessment, Text: "start a new assessment, resume an old assessment, or manage existing assessments and answers.", buttonText: "Go to Assessments", pointer: "My Assessments", type: cardEnum.NonAdmin },
+  { Title: "My Plan", Image: Images.plan, Text: "view your next steps and action plans to deal with issues highlighted in your assessments.", buttonText: "Go to My Plan", pointer: "My Plan", type: cardEnum.NonAdmin},
+  { Title: "My Review", Image: Images.review, Text: "review previous answers and a learn more about the answers previously given and the impact they may have.", buttonText: "Go to My Review", pointer: "My Review", type: cardEnum.NonAdmin },
+  { Title: "GRiST Cribsheet", Image: Images.cribsheet, Text: "download the GRiST Cribsheet to your mobile device for useful rules of system operation", buttonText: "Download Cribsheet", pointer: "pdfscreen", type: cardEnum.Download,
+   payload:PDFS.PDFcribsheet,
+   URI:"https://www.egrist.org/sites/default/files/grist-crib-sheet_1.pdf",
+   afile:"bundle-assets://pdfs/grist-crib-sheet_1.pdf",
+   ifile:'./../../Assets/PDFS/grist-crib-sheet_1.pdf' },
+  { Title: "GRiST HandBook", Image: Images.handbook, Text: "download and Read the GRiST handbook to get a better understanding of the system and its functionality", buttonText: "Download Handbook", pointer: "pdfscreen", type: cardEnum.Download, 
+  payload: PDFS.PDFhandbook, 
+  URI:"https://www.egrist.org/sites/default/files/grist-practitioners-manual.pdf",
+  afile:"bundle-assets://pdfs/grist-practitioners-manual.pdf",
+  ifile:'./../../Assets/PDFS/grist-practitioners-manual.pdf'}
 ]
 
 //Create a new class functioncard that extends the basic react component
@@ -55,7 +72,7 @@ export class FunctionCard extends React.Component {
   //Return the visual element of the class
   render() {
     //if the type is one of the three valid primary types
-     if(this.props.type == true || this.props.type == false || this.props.type == "both"){
+     if(this.props.type == "admin" || this.props.type == "nonadmin" || this.props.type == "all"){
        //return the basic card layout with the navigation function button.
       return(
         <Card title={this.props.Title} image={this.props.Image}>

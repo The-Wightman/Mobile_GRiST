@@ -18,13 +18,14 @@ import { Typography, Colors, Spacing, Images } from '../../Styles'
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
 import Validate from '../Sub-Comps/GenericComps/Validator'
 import * as ClientControls from '../Sub-Comps/userOutline'
+import ValidateLogin from '../Sub-Comps/GenericComps/Validator'
 
 
 // Create a new login object which handles information from previous pages and pass it this information through the props component
 export default class _Login extends React.Component{
     constructor(props) {
         super(props);
-        //creat a state object to store the expected inputs and set them to empty.
+        //create a state object to store the expected inputs and set them to empty.
         this.state = {
         username: "",
         password: "",
@@ -37,7 +38,7 @@ export default class _Login extends React.Component{
         // create an alert for the user describing the process and what will occur
         Alert.alert(
             'Reset Connection',
-            'This can help resolve UID and connection issue but will delete your local information which may cause slight increases to loading times when you next use the app.',
+            'This can help resolve UID and connection issue but will delete your local session information which may cause slight increases to loading times when you next use the app.',
             [
                //provide two text areas with onpress functions, one nulls the function to cancel
               {text: 'Cancel', onPress: () => {return null}},
@@ -59,13 +60,14 @@ export default class _Login extends React.Component{
    async userLogin(UID,Pass,Action){
     let UserInfo = null 
     //call the validate function on the provided information 
-     if  (Validate(UID,null,Pass,Action)){
+     if  (ValidateLogin(UID,null,Pass,Action)){
         //wait for JSONhandler to process the variables UID and pass before proceeding
      UserInfo = await this.JsonHandler(UID,Pass)  
         //if the information is validated, check if it is not null                  
         if(UserInfo !== null && UserInfo !== undefined && typeof(UserInfo) !== undefined){                
-            // store the valid client information in the devices local memory under userinfo 
-            await ClientControls._storeClient(UserInfo)    
+            // store the valid client information in the devices local memory under userinfo
+            console.log(UserInfo) 
+            await ClientControls._storeClient(UserInfo)              
             //check the users role information, for administrators navigate to the Clinician landing page         
              if(UserInfo.current_user.roles[1] == "administrator"){
                 await ClientControls._storeRole("administrator")
@@ -155,7 +157,7 @@ export default class _Login extends React.Component{
         )
     }
 }
-//Page specific styling kept seperate as a style sheet to overwriet elements of the generic styling when necessary.
+//Page specific styling kept seperate as a style sheet to overwrite elements of the generic styling when necessary.
 
 const styles = StyleSheet.create({
     container: {

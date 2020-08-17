@@ -22,16 +22,18 @@ import * as ClientControls from '../userOutline'
 
 //export function to create custom drawer content to be called by any navigation drawers in the application.
 //comments are not done inline due to issues with common commenting practice {{-- --}} not being recognised by EXPO
-export default function CustomDrawerContent(props) {   
+export default function CustomDrawerContent(props) {  
+  const prop2 = props;
+  prop2.state.routes = prop2.state.routes.slice(0,7);
       return (     
         //take the style props passed to this compenent function and set them as the props of this function
         //this is then repeated on line 32 to ensure the itemlist also has the same props
-        //line 37 to 48 are a replication of a similar logour function called by holding the icon on the login screen.
+        //line 37 to 48 are a replication of a similar logout function called by holding the icon on the login screen.
       <DrawerContentScrollView {...props} style={styles.ScrollView}>             
          <View style={styles.Container}>
            <UserProfile/>
-        </View>        
-      <DrawerItemList {...props} />      
+        </View>          
+      <DrawerItemList {...prop2} />      
       <TouchableOpacity style ={styles.opacity} onPress={()=>
         Alert.alert(
           'Log out',

@@ -7,40 +7,29 @@
 //import React & react native libraries
 import * as React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer,StackActions } from '@react-navigation/native';
-import { View,AppRegistry} from 'react-native';
 import * as Screens from '../../Screens'
-import {Colors} from '../../../Styles/index'
+import {NavStyle} from '../../../Styles/index'
 //import custom drawer styling to allow for personally styled navigation tabs.
 import CustomDrawerContent from './DrawerContainer'
+import _IndividualNav from '../Navigation/IndividualNav';
 // export Cdrawer as a new drawer navigator when the app is loaded.
 export const CDrawer = createDrawerNavigator();
 
-//register the clinician drawer as a component that can be called Application wide
-AppRegistry.registerComponent('eGRiST', () => ClinDrawer);
-
-//Function to return a custome setup loaded into the CDRAWER const.
+//Function to return a custom setup loaded into the CDRAWER const.
 export default function _ClinicianNav(){
     return (     
       //for the cdrawers new navigator, give it an initial route to use, and pass it the custom drawer style props 
       //then define a number of screen the drawer can navigate too and the names for the routes to be called to navigate to them.  
-        <CDrawer.Navigator initialRouteName={"Home"} drawerContent={props => CustomDrawerContent(props)} drawerType="slide" drawerContentOptions={styles} screenProps={{navigation: this.navigation, isClin:true}}>
+        <CDrawer.Navigator initialRouteName={"Home"} drawerContent={props => CustomDrawerContent(props)} drawerType="slide" drawerContentOptions={NavStyle} screenProps={{navigation: this.navigation, isClin:true}}>
           <CDrawer.Screen name="Home" component={Screens.LandingScreen.default} />
           <CDrawer.Screen name="My Profile" component={Screens.MyProfile} />
+          <CDrawer.Screen name="My Groups" component={Screens.MyGroups} />
           <CDrawer.Screen name="My Patients" component={Screens.MyPatients} />
           <CDrawer.Screen name="Downloads" component={Screens.Downloads} />
           <CDrawer.Screen name="E-Grist Help" component={Screens.Help} />
-          <CDrawer.Screen name="Search" component={Screens.Search} />                   
+          <CDrawer.Screen name="Search" component={Screens.Search} />
+          <CDrawer.Screen name="ILanding" component={_IndividualNav} />                    
         </CDrawer.Navigator>
      
     );
   }
-//component specific styling
-  const styles = ({
-    activeTintColor : Colors.White.color,
-    activeBackgroundColor: Colors.LightGreen.color,
-    inactiveTintColor: Colors.White.color,
-    inactiveBackgroundColor: Colors.DarkGreen.color,
-    itemStyle: { marginVertical: 5 },
-    contentContainerStyle: {backgroundColor:Colors.LightGrey.color }
-  })

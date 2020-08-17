@@ -11,7 +11,8 @@ import {
     Text,
     View,
     Image,   
-    TouchableOpacity 
+    TouchableOpacity, 
+    Modal
 } from 'react-native'
 
 import { DrawerActions,useNavigation } from '@react-navigation/native';
@@ -25,14 +26,21 @@ export default class AssessmentHeader extends React.Component {
         //Load the state object with default information to ensure that the header components are visible
         this.state = {
             isClin: true, 
-            user: "Eh",
-            assessment: "full",
-            questionSet: "State of mind",
-            username: "David Wightman",
-            modalVisible: false
+            user: this.props.usernick,
+            assessment: this.props.type,
+            questionSet: this.props.subtype,
+            username: this.props.useremail,
+            modalVisible: false,
+            modalType: "",
+            modalTitle: "",
+            formulation: "",
+            safetyPlan: ""
         }        
-         
+        
     }
+    setModalVisible(newstate){
+        this.setState({modalVisible: newstate})
+      }
     //create render of the screen
     render() {
         //define empty dynamic variables for the quadrants of the header
@@ -47,40 +55,40 @@ export default class AssessmentHeader extends React.Component {
             //make upper left store information of the current patient
             UpperLeft = (
             <View style={styles.Internal}>
-            <Text style={styles.HeadText}>Person being assessed: {this.state.user}</Text>
+            <Text style={styles.HeadText}>Person being assessed: {this.state.username}</Text>
             <Text style={styles.HeadText}>Assessment: {this.state.assessment}</Text>
             </View>
             )
             // make the upper right store the assistant information for clinicians
             UpperRight = (
             <View style={styles.Internal}>
-                <TouchableOpacity style={styles.Buttons} >
-                    <Text>Key</Text>
+                <TouchableOpacity style={styles.Buttons} onPress={() => {this.setModalVisible(),this.setState({modalType:"key",modalTitle: "Key Breakdown"}) }} >
+                    <Text style={styles.TextStyle}>Key</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.Buttons}>
-                    <Text>Quick Tips</Text>
+                <TouchableOpacity style={styles.Buttons} onPress={() => {this.setModalVisible(),this.setState({modalType:"tips",modalTitle: "Quick Tips"}) }}>
+                    <Text style={styles.TextStyle}>Quick Tips</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.Buttons}>
-                    <Text>GRiST Process</Text>
+                <TouchableOpacity style={styles.Buttons} onPress={() => {this.setModalVisible(),this.setState({modalType:"process",modalTitle: "The Grist process"}) }}>
+                    <Text style={styles.TextStyle}>GRiST Process</Text>
                 </TouchableOpacity>
             </View>
             )
             // make the lower left provide adjustment and additional options only shown to clinicians
             LowerLeft = (
                 <View style={styles.Internal}>
-                <TouchableOpacity style={styles.Buttons}>
-                    <Text>Risk </Text>
-                    <Text>Judgements</Text>
+                <TouchableOpacity style={styles.Buttons} onPress={() => {this.setModalVisible(),this.setState({modalType:"judgement",modalTitle: "Risk Judgements"}) }}>
+                    <Text style={styles.TextStyle}>Risk </Text>
+                    <Text style={styles.TextStyle}>Judgements</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.Buttons}>
-                    <Text>Risk</Text>
-                    <Text>Formulation</Text>
+                <TouchableOpacity style={styles.Buttons} onPress={() => {this.setModalVisible(),this.setState({modalType:"formulation",modalTitle: "Risk Formulation"}) }}>
+                    <Text style={styles.TextStyle}>Risk</Text>
+                    <Text style={styles.TextStyle}>Formulation</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.Buttons}>
-                    <Text>Safety Plan</Text>
+                <TouchableOpacity style={styles.Buttons} onPress={() => {this.setModalVisible(),this.setState({modalType:"plan",modalTitle: "Safety Plan"}) }}>
+                    <Text style={styles.TextStyle}>Safety Plan</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.Buttons}>
-                    <Text>Preview Report</Text>
+                <TouchableOpacity style={styles.Buttons} onPress={() => {this.setModalVisible(),this.setState({modalType:"preview",modalTitle: "Preview Report"}) }}>
+                    <Text style={styles.TextStyle}>Preview Report</Text>
                 </TouchableOpacity>
                 </View>
             )  
@@ -96,14 +104,14 @@ export default class AssessmentHeader extends React.Component {
                 //provide the user with assistant information and relevant help guides.
             UpperRight = (
                 <View style={styles.Internal}>
-                    <TouchableOpacity style={styles.Buttons}>
-                        <Text>Key</Text>
+                    <TouchableOpacity style={styles.Buttons} onPress={() => {this.setModalVisible(),this.setState({modalType:"key",modalTitle: "Key Breakdown"}) }}>
+                        <Text style={styles.TextStyle}>Key</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.Buttons}>
-                        <Text>Quick Tips</Text>
+                    <TouchableOpacity style={styles.Buttons} onPress={() => {this.setModalVisible(),this.setState({modalType:"tips",modalTitle: "Quick Tips"}) }}>
+                        <Text style={styles.TextStyle}>Quick Tips</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.Buttons}>
-                        <Text>Using myGRiST</Text>
+                    <TouchableOpacity style={styles.Buttons} onPress={() => {this.setModalVisible(),this.setState({modalType:"mygrist",modalTitle: "Using MyGrist"}) }}>
+                        <Text style={styles.TextStyle}>Using myGRiST</Text>
                     </TouchableOpacity>
                    
                 </View>
@@ -111,37 +119,39 @@ export default class AssessmentHeader extends React.Component {
                 //provide adjustment and additional options only relevant to the user
             LowerLeft = (
                 <View style={styles.Internal}>
-                    <TouchableOpacity style={styles.Buttons}>
-                        <Text>My Answers</Text>
+                    <TouchableOpacity style={styles.Buttons} onPress={() => {this.setModalVisible(),this.setState({modalType:"answers",modalTitle: "My Answers"}) }}>
+                        <Text style={styles.TextStyle}>My Answers</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.Buttons}>
-                        <Text>GRiST Advice </Text>
-                        <Text>& My Plan</Text>
+                    <TouchableOpacity style={styles.Buttons} onPress={() => {this.setModalVisible(),this.setState({modalType:"advice",modalTitle: "Advice and Planning"}) }}>
+                        <Text style={styles.TextStyle}>GRiST Advice </Text>
+                        <Text style={styles.TextStyle}>& My Plan</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.Buttons}>
-                        <Text>Guide &</Text>
-                        <Text> Next Steps</Text>
+                    <TouchableOpacity style={styles.Buttons} onPress={() => {this.setModalVisible(),this.setState({modalType:"guide",modalTitle: "My Next Steps"}) }}>
+                        <Text style={styles.TextStyle}>Guide &</Text>
+                        <Text style={styles.TextStyle}> Next Steps</Text>
                     </TouchableOpacity>                   
                 </View>
                 )
          }
          //the lower right quadrant is the same for all users as it oversees assesment handling such as leaving or saving progress.
+         if(this.props.type !== "Practice"){
          LowerRight = (
-            <View style={styles.Internal}>
-                <TouchableOpacity style={styles.Buttons} >
-                    <Text>Go Back</Text>
+             
+            <View style={styles.Internal}>                
+                <TouchableOpacity style={styles.Buttons} onPress={() => this.props.answerHandler("save")}>
+                    <Text style={styles.TextStyle}>Save</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.Buttons}>
-                    <Text>Save</Text>
+                <TouchableOpacity style={styles.Buttons} onPress={() => this.props.answerHandler("suspend")}>
+                    <Text style={styles.TextStyle}>Suspend</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.Buttons}>
-                    <Text>Suspend</Text>
+                <TouchableOpacity style={styles.Buttons} onPress={() => this.props.answerHandler("finish")}>
+                    <Text style={styles.TextStyle}>Finish</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.Buttons}>
-                    <Text>Finish</Text>
-                </TouchableOpacity>
-            </View>
+            </View>             
             )
+         }else {
+             <View style={styles.Internal}></View>
+         }
             //take the loaded variables and return them as a render to the screen
         return(            
            <View style={styles.container} navigation={navigation}>
@@ -153,7 +163,13 @@ export default class AssessmentHeader extends React.Component {
                 {LowerLeft}               
                 {LowerRight}                    
                 </View> 
-                <AssessmentModal ref="modal" modalVisible={this.state.modalVisible}/>                                           
+                <AssessmentModal 
+                ref={modal => {this.modal = modal}}
+                modalType={this.state.modalType}
+                modalVisible={this.state.modalVisible}
+                setModalVisible={this.setModalVisible.bind(this)}
+                title = {this.state.modalTitle}
+                content />                                           
            </View>
         )
     }
@@ -161,19 +177,19 @@ export default class AssessmentHeader extends React.Component {
 //component specific styling
 const styles = StyleSheet.create({
     container: {                
-        height: '18%',
+        height:250,
         width:'100%',
-        backgroundColor: Colors.White.color
-        
+        backgroundColor: Colors.White.color 
+
     },     
     controller: {
         flex:1,
         justifyContent:"space-between",
         alignSelf:'center',           
         flexDirection: 'column',
-        width:'100%',
-        height:'50%',
-        backgroundColor: Colors.LightGreen.color
+        width:'100%',        
+        backgroundColor: Colors.LightGreen.color,
+        height: '50%'
     },
     Internal: {
         flex:1,
@@ -181,9 +197,7 @@ const styles = StyleSheet.create({
         
         alignContent: 'center',                         
         flexDirection: 'row',
-        maxWidth:'100%',
-        height: '50%'
-        
+        maxWidth:'100%',                
 },
 Buttons:{ 
     borderWidth:1,
@@ -193,14 +207,18 @@ Buttons:{
     alignContent: 'center',
     alignItems: 'center',
     justifyContent: 'center',   
-    minWidth:'24%',
-    minHeight:'90%',
+    minWidth:'24%',    
     maxWidth:'25%',
+    maxHeight: 100,
     textAlign:'center'
 },
 HeadText: {
     color: Colors.White.color,
     fontSize: Spacing.TextSizes.navText,
     maxWidth: '50%'
+},
+TextStyle: {
+    fontSize: Spacing.TextSizes.smallText,
+    textAlign:'center'
 }
 })
