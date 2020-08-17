@@ -29,8 +29,8 @@ async function callInfo(){
   return [getcl,getrl]
 
 }
-async function editUser(currentpas,nickname,Email,password,confpass){    
-  const apicall = 'http://public-grist-test.aston.ac.uk/user/'+this.state.USERJSON.current_user.uid +'/edit'
+async function editUser(currentpas,nickname,Email,password,confpass,UID){    
+  const apicall = 'http://public-grist-test.aston.ac.uk/user/'+ UID +'/edit'
   const details = {
       header: 'Content-type: application/json',
       method: 'POST',
@@ -41,7 +41,7 @@ async function editUser(currentpas,nickname,Email,password,confpass){
       response = await fetch(apicall,details)
       .then(response => {
           if (response.status === 200) {
-
+            Alert.alert("Update succesful","You should logout and re-log with your new information to ensure everything is up to date.")
           } else {
               console.log(response)
             throw new Error('The server is currently unable to service your request, this could be due to too many failed login attempts, Internet connection issues, or Recently edited details. Please check your internet and try again.');
@@ -55,10 +55,7 @@ async function editUser(currentpas,nickname,Email,password,confpass){
   }
   catch(err){
       alert(err)
-  }
-  finally{  
-      Alert.alert("Update succesful","You may want to save your current progress and logout to update information locally, changes may take up to a day to apply.")
-  }
+  }  
   }
 
 export default class MyProfile extends Component{ 
@@ -66,6 +63,7 @@ export default class MyProfile extends Component{
     super(props);
     this.state = {
       USERJSON: "",
+      current_user: "",      
       USERROLE: "",
       Description: "",
       currentpas:"",
@@ -94,7 +92,8 @@ export default class MyProfile extends Component{
         break;
         default:
           this.setState({Description:this.role_desc.Authenticated})
-        }
+        }       
+        this.setState({current_user: this.state.USERJSON.current_user})
 
     }
   render() {   
@@ -108,7 +107,10 @@ export default class MyProfile extends Component{
           <View style={styles.container}>
            <UserProfile/>
           </View>
-          <Card title="Your Information">           
+          <Card title="Your Information">    
+          <Text style={styles.TextStyle}>
+               User ID: {this.state.current_user.uid}
+            </Text>        
             <Text style={styles.TextStyle}>
                Roles: {this.state.USERROLE}
             </Text>
@@ -131,22 +133,22 @@ export default class MyProfile extends Component{
               This form can be used to edit profile information ,to edit more information like timezones and profile images please use the web browser for conveinience:
               </Text>
             <Text style={styles.TextStyle}>
-              "https://www.egrist.org/user/YOUR-UID/edit"
+            "https://www.egrist.org/user/{this.state.current_user.uid}/edit"
             </Text > 
             <View>
             <Text style={styles.TextStyle}>Enter current password</Text>
               <TextInput placeholder="Current Password" style={styles.TextInputStyle} secureTextEntry={true}  onChangeText={(text) => { this.setState({currentpas: text})}}/>
             <Text style={styles.TextStyle}>Change your nickname</Text>
-              <TextInput placeholder="Username" style={styles.TextInputStyle}   onChangeText={(text) => { this.setState({ username: text})}}/>
+              <TextInput placeholder="Username"  defaultValue={this.state.current_user.name} style={styles.TextInputStyle}   onChangeText={(text) => { this.setState({ username: text})}}/>
               <Text style={styles.TextStyle}>Change your email</Text>
-              <TextInput placeholder="Email" style={styles.TextInputStyle}   onChangeText={(text) => { this.setState({ email: text})}}/>
+              <TextInput placeholder="Email" defaultValue={this.state.current_user.name} style={styles.TextInputStyle}   onChangeText={(text) => { this.setState({ email: text})}}/>
               <Text style={styles.TextStyle}> Change your password</Text>
               <TextInput placeholder="Password" style={styles.TextInputStyle} secureTextEntry={true}  onChangeText={(text) => { this.setState({password: text})}}/> 
               <Text style={styles.TextStyle}>Confirm new password</Text>
               <TextInput placeholder="Confirm password" style={styles.TextInputStyle} secureTextEntry={true} onChangeText={(text) => { this.setState({passconf: text})}}/>
               <Button icon={<Icon name='code' color='#ffffff' />}
               buttonStyle={styles.buttonStyle}
-              title="Submit changes" onPress={() => editUser(this.state.currentpas,this.state.username,this.state.email,this.state.password,this.state.confpass)} />                
+              title="Submit changes" onPress={() => editUser(this.state.currentpas,this.state.username,this.state.email,this.state.password,this.state.confpass,this.state.current_user.uid)} />                
              </View>
             
             </Card>  

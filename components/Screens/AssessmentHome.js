@@ -25,6 +25,8 @@ import MainHeadTemplate from '../Sub-Comps/Navigation/Header'
 //Import style presets from the Styles document
 import {Colors,Spacing} from '../../Styles/index'
 
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import {Card, Icon} from 'react-native-elements';
 // Create a new Assessment home object which handles information from previous pages and pass it this information through the props component
 export default class AssessmentHome extends Component{ 
   constructor(props) {
@@ -33,42 +35,46 @@ export default class AssessmentHome extends Component{
   }
   //Return a render with the following information
   render() {   
-        return(
-          <View >
-          <MainHeadTemplate navigation={this.props.navigation}/>
-          <DefaultTemplate/>
-          
-          <View style={styles.screenPos}>
-          <Text style={styles.TextStyle}>MYProfile</Text>
-          </View>
-          </View>
-
-        )
-    }
-  }
-//Page specific styling kept seperate as a style sheet to overwriet elements of the generic styling when necessary.
+    return(
+      <View >
+      <MainHeadTemplate navigation={this.props.navigation}/>
+      <DefaultTemplate/>
+      <View style={styles.screenPos}>
+          <KeyboardAwareScrollView>
+          <Card style={styles.cards}title="My Patients">
+                <Text style={styles.cardTextStyle}>From here a list of all patients for the selected group is visible, allowing for you to view all paticipants.</Text>
+                <Text style={styles.cardTextStyle}>As of version 2.4 onwards you will also be able to review patients reports and begin assesments for individual patients from the screen using the option on the table below.</Text>
+          </Card>                 
+          </KeyboardAwareScrollView>
+          </View>      
+      </View>          
+      
+    )
+}
+}
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'black',
-    flex: 1,
-    alignItems: 'center',
-    justifyContent:'center',
-  },
-  title: {
-      fontSize: 24,
-      color: 'black'
-  },
-  screenPos: {
-    paddingTop: '15%',
-    width: '100%',
-    height: '70%',
-    alignContent: 'center',
-    justifyContent: 'center',
-    position: 'absolute',
+container: {
+backgroundColor: 'black',
+flex: 1,
+alignItems: 'center',
+justifyContent:'center',
+},
+title: {
+  fontSize: 24,
+  color: 'black'
+},
+screenPos: {
+paddingTop: '15%',
+width: '100%',
+height: '70%',
+alignContent: 'center',
+justifyContent: 'center',
+position: 'absolute',
 
 },
 TextStyle: {
-    color: Colors.DarkGreen.color,                
-    fontSize: Spacing.TextSizes.navText
- }
+color: Colors.Black.color,                
+fontSize: Spacing.TextSizes.navText,
+marginBottom: 10},
+
 })

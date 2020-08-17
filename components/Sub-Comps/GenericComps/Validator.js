@@ -10,7 +10,7 @@ import { EmailReg, PassReg, IDReg, UIDREG} from './Regex'
 import {  Alert  } from 'react-native'
 
 // export the validate function for use by other classes
-export default function Validate(UserID,Email,Password,action) {    
+export default function ValidateLogin(UserID,Email,Password,action) {    
     //set isValid to true, so that should information be special case but valid it is still sent
     var isValid = true;
     var message = "";  
@@ -27,7 +27,7 @@ export default function Validate(UserID,Email,Password,action) {
         if (PassReg.test(Password)) {
            isValid = true
         } else {
-            //else alert the user the seelcted password si not strong enough
+            //else alert the user the selected password is not strong enough
             message += "The password entered was not secure enough \n\n"
             isValid = false
         }
@@ -46,7 +46,10 @@ export default function Validate(UserID,Email,Password,action) {
             ],
             { cancelable: false },
         );
-    }   
+    }
+    if(action == ""){
+        isValid = false
+    }  
     //return the boolean to the calling function to signal wether information is acceptable or not.
     return isValid;
 } 

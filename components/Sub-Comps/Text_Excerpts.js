@@ -3,12 +3,17 @@
 //Inputs: None
 //Outputs: String Text 
 
-import { View,Text } from "react-native"
+import { View,Text,ScrollView,StyleSheet,Image} from "react-native"
+import CustomTable from '../Sub-Comps/tableview'
+import { Images} from '../../Styles'
+
 import React from 'react';
 export const silver_lock = "This indicates data that may occasionally change across assessments. The answers to these questions are carried over when repeating an assessment, but should be checked to ensure they are still applicable."
 export const gold_lock = "This indicates data that will almost never change across assessments. For convenience, the answers to these questions are carried over when repeating an assessment."
-export const GRiST_Process = (
-    <View>
+export class Process extends React.Component{
+    render() { 
+        return (
+    <ScrollView style={{maxHeight:'65%',width:'100%'}}>
         <Text>"Stage 1 diagnosing or assessing the levels of risk in each category (suicide, self harm, harm to others, etc) and how to address each one: the specific risk judgements and action plans."</Text>
             <Text>  1.This is where the basic data collection takes place, which can be for the varying contexts of assessments that are selected on the home page (screening, full, repeat, etc).</Text>
             <Text>  2.Data can be provided in any order by selecting topics from the mind map. This will take you to all the questions within that topic.</Text>
@@ -20,10 +25,14 @@ export const GRiST_Process = (
         <Text>Stage 3 is the final stage, selected by the SafetyPlan button.</Text>
             <Text>  1.The safety plan brings together information and actions for each risk into a cohesive overall plan.</Text>
             <Text>  2.It summarises what needs to happen for the patient and informs referral information such as letters to GPs or specialist services.</Text>
-    </View>
-);
-export const Quick_Tips = (
-    <View>
+    </ScrollView>
+        ) 
+    }   
+ };
+export class Tips extends React.Component{
+    render() { 
+        return (
+        <ScrollView style={{maxHeight:'65%'}}>
         <Text>Providing scores for items with a zero to ten scale</Text>
         <Text>  1.Use the descriptors at each end of the scale for a clear definition of how to interpret the maximum and minimum values.</Text>
         <Text>  2.Give the value that feels right and do not agonise about it because it will not improve your intuitive judgement.</Text>
@@ -55,11 +64,31 @@ export const Quick_Tips = (
         <Text>  2.Collate your summary management plans for each assessed risk with actions from the general questions to produce your overall safety plan.</Text>
         <Text>      a.The management tab has a mechanism for copying risk plans and general actions into the safety plan text box.</Text>
         <Text>      b.After selecting and copying appropriate ones, edit the box as required.</Text>      
-    </View>
-);
-//export const Keys = ( );
-export const Indv_Help = (
-    <View>
+    </ScrollView>
+)
+}};
+export class Key extends React.Component{    
+    render() { 
+        return (
+        <ScrollView style={{maxHeight:'65%',minWidth:'90%'}}>
+        <CustomTable style={{minHeight:'100%',minWidth:'90%'}} tableHead={['Icon', 'Description', ]} headflex={[1, 6]} dataflex={[1,6]} 
+    tableData={[
+        [<Image style={styles.KeyIconsize} source={Images.document}/>,'Tapping on a management icon will enable you to add information on management of this aspect'],
+        [<Image style={styles.KeyIconsize} source={Images.ballon}/>,'Select this icon to enter a comment that explains your answer, if you think it is needed and if the comment is directly relevant to the question.'],
+        [<Image style={styles.KeyIconsize} source={Images.exclamation}/>,'Tapping this icon will reveal an alert box with information that may impact your answer.'],
+        [<Image style={styles.KeyIconsize} source={Images.info}/>,'Tapping this icon will reveal some help text to clarify the question'],
+        [<Image style={styles.KeyIconsize} source={Images.lock_s}/>,silver_lock],
+        [<Image style={styles.KeyIconsize} source={Images.lock_g}/>,gold_lock],
+        
+    ]}
+    ></CustomTable> 
+    </ScrollView>   
+)}
+};
+export class Indvhelp extends React.Component{
+    render() { 
+        return (
+    <ScrollView style={{maxHeight:'65%'}}>
         <Text>
 On the Screen, you will see the questions associated with the selected sub-topic or the whole set of questions if no topic is selected.
 Above the questions on the right hand-side of the panel are buttons that help you navigate between screens and through the assessment process:
@@ -87,5 +116,6 @@ the 'Key' which explains what the little pictures or icons mean next to question
 'Preferences' that lets you change how GRiST looks.
 'Quick tips' that guide you with answering questions and providing comments or management plans.
 'GRiST process' that explains the overall assessment procedure from starting the assessment to submitting it.</Text>
-    </View>
-);
+    </ScrollView>
+)}};
+

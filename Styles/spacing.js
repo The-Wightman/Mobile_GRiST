@@ -3,5 +3,6 @@ export const TextSizes = {
     SubText: 32,
     FieldText: 20,
     ButtonText: 24,
-    navText: 16
+    navText: 16,
+    smallText: 12
 }

@@ -9,6 +9,7 @@ export const info = require('../Assets/QuestionIcons/information-frame.png');
 export const lock_s = require('../Assets/QuestionIcons/lock-bw.png');
 export const lock_g = require('../Assets/QuestionIcons/lock-yellow.png');
 export const Assessment = require('../Assets/CardImages/Assessment.png');
+export const group = require('../Assets/CardImages/groups.jpg');
 export const downloads = require('../Assets/CardImages/downloads.png');
 export const Help = require('../Assets/CardImages/Help.png');
 export const Patients = require('../Assets/CardImages/Patients.jpg');

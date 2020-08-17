@@ -44,25 +44,36 @@ export default class Search extends Component{
     let selectedCards = new Array();
     let index = 0;
     let foundCards = 0;
+      //for the length of the card types array
       for(index = 0; index < cardTypes.length; index++){                                 
+        //if the user is an administrator.
         if (role == "administrator"){
-          if((cardTypes[index].type == true || cardTypes[index].type =="both") && (cardTypes[index].Text.includes(this.state.searchkey) || cardTypes[index].Title.includes(this.state.searchkey))){
-              selectedCards[foundCards] =  <View><FunctionCard {...cardTypes[index]} navigation={this.props.navigation} /></View>  
-              foundCards++        
+          //if the card type matches the user role or is a public card, & the users search phrase is in the cards content or title
+          if((cardTypes[index].type == "admin" || cardTypes[index].type =="all") && (cardTypes[index].Text.includes(this.state.searchkey) || cardTypes[index].Title.includes(this.state.searchkey))){
+            //add it to the returned cards array.  
+            selectedCards[foundCards] =  <View><FunctionCard {...cardTypes[index]} navigation={this.props.navigation} /></View>  
+            //increment the index of the found card array.  
+            foundCards++        
             }
          }
       else {
-        if((cardTypes[index].type == false || cardTypes[index].type =="both" ) && (cardTypes[index].Text.includes(this.state.searchkey) || cardTypes[index].Title.includes(this.state.searchkey))){
+        // if the card is for non-adminstrator roles or is public and matches the search ley in its content
+        if((cardTypes[index].type == "nonadmin" || cardTypes[index].type =="all" ) && (cardTypes[index].Text.includes(this.state.searchkey) || cardTypes[index].Title.includes(this.state.searchkey))){
+          //add it to the returned cards array
           selectedCards[foundCards] =  <View><FunctionCard {...cardTypes[index]} navigation={this.props.navigation}/></View> 
+          //increment the index of the found card array.
           foundCards++       
         }
       }
-      }  
+      } 
+      // if atleast one card matches the search phrase. 
       if (foundCards > 0){    
+        //return all relevant cards.
       selectedCards = <View>{selectedCards}</View>       
       return selectedCards 
+      //otherwsie return a message informing the user that they have not matched any of the available content.
       } else {
-        selectedCards =  <View><Text style={styles.TextStyle}>Your search term didnt match any of the apps current functions </Text></View>
+        selectedCards =  <Card title="No results found"><Text style={styles.TextStyle}>Your search term didnt match any of the apps current functions </Text></Card>
       }    
       return selectedCards
 
