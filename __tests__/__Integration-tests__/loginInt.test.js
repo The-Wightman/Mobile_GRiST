@@ -1,4 +1,4 @@
-//Function: Validate the logins interctions with other components
+//Function: Validate the logins interactions with other components
 //Description: verify APIcalls work correctly and that asynchronous functions return correctly.
 //Inputs: Login Class,Navigation component.
 //Outputs: Login.test.suite

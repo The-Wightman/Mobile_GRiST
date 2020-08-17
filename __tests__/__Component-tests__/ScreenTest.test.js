@@ -8,22 +8,22 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {Login,LandingScreen,OverlayScreen,signup,QuestionWindow,MyProfile,MyPatients,MyGroups,MyPlan,MyAssessment,Search,MyReview,Help,Downloads,AssessmentHome} from '../../components/Screens';
 
-it('renders correctly', () => {
+it('Help Screen renders correctly', () => {
   const help = renderer.create(<Help />);
   expect(help).toMatchSnapshot();
 });
 
-it('renders correctly', () => {
+it('Landing Screen renders correctly', () => {
   const landing = renderer.create(<LandingScreen />);
   expect(landing).toMatchSnapshot();
 });
 
-it('renders correctly', () => {
+it('Login Screen renders correctly', () => {
   const login = renderer.create(<Login/>);
   expect(login).toMatchSnapshot();
 });
 
-it('renders correctly', () => {
+it('Overlay screen renders correctly', () => {
     const login = renderer.create(<OverlayScreen/>);
     expect(login).toMatchSnapshot();
   });

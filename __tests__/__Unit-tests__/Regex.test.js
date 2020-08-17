@@ -6,10 +6,10 @@
 const regex = require('../../components/Sub-Comps/GenericComps/Regex');
 
 test('That a valid .co.uk email returns true', () => {
-    expect(regex.EmailReg.test("wightmad@aston.ac.uk")).toBe(true);
+    expect(regex.EmailReg.test("wightmad@aston.ac.uk")).toBe(false);
   });
   test('That a valid .com email returns true', () => {
-    expect(regex.EmailReg.test("wightmad@aston.com")).toBe(true);
+    expect(regex.EmailReg.test("wightmad@aston.com")).toBe("banana");
   });
   test('That an invalid email returns false no @', () => {
     expect(regex.EmailReg.test("wightmadaston.ac.uk")).toBe(false);
