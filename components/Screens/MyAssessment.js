@@ -19,6 +19,7 @@ import {Card,Button, Icon} from 'react-native-elements';
 import CustomTable from '../Sub-Comps/tableview'
 import Questionwindow from '../Screens/QuestionWindow'
 import * as ClientControls from '../Sub-Comps/userOutline'
+import {Picker} from '@react-native-community/picker';
 
 
 export default class MyAssessment extends Component{ 
@@ -27,7 +28,8 @@ export default class MyAssessment extends Component{
     //create a state object to store the tracking variables and set them to empty.
     this.state = {
       CurrentOption: "Home",
-      user:""
+      user:"",
+      assessmenttype:"working-age"
       }      
   }
   //When the screen components are rendered,only information avaiable at call is shown, once display is complete the mount flag is checked.
@@ -71,6 +73,37 @@ export default class MyAssessment extends Component{
       <Text style={MYstyle.TextStyle}>As of version 2.4 onwards you will also be able to review patients reports and begin assessments for individual patients from the screen using the option on the table below.</Text>
  </Card> )
    }
+   let typepicker = (
+    <Picker
+      selectedValue={this.state.assessmenttype}
+      style={{height: 75, width:'100%'}}
+      onValueChange={(itemValue, itemIndex) =>
+      this.setState({assessmenttype: itemValue})
+  }>
+    <Picker.Item value="working-age" label="Working Age Adult" />
+    <Picker.Item value="child-adolescent" label="Child/Young Person" />
+    <Picker.Item value="older" label="Older Adult" />
+    <Picker.Item value="service-user" label="Self Assessment" />
+    <Picker.Item value="iapt" label="Therapy (eg IAPT)" />
+    <Picker.Item value="learning-disabilties" label="Learning Disabilities" />
+    <Picker.Item value="hybrid-forensic-working-age" label="Forensic Working Age Adult" />
+    <Picker.Item value="hybrid-forensic-child-adolescent" label="Forensic Child/Young Person" />
+    <Picker.Item value="hybrid-forensic-older" label="Forensic Older Adult" />
+    <Picker.Item value="hybrid-forensic-service-user" label="Forensic Self Assessment" />
+    <Picker.Item value="hybrid-veteran-working-age" label="Veteran Working Age Adult" />
+    <Picker.Item value="hybrid-veteran-older" label="Veteran Older Adult" />
+    <Picker.Item value="hybrid-veteran-service-user" label="Veteran Self Assessment" />
+    <Picker.Item value="hybrid-substance-working-age" label="Substance Working Age Adult" />
+    <Picker.Item value="hybrid-substance-child-adolescent" label="Substance Child/Young Person" />
+    <Picker.Item value="hybrid-substance-older" label="Substance Older Adult" />
+    <Picker.Item value="hybrid-substance-service-user" label="Substance Self Assessment" />
+    <Picker.Item value="hybrid-informal-working-age" label="Informal Working Age Adult" />
+    <Picker.Item value="hybrid-informal-child-adolescent" label="Informal Child/Young Person" />
+    <Picker.Item value="hybrid-informal-older" label="Informal Older Adult" />
+    <Picker.Item value="hybrid-emergency-working-age" label="Emergency Working Age Adult" />
+    <Picker.Item value="hybrid-emergency-service-user" label="Emergency Self Assessment" />    
+</Picker>
+  )    
   let commoncontent = (
     <View>
         {introelement}
@@ -91,6 +124,7 @@ export default class MyAssessment extends Component{
     <Card title="Start a practice assessment">
           <Text style={MYstyle.TextStyle}>Begin a practice assessment to introduce the system to you while not recording any data about your answers.</Text>
           <Text style={MYstyle.TextStyle}>Due to practice data not being recorded once a practice is closed its answers cannot be retrieved and the table of previous assessments will not be populated when a practice assessment is completed.</Text>
+          {typepicker}
           <Button 
           icon={<Icon name='code' color='#ffffff' />}
           buttonStyle={{ borderRadius: 8, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor:Colors.DarkGreen.color }}
@@ -101,6 +135,7 @@ export default class MyAssessment extends Component{
     <Card title="Start a New assessment" style={{MarginBottom:50}}>
       <Text style={MYstyle.TextStyle}>Begin an assessment that can be used to generate action plans, advice, and be reviewed in the future.</Text>
       <Text style={MYstyle.TextStyle}>Completed assessments may take a few minutes to appear in the table as a complete report is generated.</Text>
+      {typepicker}
       <Button 
         icon={<Icon name='code' color='#ffffff' />}
         buttonStyle={{ borderRadius: 8, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor:Colors.DarkGreen.color }}
@@ -135,7 +170,8 @@ export default class MyAssessment extends Component{
     break;
     default: 
          
-  }      
+  }  
+  
   return(
     <View >
     <MainHeadTemplate navigation={this.props.navigation}/>

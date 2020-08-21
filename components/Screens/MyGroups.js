@@ -44,7 +44,13 @@ export default class MyGroups extends Component{
                 </Card> 
                 <Card title="Table of current groups">
               <Text style={MYstyle.TextStyle}>This Table Displays all of the groups you are currently a member or administrator of.</Text>
-              <CustomTable tableHead={['Group', 'Description']} headflex={[1, 3]} dataflex={[1, 3]} tableData={[['1', '2'],['a', 'b'],['1', '2'],['a', 'b']]}></CustomTable>
+              <CustomTable tableHead={['Group', 'Description']} 
+                           headflex={[1, 3]} dataflex={[1, 3]} 
+                           tableData={[
+                                        ['GRiST Demo', 'Group for testing GRiST'],
+                                        ['myGRiST', 'myGRACE for self assessments'],
+                                        ['myGRiST', 'A group for launching myGRiST Pathway assessments']
+                                       ]}></CustomTable>
               </Card>                   
           </KeyboardAwareScrollView>
           </View>          
