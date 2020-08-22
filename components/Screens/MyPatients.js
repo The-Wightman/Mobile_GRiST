@@ -7,7 +7,8 @@ import {
   View,
   Text,  
   TextInput,  
-  StyleSheet   
+  StyleSheet,
+  TouchableOpacity   
 } from 'react-native';
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
 import MainHeadTemplate from '../Sub-Comps/Navigation/Header'
@@ -22,11 +23,39 @@ export default class MyPatients extends Component{
     this.state = {
       newPatientID: "",
       newPatientFore:"",
-      newPatientSur:""
-    } 
+      newPatientSur:"",
+      selectedpatient:"",
+      tabledata: [['DVD2013', 'David', 'Wightman'],['DVD2014', 'James', 'reynolds'],['DVD2015', 'William', 'wallace'],['DVD2016', 'edgard', 'example']]
+        } 
    }
-   
-  render() {   
+  UpdatePatients(ID,fore,sur){
+    let nextPatient = [ID,fore,sur]
+    let newdata = [...this.state.tabledata]
+    newdata.push(nextPatient)
+    this.setState({tabledata: newdata})
+  }
+  dataFormatter(DataArray){
+    let finalisedData =[]
+    for(let x=0;x<DataArray.length;x++){
+      let addedbutton = (
+        <TouchableOpacity onPress={() =>  this.selectPatient(DataArray[x][1] + " " + DataArray[x][2])}>
+          <View style={styles.btn}>
+            <Text style={styles.btnText}>Select Patient</Text>
+          </View>
+        </TouchableOpacity>)    
+      DataArray[x][4] = addedbutton
+      finalisedData[x] = DataArray[x]
+    }
+    return finalisedData
+  }
+  selectPatient(givendata){
+    this.setState({selectedpatient: givendata})
+  } 
+  render() { 
+    let patientinfotext
+    if(this.state.selectedpatient !== ""){
+       patientinfotext = (<Text style={MYstyle.TextStyle}>Currently Selected patient: {this.state.selectedpatient}</Text>)
+    }  
         return(
           <View >
           <MainHeadTemplate navigation={this.props.navigation}/>
@@ -41,8 +70,9 @@ export default class MyPatients extends Component{
          </Card> 
           <Card title="Patients List">
               <Text style={MYstyle.TextStyle}>This Table keeps a record of all pateints in the currently selected group or main group depending on which is more apropriate for you.</Text>
-              <CustomTable tableHead={['Patient ID', 'Forename', 'Surname','Actions']} headflex={[1, 1, 1,1]} dataflex={[1, 1, 1,1]}tableData={[['DVD2013', 'Test', 'Data',''],['DVD2013', 'Test', 'Data',''],['DVD2013', 'Test', 'Data',''],['DVD2013', 'Test', 'Data','']]} ></CustomTable>
-              <Button 
+              <CustomTable tableHead={['Patient ID', 'Forename', 'Surname','Actions']} headflex={[1, 1, 1,1]} dataflex={[1, 1, 1,1]}tableData={this.dataFormatter(this.state.tabledata)} ></CustomTable>
+              {patientinfotext}
+                <Button 
                   icon={<Icon name='code' color='#ffffff' />}
                   buttonStyle={{ borderRadius: 8, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor:Colors.DarkGreen.color }}
                   title='View Selected patient' onPress={() => this.props.navigation.navigate("ILanding",{screen: "My Assessments"})} />
@@ -58,7 +88,7 @@ export default class MyPatients extends Component{
                 <Button 
                   icon={<Icon name='code' color='#ffffff' />}
                   buttonStyle={{ borderRadius: 8, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor:Colors.DarkGreen.color }}
-                  title='Add Patient' onPress={() => this.UpdateSelection("Full")} />
+                  title='Add Patient' onPress={() => this.UpdatePatients(this.state.newPatientID,this.state.newPatientFore,this.state.newPatientSur)} />
           </Card>                 
           </KeyboardAwareScrollView>
           </View>          
