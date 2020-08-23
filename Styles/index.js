@@ -43,5 +43,13 @@ const MYstyle = StyleSheet.create({
       itemStyle: { marginVertical: 5 },
       contentContainerStyle: {backgroundColor:Colors.LightGrey.color }
     })
-export { Typography, Spacing, Colors, Buttons, Images, PDFS ,MYstyle,NavStyle}
+
+    const Opacity = StyleSheet.create({
+          opacity:{
+            backgroundColor:Colors.DarkGreen.color, 
+            justifyContent:'center',
+            paddingVertical: 8
+          }
+        })
+export { Typography, Spacing, Colors, Buttons, Images, PDFS ,MYstyle,NavStyle,Opacity}
 

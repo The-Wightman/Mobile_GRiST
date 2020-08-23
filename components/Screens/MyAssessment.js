@@ -10,10 +10,12 @@ import {
   ScrollView,
   Dimensions,
   View,
-  Text } from 'react-native';
+  Text,
+  TouchableOpacity, 
+  Alert} from 'react-native';
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
 import MainHeadTemplate from '../Sub-Comps/Navigation/Header'
-import {Colors,MYstyle} from '../../Styles/index'
+import {Colors,MYstyle,Opacity} from '../../Styles/index'
 import {KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import {Card,Button, Icon} from 'react-native-elements';
 import CustomTable from '../Sub-Comps/tableview'
@@ -29,18 +31,31 @@ export default class MyAssessment extends Component{
     this.state = {
       CurrentOption: "Home",
       user:"",
-      assessmenttype:"working-age"
+      assessmenttype:"working-age",
+      offlinetypes: ["working-age"],
+      onlineAssessments: [['2020-08-01, 4:23:23 pm', 'Complete'],['2020-08-04, 4:23:23 pm', 'Suspended'],['2020-08-11, 4:23:23 pm', 'Complete'],['2020-08-12, 4:23:23 pm', 'Complete']],
+      offlineAssessments: '' 
       }      
   }
+  async loadAssessData(){
+    let getuser = await ClientControls._getClient()
+    let previousoffline = await ClientControls._getAssessArray(getuser.current_user.uid)
+    this.setState({offlineAssessments: previousoffline})
+    console.log(this.state.offlineAssessments) 
+  } 
   //When the screen components are rendered,only information avaiable at call is shown, once display is complete the mount flag is checked.
   //once the flag is checked the component did mount function is automaitcally called.
   componentDidMount(){
     //get the current users role information from storage
     UserAdmin = ClientControls._getRole()
+    this.loadAssessData()
+
     //once this is complete set the state for the user to match the role and set isloading to false.
-    .then( UserAdmin => this.setState({user: UserAdmin}))    
+    this.setState({user: UserAdmin})  
+     
   }
   UpdateSelection(AssessType){
+    if(this.state.offlinetypes.includes(this.state.assessmenttype)){
     switch(AssessType){
       case "Practice":
         this.setState({CurrentOption: "Practice"})
@@ -51,6 +66,53 @@ export default class MyAssessment extends Component{
       default:
         this.setState({CurrentOption: "Home"})
     }
+  }
+  else {
+    Alert.alert("Assessment error","The assessment type you have chosen is not currently supported, this may be either due to a lack of internet connection or an outdated app version.")
+  }
+  }
+  dataFormatter(DataArray,Storage){
+    let finalisedData =[]
+    if(Storage == "local"){
+    let arrayofKeys = Object.keys(DataArray)
+    for(let x=0;x<arrayofKeys.length;x++){
+      let addedbutton = (
+        <TouchableOpacity  style={Opacity.opacity} onPress={() =>  this.DeleteEntry(x,'local')}>
+          <View >
+            <Text >Delete</Text>
+          </View>
+        </TouchableOpacity>) 
+        let rowArray = []
+        rowArray[1] = arrayofKeys[x]
+        rowArray[2] = "Complete"   
+        rowArray[3] = addedbutton
+        finalisedData[x] = rowArray
+      
+    }
+  }
+  ///handle online information with an API call, currently unimplemented due to lack of API access.
+  else {
+    for(let x=0;x<DataArray.length;x++){
+      let addedbutton = (
+        <TouchableOpacity  style={Opacity.opacity} onPress={() =>  this.DeleteEntry(x,'online')}>
+          <View >
+            <Text >Delete</Text>
+          </View>
+        </TouchableOpacity>)    
+      DataArray[x][3] = addedbutton
+      finalisedData[x] = DataArray[x]
+    }
+  }  
+    return finalisedData
+  }
+  DeleteEntry(index,Storage){
+    if(Storage == 'online'){
+
+    }
+    else {
+
+    }
+
   }
   
  //Return a render with the following information
@@ -77,8 +139,7 @@ export default class MyAssessment extends Component{
     <Picker
       selectedValue={this.state.assessmenttype}
       style={{height: 75, width:'100%'}}
-      onValueChange={(itemValue, itemIndex) =>
-      this.setState({assessmenttype: itemValue})
+      onValueChange={(itemValue) => this.setState({assessmenttype: itemValue})
   }>
     <Picker.Item value="working-age" label="Working Age Adult" />
     <Picker.Item value="child-adolescent" label="Child/Young Person" />
@@ -110,13 +171,13 @@ export default class MyAssessment extends Component{
         <Card title="List of previous online assessments">
               <Text style={MYstyle.TextStyle}>This Table Displays a set of your most recent assessments, note that if you have completed a large number of assessments you may need to scroll down the table.</Text>
               <Text style={MYstyle.TextStyle}>If you have not previously completed an assessment using the system we advise you select the Practice assessment option below to familiarise yourself with the system.</Text>
-              <CustomTable tableHead={['Date', 'Status', 'Delete']} headflex={[1, 1, 1]} dataflex={[1, 1, 1]} tableData={[['1', '2', '3'],['a', 'b', 'c'],['1', '2', '3'],['a', 'b', 'c']]}></CustomTable>
+              <CustomTable tableHead={['Date', 'Status', 'Delete']} headflex={[1, 1, 1]} dataflex={[1, 1, 1]} tableData={this.dataFormatter(this.state.onlineAssessments,'online')}></CustomTable>
         </Card>
         <Card title="List of previous offline assessments">
               <Text style={MYstyle.TextStyle}>This table only displays assessments completed locally that have not been submitted to the server</Text>
               <Text style={MYstyle.TextStyle}>If you have not completed any offline assesments or all of your assesments have been uploaded then this table may be blank</Text>
               <Text style={MYstyle.TextStyle}>For fixing errors in uncompleted assessments please use the online tool, for reports and comment diary switch to the My Plans and My reviews.</Text>
-              <CustomTable tableHead={['Date', 'Status', 'Delete']} headflex={[1, 1, 1]} dataflex={[1, 1, 1]} tableData={[['1', '2', '3'],['a', 'b', 'c'],['1', '2', '3'],['a', 'b', 'c']]}></CustomTable>
+              <CustomTable tableHead={['Date', 'Status', 'Delete']} headflex={[1, 1, 1]} dataflex={[1, 1, 1]} tableData={this.dataFormatter(this.state.offlineAssessments,'local')}></CustomTable>
         </Card>
     </View>
   )

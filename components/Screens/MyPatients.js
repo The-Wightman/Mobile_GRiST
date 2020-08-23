@@ -8,11 +8,12 @@ import {
   Text,  
   TextInput,  
   StyleSheet,
-  TouchableOpacity   
+  TouchableOpacity,   
+  Alert
 } from 'react-native';
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
 import MainHeadTemplate from '../Sub-Comps/Navigation/Header'
-import {Colors,MYstyle} from '../../Styles/index'
+import {Colors,MYstyle,Opacity} from '../../Styles/index'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import {Card, Button, Icon} from 'react-native-elements';
 import CustomTable from '../Sub-Comps/tableview'
@@ -38,9 +39,9 @@ export default class MyPatients extends Component{
     let finalisedData =[]
     for(let x=0;x<DataArray.length;x++){
       let addedbutton = (
-        <TouchableOpacity onPress={() =>  this.selectPatient(DataArray[x][1] + " " + DataArray[x][2])}>
-          <View style={styles.btn}>
-            <Text style={styles.btnText}>Select Patient</Text>
+        <TouchableOpacity  style={Opacity.opacity} onPress={() =>  this.selectPatient(DataArray[x][1] + " " + DataArray[x][2])}>
+          <View >
+            <Text >Select</Text>
           </View>
         </TouchableOpacity>)    
       DataArray[x][4] = addedbutton
@@ -51,6 +52,14 @@ export default class MyPatients extends Component{
   selectPatient(givendata){
     this.setState({selectedpatient: givendata})
   } 
+  NavigationHandler(){
+    if(this.state.selectedpatient !== ""){
+    this.props.navigation.navigate("ILanding",{screen: "My Assessments", userInfo: this.state.selectedpatient})
+    }
+    else {
+      Alert.alert("No Patient Error","You must select a patient to view thier information. Please select one from your existing list or add a new patient using the form below.")
+    }
+  }
   render() { 
     let patientinfotext
     if(this.state.selectedpatient !== ""){
@@ -75,7 +84,7 @@ export default class MyPatients extends Component{
                 <Button 
                   icon={<Icon name='code' color='#ffffff' />}
                   buttonStyle={{ borderRadius: 8, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor:Colors.DarkGreen.color }}
-                  title='View Selected patient' onPress={() => this.props.navigation.navigate("ILanding",{screen: "My Assessments"})} />
+                  title='View Selected patient' onPress={() => this.NavigationHandler()  } />
               </Card> 
               <Card style={MYstyle.cards}title="Add a New patient">
                 <Text style={MYstyle.cardTextStyle}>Fill in the form below to add a new patient to the system. You need to ensure the patient id is unique by, for example, basing it on the patient intials and the current date (e.g. jfk171210 for a patient created on the 17th December, 2010) or by using the unique identifiers you already have for your patients.</Text>
@@ -110,5 +119,7 @@ const styles = StyleSheet.create({
     maxHeight: 50,    
     backgroundColor: Colors.White.color,
     
-}
+},
+
+
 })
