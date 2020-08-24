@@ -31,6 +31,7 @@ export default class MyAssessment extends Component{
     this.state = {
       CurrentOption: "Home",
       user:"",
+      UID:"",
       assessmenttype:"working-age",
       offlinetypes: ["working-age"],
       onlineAssessments: [['2020-08-01, 4:23:23 pm', 'Complete'],['2020-08-04, 4:23:23 pm', 'Suspended'],['2020-08-11, 4:23:23 pm', 'Complete'],['2020-08-12, 4:23:23 pm', 'Complete']],
@@ -39,17 +40,18 @@ export default class MyAssessment extends Component{
   }
   async loadAssessData(){
     let getuser = await ClientControls._getClient()
-    let previousoffline = await ClientControls._getAssessArray(getuser.current_user.uid)
-    this.setState({offlineAssessments: previousoffline})
+    let UserUID = await ClientControls._getUID()
+    console.log(UserUID)
+    let previousoffline = await ClientControls._getAssessArray(getuser.current_user.uid)    
+    this.setState({offlineAssessments: previousoffline,UID: UserUID})
     console.log(this.state.offlineAssessments) 
   } 
   //When the screen components are rendered,only information avaiable at call is shown, once display is complete the mount flag is checked.
   //once the flag is checked the component did mount function is automaitcally called.
   componentDidMount(){
     //get the current users role information from storage
-    UserAdmin = ClientControls._getRole()
-    this.loadAssessData()
-
+    UserAdmin = ClientControls._getRole()    
+    this.loadAssessData()    
     //once this is complete set the state for the user to match the role and set isloading to false.
     this.setState({user: UserAdmin})  
      
@@ -70,6 +72,7 @@ export default class MyAssessment extends Component{
   else {
     Alert.alert("Assessment error","The assessment type you have chosen is not currently supported, this may be either due to a lack of internet connection or an outdated app version.")
   }
+  this.loadAssessData()
   }
   dataFormatter(DataArray,Storage){
     let finalisedData =[]
@@ -77,7 +80,7 @@ export default class MyAssessment extends Component{
     let arrayofKeys = Object.keys(DataArray)
     for(let x=0;x<arrayofKeys.length;x++){
       let addedbutton = (
-        <TouchableOpacity  style={Opacity.opacity} onPress={() =>  this.DeleteEntry(x,'local')}>
+        <TouchableOpacity  style={Opacity.opacity} onPress={() => this.DeleteEntry(arrayofKeys[x],'local')}>
           <View >
             <Text >Delete</Text>
           </View>
@@ -105,14 +108,19 @@ export default class MyAssessment extends Component{
   }  
     return finalisedData
   }
-  DeleteEntry(index,Storage){
+  DeleteEntry(key,Storage){
     if(Storage == 'online'){
-
+      Alert.alert("Online Assessment","Currently due to either connection issues with the internet or the server the deletion of this assessment cannot be completed, please go online or contact support for further information and assistance")
     }
-    else {
-
+    else {      
+      let localOffAssess = {...this.state.offlineAssessments}
+      delete localOffAssess[key]
+      console.log(this.state.UID)
+      console.log(localOffAssess)
+      ClientControls._storeAssessArray(this.state.UID,localOffAssess)
+      Alert.alert("Process successful", "This offline assessment has been deleted and will not be uploaded, if the assesment still appears in local tables try refreshing the page.")
+      this.setState({offlineAssessments: localOffAssess})
     }
-
   }
   
  //Return a render with the following information

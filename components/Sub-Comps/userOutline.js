@@ -6,7 +6,7 @@
 //call the Android/IOS agnostic helper library from te react native libraries
 import {AsyncStorage} from 'react-native';
 import {   
-    alert
+    Alert
 } from 'react-native'
 
 //function to handle the server response string,and store it locally for reference when validating internal app functions
@@ -17,7 +17,7 @@ export async function _storeClient(responseJson){
       
       //catch issues and present them as an error to the user
     } catch (error) {
-      alert(error)
+      Alert.alert(error)
     } 
 
   }
@@ -28,7 +28,7 @@ export async function _storeClient(responseJson){
       await AsyncStorage.setItem('isClin', role);
       //catch issues and present them as an error to the user
     } catch (error) {
-      alert(error)
+      Alert.alert(error)
     } 
 
   }
@@ -39,7 +39,7 @@ export async function _storeClient(responseJson){
       await AsyncStorage.setItem(UserUID + 'Assessments',JSON.stringify(AssessArray));
       //catch issues and present them as an error to the user
     } catch (error) {
-      alert(error)
+      Alert.alert(error)
     } 
 
   }
@@ -52,18 +52,18 @@ export async function _storeClient(responseJson){
      return JSON.parse(value)  
      //catch issues and present them as an error to the user
     } catch (error) {
-       alert(error)
+      Alert.alert(error)
     }
     
   };
    //function to clear currently stored user assesment information
-   export async function _clearAssessArray(UID){    
+   export async function _clearAssessArray(UserUID){    
     try {  
       //wait for the Storage library to return from clearing the key value pair succesfully    
       await AsyncStorage.removeItem(UserUID + 'Assessments');        
       //catch issues and present them as an error to the user
     } catch (error) {
-      alert(error)
+      Alert.alert(error)
     } 
 
   }
@@ -75,7 +75,7 @@ export async function _storeClient(responseJson){
       await AsyncStorage.removeItem('responseString');        
       //catch issues and present them as an error to the user
     } catch (error) {
-      alert(error)
+      Alert.alert(error)
     } 
 
   }
@@ -104,4 +104,17 @@ export async function _getRole(){
   }
   
 };
-
+  //return the current users role classificiation
+  export async function _getUID(){    
+    try {
+    //wait for the Storage library to return from retrieving the key value pair succesfully
+     var value = await AsyncStorage.getItem('responseString')
+     var JSONvalue = JSON.parse(value) 
+     var UID = JSONvalue.current_user.uid      
+     return UID 
+     //catch issues and present them as an error to the user
+    } catch (error) {
+       alert(error)
+    }
+    
+  };

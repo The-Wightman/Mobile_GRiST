@@ -104,7 +104,7 @@ export default class QuestionBox extends React.Component{
         
     returnAnswers(){
         if(this.state.Answer !== "" || this.state.Action !== "" || this.state.Comment !== ""){
-            let qinfo = [this.state.Answer,this.state.Action, this.state.Comment]
+            let qinfo = [this.state.Answer,this.props.question,this.state.Action, this.state.Comment]
             return qinfo
         }
     }
