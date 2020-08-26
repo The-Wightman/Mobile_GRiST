@@ -1,66 +1,86 @@
-//Function: 
-//Description: 
-//Inputs: 
-//Outputs: 
+//Function: Provide a screen for the Users individual profile
+//Description: Show the users information based on the responseJSON string and the users login status, while also prviding a form that allows for the changing of this information with the main server.
+//Inputs: Strings CurrentPass,Nickname,Email,NewPass,Confirmpass
+//Outputs: Visual screen render
+
+//import React & react native libraries
 import React, {Component} from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
+import {  
+  StyleSheet, 
   View,
-  Text,
-  Picker,
-  StatusBar,
-  TextInput,  
-  TouchableOpacity,
+  Text, 
+  TextInput,   
   Alert,  
 } from 'react-native';
-import { color } from 'react-native-reanimated';
+//Import the default template
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
+//Import the header component to allow for navigation
 import MainHeadTemplate from '../Sub-Comps/Navigation/Header'
+//import the colors and spacing style information from the styles index.
 import {Colors,Spacing} from '../../Styles/index'
+//import the user profile sub component from the sub-components folder.
 import UserProfile from '../Sub-Comps/userprofile'
+//Import the keyboard aware scrolling view component from the community module.
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+//Import the Card,Button and Icon componenets from the react native elements module.
 import {Card,Button,Icon} from 'react-native-elements';
+//Import the Clientcontrols function library as ClientControls.XXXX
 import * as ClientControls from '../Sub-Comps/userOutline'
 
+ //Asynchronous function for calling the client response string and the client controls from the asynstroage library
+ //inputs: null
+ //output: Array [Objects JSONresponse,String Role]
 async function callInfo(){            
   let [getcl,getrl] = await Promise.all([ClientControls._getClient(),ClientControls._getRole()])             
   return [getcl,getrl]
 
 }
+ //Asynchronous function for creating an update user information post call to the server and then executing that call.
+ //inputs: Strings CurrentPass,Nickname,Email,Password,Confirmed Password, User ID
+ //output: Null
 async function editUser(currentpas,nickname,Email,password,confpass,UID){    
+  //Define constants of the Apicall address and the request body
   const apicall = 'http://public-grist-test.aston.ac.uk/user/'+ UID +'/edit'
   const details = {
       header: 'Content-type: application/json',
       method: 'POST',
-      redirect: 'manual',                        
+      redirect: 'manual',  
+      //premeptively stringify the information as a single string.                      
       body: JSON.stringify({"current_pass": currentpas,"mail": Email,"name":nickname,"pass[pass1]":password,"pass[pass2]": confpass}),
   }
+  //attempt to
   try {
+      //call the fetch command which executes the call and await for the promise object to be resolved.
       response = await fetch(apicall,details)
+      //once the promise object has been resolved and a return is given.
       .then(response => {
+        //if the error code is 200 (Good)
           if (response.status === 200) {
+            //alert the user that the update has been successful
             Alert.alert("Update succesful","You should logout and re-log with your new information to ensure everything is up to date.")
           } else {
+            //log the error response to the console to allow developers to see what the problem is.
               console.log(response)
+              //throw a new error with a given message.
             throw new Error('The server is currently unable to service your request, this could be due to too many failed login attempts, Internet connection issues, or Recently edited details. Please check your internet and try again.');
           }
         })
-                 
+        //catch th error and pass it up.         
       .catch(function(error) {                        
         throw error;
       })            
                         
   }
+  //catch the passed error and provide it to the user as an alert.
   catch(err){
       alert(err)
   }  
   }
-
+// Create a new MyProfile object which handles information from previous pages and pass it this information through the props component
 export default class MyProfile extends Component{ 
   constructor(props) {
     super(props);
+     //create a state object to store the expected inputs and set them to empty.
     this.state = {
       USERJSON: "",
       current_user: "",      
@@ -72,17 +92,27 @@ export default class MyProfile extends Component{
       password:"",
       confpass:"",
     }
+    //Create an object with keys matching the possible user role values with matching descriptive strings.
     this.role_desc = {Administrator: "Work on development of GRiST services or 3rd party extensions to the GRiST environment",
     Clinician:"Responsible for a number of patients, performance and management of assessments as well as overseeing thier action plans and comments.",
     Authenticated:"User has the app for self-assessment to help provide guidance and advice on a number of subjects."}
     
   }
+ //function for calling callInfo function once the screen has begun the process of rendering.
+ //inputs: null
+ //output: null
   componentDidMount(){
     response = callInfo()
     .then(response => this.statemanage(response));      
-    }    
-     statemanage(response){        
+    } 
+    
+//function for Updating the user information state object with the information passed in the response array.
+ //inputs: Response (Array [Objects JSONresponse,String Role])
+ //output: null
+     statemanage(response){ 
+       //Update the state objects with elements of the response array       
         this.setState({USERJSON: response[0],USERROLE: response[1]});
+        //switch statment checking the user role and calling this objects role description object key value pair.
         switch(this.state.USERROLE){
         case "administrator":
           this.setState({Description:this.role_desc.Administrator})
@@ -96,6 +126,7 @@ export default class MyProfile extends Component{
         this.setState({current_user: this.state.USERJSON.current_user})
 
     }
+  // render the MyProfile screen for the user
   render() {   
         return(
           <View >

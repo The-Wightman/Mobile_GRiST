@@ -3,25 +3,17 @@
 //Inputs: 
 //Outputs: 
 import React, {Component} from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
+import {  
   View,
   Text,
-  Picker,
-  StatusBar,
-  TextInput,
-  Button,
   TouchableOpacity,
   Alert,  
 } from 'react-native';
-import { color } from 'react-native-reanimated';
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
 import MainHeadTemplate from '../Sub-Comps/Navigation/Header'
 import {MYstyle,Opacity} from '../../Styles/index'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import {Card, Icon} from 'react-native-elements';
+import {Card} from 'react-native-elements';
 import CustomTable from '../Sub-Comps/tableview'
 import * as ClientControls from '../Sub-Comps/userOutline'
 

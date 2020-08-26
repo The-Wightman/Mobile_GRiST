@@ -5,25 +5,16 @@
 
 //Common import statments for react native, sub components, & styles
 import React, {Component} from 'react';
-import {
-  SafeAreaView,
+import {  
   StyleSheet,
-  ScrollView,
   View,
-  Text,
-  Picker,
-  StatusBar,
-  TextInput,
-  Button,
-  TouchableOpacity,  
+  Text,    
 } from 'react-native';
-import { color } from 'react-native-reanimated';
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
 import MainHeadTemplate from '../Sub-Comps/Navigation/Header'
 import {Colors,Spacing} from '../../Styles/index'
-import Clin_Help from '../Sub-Comps/Text_Excerpts'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import {Card, Icon} from 'react-native-elements';
+import {Card} from 'react-native-elements';
 
 // Create a new Help object which handles information from previous pages and pass it this information through the props component
 export default class Help extends Component{ 

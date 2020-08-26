@@ -1,33 +1,36 @@
-//Function: 
-//Description: 
-//Inputs: 
-//Outputs: 
+//Function: Provide a screen that allows for searching of app functionality.
+//Description: Provide a set of cards reduced based on the users input which is compared to the card content where only matches are then displayed to the user.
+//Inputs: String searchKey
+//Outputs: Array SelectedCards
 
+//import React & react native libraries
 import React, {Component} from 'react';
-import {
-  SafeAreaView,
+import {  
   StyleSheet,
   ScrollView,
   View,
-  Text,
-  Picker,
-  StatusBar,
-  TextInput,
-  Button,
-  TouchableOpacity, 
+  Text,  
+  TextInput,   
   Image 
 } from 'react-native';
-import { color } from 'react-native-reanimated';
+//Import the default template
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
+//Import the header component to allow for navigation
 import MainHeadTemplate from '../Sub-Comps/Navigation/Header'
+//Import the function cards component and the cardtypes array
 import {FunctionCard,cardTypes} from '../Sub-Comps/FunctionCard';
+//Import the client controls functions library as ClientControls.XXX
 import * as ClientControls from '../Sub-Comps/userOutline'
+//Import the style Colors,Spacing and Images from the Styles folder.
 import {  Colors, Spacing, Images } from '../../Styles'
+//Import the Card componenet from the react native elements module.
 import {Card} from 'react-native-elements';
 
+// Create a new search object which handles information from previous pages and pass it this information through the props component
 export default class Search extends Component{ 
   constructor(props) {
     super(props);
+      //create a state object to store the expected inputs and set them to empty.
       this.state = {
         isLoading:true,
         user: "",
@@ -35,11 +38,16 @@ export default class Search extends Component{
       }
     
   }
-  
+ //function for calling the client controls function and then updating the model state after the first screen render has occured.
+ //inputs: null
+ //output: String UserAdmin
   componentDidMount(){
     UserAdmin = ClientControls._getRole()
     .then( UserAdmin => this.setState({user: UserAdmin, isLoading:false})) 
   }
+//function for returning the relevant cards based on the role of the currently logged in user
+//inputs:String Role
+//output: Array of Card components selectedcards
   RelevantCards(role){     
     let selectedCards = new Array();
     let index = 0;
@@ -79,8 +87,7 @@ export default class Search extends Component{
 
 
   } 
-  
-  
+  // render the Search screen for the user or the loading screen if the screen is still handling the users intial login (low-end devices)
   render() {         
       if (this.state.isLoading) {
         return(

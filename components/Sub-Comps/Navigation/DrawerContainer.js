@@ -9,8 +9,6 @@ import React from 'react';
 import {StyleSheet,
         View,
         Text,
-        Image,
-        Button,
         TouchableOpacity,
         Alert} from 'react-native';
 import { DrawerContentScrollView,DrawerItemList, DrawerItem } from '@react-navigation/drawer';

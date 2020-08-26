@@ -14,9 +14,8 @@ import {
     TouchableOpacity,
     Alert
 } from 'react-native'
-import { Typography, Colors, Spacing, Images } from '../../Styles'
+import { Colors, Spacing, Images } from '../../Styles'
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
-import Validate from '../Sub-Comps/GenericComps/Validator'
 import * as ClientControls from '../Sub-Comps/userOutline'
 import ValidateLogin from '../Sub-Comps/GenericComps/Validator'
 

@@ -5,20 +5,13 @@
 
 //Common import statments for react native, sub components, & styles
 import React, {Component} from 'react';
-import {
-  SafeAreaView,
+import {  
   StyleSheet,
   ScrollView,
   View,
-  Text,
-  Picker,
-  StatusBar,
-  TextInput,
-  Button,
-  TouchableOpacity, 
+  Text, 
   Image 
 } from 'react-native';
-import { color } from 'react-native-reanimated';
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
 import MainHeadTemplate from '../Sub-Comps/Navigation/Header'
 import {FunctionCard,cardTypes} from '../Sub-Comps/FunctionCard';

@@ -5,17 +5,14 @@
 
 //import standard react/react native libraries and styling.
 import React, {Component} from 'react';
-import { Images,Colors,Typography, Spacing } from '../../../Styles'
+import { Colors, Spacing } from '../../../Styles'
 import {
     StyleSheet,
     Text,
-    View,
-    Image,   
+    View,       
     TouchableOpacity, 
     Modal
 } from 'react-native'
-
-import { DrawerActions,useNavigation } from '@react-navigation/native';
 //Import modal component to create as called from header
 import AssessmentModal from '../AssessmentModals/Assessmentmodal';
 

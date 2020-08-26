@@ -1,7 +1,9 @@
-//Function: 
-//Description: 
-//Inputs: 
-//Outputs: 
+//Function: Provide a screen to present to the user the Patient information
+//Description: Show a list of the current patietns allow for the selection of patients and the addition of new patients to the ongoing list in the table.
+//Inputs: String PatientID,PatientFor,PatientSur
+//Outputs: Visual screen render
+
+//import React & react native libraries
 import React, {Component} from 'react';
 import {  
   View,
@@ -11,16 +13,24 @@ import {
   TouchableOpacity,   
   Alert
 } from 'react-native';
+//Import the default template
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
+//Import the header component to allow for navigation
 import MainHeadTemplate from '../Sub-Comps/Navigation/Header'
+//import the colors ,Mystyle, and spacing style information from the styles index.
 import {Colors,MYstyle,Opacity} from '../../Styles/index'
+//Import the keyboard aware scrolling view component from the community module.
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+//Import the Card,Button and Icon componenets from the react native elements module.
 import {Card, Button, Icon} from 'react-native-elements';
+//import the customTable component from the sub component folder.
 import CustomTable from '../Sub-Comps/tableview'
 
+//Create a new MyGroups object which handles information from previous pages and pass it this information through the props componen
 export default class MyPatients extends Component{ 
   constructor(props) {
     super(props);
+    //create a state object to store the expected inputs and set them to empty.
     this.state = {
       newPatientID: "",
       newPatientFore:"",
@@ -29,37 +39,64 @@ export default class MyPatients extends Component{
       tabledata: [['DVD2013', 'David', 'Wightman'],['DVD2014', 'James', 'reynolds'],['DVD2015', 'William', 'wallace'],['DVD2016', 'edgard', 'example']]
         } 
    }
+//function for Updating the information the State Patient Data used to render the table and pass information to future pages.
+ //inputs: Strings ID,fore,sur
+ //output: Null
   UpdatePatients(ID,fore,sur){
     let nextPatient = [ID,fore,sur]
+    //Create a new array using the old state.tabledata
     let newdata = [...this.state.tabledata]
+    //add the new data to the end of that array using the push command
     newdata.push(nextPatient)
+    //update the state object with the newly created data array
     this.setState({tabledata: newdata})
   }
+
+//function formatting the able data as to allow for its rendering and provide each column with a relevant button that calls the selected patients information.
+ //inputs: Array DataArray
+ //output: Array FinalisedData
   dataFormatter(DataArray){
+    //create a new empty array called finalised data
     let finalisedData =[]
+    //for x incrementing up to the length of the data array
     for(let x=0;x<DataArray.length;x++){
+      //create a new added button component that contains a button referencing the current tabledata index information.
       let addedbutton = (
         <TouchableOpacity  style={Opacity.opacity} onPress={() =>  this.selectPatient(DataArray[x][1] + " " + DataArray[x][2])}>
           <View >
             <Text >Select</Text>
           </View>
-        </TouchableOpacity>)    
+        </TouchableOpacity>) 
+      //Add this new button to the end of the data array   
       DataArray[x][4] = addedbutton
+      //and add that data array index to the matching index in the finalised data array.
       finalisedData[x] = DataArray[x]
     }
+    //Return the finalised data array once the loop has completed.
     return finalisedData
   }
+//function for selecting a patients data and passing it to the currently selected patient state object
+ //inputs: String Givendata
+ //output: null
   selectPatient(givendata){
     this.setState({selectedpatient: givendata})
   } 
+//function for ensuring a patient is seelected and allow navigation to that patients information.
+ //inputs: null
+ //output: Alert PatientNotSelectedAlert
   NavigationHandler(){
+    //if the currently seelcted patient is not currently null/empty string
     if(this.state.selectedpatient !== ""){
+      //navigate to the my assesments screen in the individual navigator passing the current patient as a props key under userinfo
     this.props.navigation.navigate("ILanding",{screen: "My Assessments", userInfo: this.state.selectedpatient})
     }
+    //if there is no currently seelcted patient
     else {
+      //throw a new alert telling the user they must select a patient to view a specific patients information.
       Alert.alert("No Patient Error","You must select a patient to view thier information. Please select one from your existing list or add a new patient using the form below.")
     }
   }
+  // render the MyPatients screen for the user
   render() { 
     let patientinfotext
     if(this.state.selectedpatient !== ""){

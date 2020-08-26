@@ -6,20 +6,11 @@
 
 //Common import statments for react native, sub components, & styles
 import React, {Component} from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  Picker,
-  StatusBar,
-  TextInput,
-  Button,
-  TouchableOpacity, 
+import { 
+  StyleSheet,  
+  View,  
   Dimensions, 
 } from 'react-native';
-import { color } from 'react-native-reanimated';
 import DefaultTemplate from '../Sub-Comps/DefaultScreen'
 import MainHeadTemplate from '../Sub-Comps/Navigation/Header'
 import {Colors,Spacing} from '../../Styles/index'
@@ -59,8 +50,7 @@ export default class Downloads extends Component{
           <View style={styles.screenPos}>          
           <KeyboardAwareScrollView>
             {this.DownloadCards()}                                    
-          </KeyboardAwareScrollView> 
-                    
+          </KeyboardAwareScrollView>                     
           </View>
           </View>
 
